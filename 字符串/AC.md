@@ -1,37 +1,41 @@
-AC�Զ���
+AC自动机
+============================
+###基本概念
+AC自动机（Aho-Corasick）,是一种特殊的自动机，是通过在tire树上添加一些额外的边组成，其核心部分是后缀节点的构建。<br/>
+AC自动机主要解决的问题是一类多串匹配的问题：<br/>
+给定多个模式串s1,s2,...,Sn，确定主串S中是否包含任意一个模式串。<br/>
+###路径字符串
+在tire树上，某个节点的路径字符串是指从tire的根节点到该节点的路径上的边上的字符串连起来形成的字符串。<br/>
+######后缀节点
+在tire树中，一个节点x的后缀节点为tire树上的一个非本身节点y，并且y的路径字符串为x的路径字符串的所有后缀中出现在tire树上的最长的一个。后缀节点的概念和KMP中的前缀数组很相似，其构造方法也相似。
+如下图，5号节点对应字符串为abab，它出现在tire树上的最长后缀为ab，对应节点3号节点。<br/>
 
-��������
-AC�Զ�����Aho-Corasick��,��һ��������Զ�������ͨ����tire��������һЩ����ı���ɣ�����Ĳ����Ǻ�׺�ڵ�Ĺ�����
-AC�Զ�����Ҫ�����������һ��മƥ������⣺
-�������ģʽ��s1,s2,...,Sn��ȷ������S���Ƿ��������һ��ģʽ����
-·���ַ���
-��tire���ϣ�ĳ���ڵ��·���ַ�����ָ��tire�ĸ��ڵ㵽�ýڵ��·���ϵı��ϵ��ַ����������γɵ��ַ�����
-��׺�ڵ�
-��tire���У�һ���ڵ�x�ĺ�׺�ڵ�Ϊtire���ϵ�һ���Ǳ����ڵ�y������y��·���ַ���Ϊx��·���ַ��������к�׺�г�����tire���ϵ����һ������׺�ڵ�ĸ����KMP�е�ǰ׺��������ƣ��乹�췽��Ҳ���ơ�
-����ͼ��5�Žڵ��Ӧ�ַ���Ϊabab����������tire���ϵ����׺Ϊab����Ӧ�ڵ�3�Žڵ㡣
-AC�Զ����Ĺ��죺
-��1������һ��tire��
-��2������ÿ���ڵ�ĺ�׺�ڵ�
-���룺tire��
-�����tire���ĺ�׺�ڵ�����
-α���룺
-��root�����
+###AC自动机的构造：
+（1）建立一棵tire树<br/>
+（2）计算每个节点的后缀节点<br/>
+```
+输入：tire树
+输出：tire树的后缀节点数组
+伪代码：
+将root如队列
 pre[root]=-1;
-while(���в�Ϊ��) {
-     x = �����ײ�
-     for( x�ı��Ϊc�Ķ���i ) {
+while(队列不为空) {
+     x = 队列首部
+     for( x的标记为c的儿子i ) {
           tmp = pre[x];
-          while(tmp��=-1 &&��tmp�����б��Ϊc�Ķ���) tmp = pre[tmp];
+          while(tmp！=-1 &&　tmp不含有标记为c的儿子) tmp = pre[tmp];
           if(tmp==-1) pre[i]=root;
-          else tmp = tmp�ı��Ϊc�Ķ��ӽڵ�
-          ��i�����     
+          else tmp = tmp的标记为c的儿子节点
+          将i入队列     
      }
 }
+```
+###匹配过程
+重头到尾匹配主串，根据主串中扫描到的字符同步的在AC自动机中遍历，每经过一个结束节点就表示主串中出现了某个模式串。如下图，模式串为"a","aaa","aba","baa","bb", 主串为”aabababbaaa“,那么遍历经过的节点有1，2，3，7，8，7，7，5，9，10，6
 
-ƥ�����
-��ͷ��βƥ������������������ɨ�赽���ַ�ͬ������AC�Զ����б�����ÿ����һ�������ڵ�ͱ�ʾ�����г�����ĳ��ģʽ��������ͼ��ģʽ��Ϊ"a","aaa","aba","baa","bb", ����Ϊ��aabababbaaa��,��ô���������Ľڵ���1��2��3��7��8��7��7��5��9��10��6
 
-AC�Զ���ģ��
+###AC自动机模板
+```C
 #include <cstdio>
 #include <cstdlib>
 #include <queue>
@@ -39,12 +43,12 @@ AC�Զ���ģ��
 using namespace std;
 /*
 HDU2222 http://acm.hdu.edu.cn/showproblem.php?pid=2222
-AC�Զ���
-��1��������Ӵ��ǿ�����ͬ�ģ���ʱTrie��ÿ�����Ҫ��һ��mulֵ����ʾ�ý���Ӧ���ַ����������Ӵ����ظ��Ĵ�����
-���⣬��ҪΪ��ʡ�ռ��mul�����char�ͣ��п������е��ַ���ȫ��ͬ�������Ҫ�����int����ʵ֤�����ᱬ�ռ䣩�����Ǳ�ɳ�豻��ĥ����ô�õ���Ҫԭ��
-��2��Trie���þ�̬�洢��0�Ž����Ϊ�ս�㣨NULL������������Ľ���Ŵ�1��ʼ������rootһ�㶼��1�Ž�㣻
-��3��ע���ڽ����Զ����Լ�ƥ���ʱ������Ҫ��fail���ݵĵط�����߽綼��0��NULL��ע�ⲻ��root�������ҵ�һ���ж�Ӧ�ӽ��Ľ�㡣
-ע�⵽0��û���ҵ��Ĵ����������ڽ����Զ�����ʱ�򣬽�T[j]��Ϊroot����ƥ���ʱ�򣬽�x��Ϊroot��
+AC自动机
+（1）本题的子串是可以相同的，此时Trie的每个结点要设一个mul值，表示该结点对应的字符串在所有子串中重复的次数，
+另外，不要为了省空间把mul定义成char型，有可能所有的字符串全相同，因此需要定义成int（事实证明不会爆空间），这是本沙茶被折磨了这么久的主要原因；
+（2）Trie采用静态存储，0号结点作为空结点（NULL），因此真正的结点编号从1开始，另外root一般都是1号结点；
+（3）注意在建立自动机以及匹配的时候，所有要沿fail上溯的地方，其边界都是0（NULL，注意不是root）或者找到一个有对应子结点的结点。
+注意到0还没有找到的处理方法：在建立自动机的时候，将T[j]置为root；在匹配的时候，将x置为root；
 */
 typedef struct {
      int mark;  // attention
@@ -56,7 +60,7 @@ const int MAXN=5000001;
 Node T[MAXN];
 int root,num;
 char str[1000010];
-// tire ���Ĳ���
+// tire 树的插入
 void insert(char* s)
 {
      int len = strlen(s);
@@ -107,8 +111,8 @@ int sovle(char *s)
           if(index==-1) index = root;
           else index = T[index].son[c];
           tmp = index;
-          //ƥ������е�һ�����Ż��ĵط�������һ����x�Լ��������з��ؽ�㣨�������������x��ʧ��ָ�벻������ֱ��root·���ϵĽ�㶼��Ϊ���ؽ�㣩�����ڲ����ظ����������Խ����ǵ�mulֵ��Ϊԭ��mulֵ���෴����-mul����������0����ʾ�ý���Ѿ�ͳ�ƹ�����������һ��y�����ݹ�����һ������һ��mulֵΪ���ĵ�Ͳ��ü��������ˣ���Ϊ����ĵ�һ��Ҳ�Ѿ�ͳ�ƹ��ˡ�
-          //��Ȼ��������ڵ�����������Ƕ���������Ҫ��ÿ��ƥ��֮ǰ��Trie�������н���mulֵ������Ǹ����ĵĻ���ȫ������ȡ����Ϊ�˽�ʡʱ�䣬������ƥ������а�����ͳ�ƹ��ģ�mulֵ��Ϊ�����ģ����ȫ���Ž�һ�������Ķ����Ȼ��ȡ��ʱֻҪ���������еĽ������ˡ�
+          //匹配过程中的一个可优化的地方：对于一个点x以及它的所有返回结点（这里把所有沿着x的失败指针不断上溯直到root路径上的结点都称为返回结点），由于不可重复计数，可以将它们的mul值置为原来mul值的相反数（-mul），而不是0，表示该结点已经统计过。这样在下一次y的上溯过程中一旦发现一个mul值为负的点就不用继续上溯了，因为上面的点一定也已经统计过了。
+          //当然，这仅限于单主串，如果是多主串则需要在每次匹配之前把Trie树中所有结点的mul值（如果是负数的的话）全部重新取反。为了节省时间，可以在匹配过程中把所有统计过的（mul值改为负数的）结点全部放进一个辅助的队列里，然后取反时只要处理队列中的结点就行了。
           while(tmp>0 && T[tmp].mark>=0) {
                res+=T[tmp].mark;
                T[tmp].mark=-T[tmp].mark;
@@ -152,4 +156,4 @@ int main()
      }
      return 0;
 }
-
+````
