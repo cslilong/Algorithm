@@ -1,0 +1,59 @@
+KMP算法
+
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+using namespace std;
+/*
+*获得模式串p的前缀数组next
+next[j]=max { k | 0<k<j 且p[0,k]==p[j-k,j-1] } （当此集合非空时）
+              =-1    ( j=0时）
+             =0    （其他情况）
+*/
+void GetNext(char* p, int* next, int len)
+{
+     int j=-1;next[0]=-1;
+     for(int i=1;i<len;++i) {
+          while(j>-1 && p[j+1]!=p[i]) j=next[j];
+          if(p[j+1]==p[i]) j++;
+          next[i]=j;
+     }
+}
+
+/*
+* 模式串p和主串s的匹配，判断p是否在s中出现
+*/
+int KMP(char *p, char *s, int* next, int plen, int slen)
+{
+     int res = -1, j=-1;
+     for(int i=0;i<slen;++i) {
+          while(j>-1 && s[i]!=p[j+1]) j = next[j];
+          if(s[i] == p[j+1]) j++;
+          if(j==plen-1) return i-plen+1;
+     }
+     return res;
+}
+
+int main()
+{
+     char p[]="ababc";
+     char s[]="abcdababcddddd";
+     int next[10];
+     GetNext(p,next, strlen(p));
+     for(int i=0;i<strlen(p);++i) printf("%d ",next[i]); printf("\n");
+     printf("%d\n", KMP(p, s, next, strlen(p), strlen(s)));
+     system("pause");
+     return 0;
+}
+
+运行结果：
+-1 -1 0 1 -1
+4
+
+KMP算法的应用
+（1）求重复字符串的次数（下标重0开始）
+当(i+1)%(i-next[i])==0 && (i+1)/(i-next[i])>1 时，字符串是一个重复字符串，重复的次数为(i+1)/(i-next[i])
+如字符串"ababab", 可以表示为"ab"^3, (5+1)/(5-3)=3.
+
+
