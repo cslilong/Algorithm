@@ -1,0 +1,125 @@
+/* 4022402 B06350214 2774 Accepted 4500K
+    563MS G++ 2632B 2008-09-05 15:03:32  */
+//参考国家队的一篇论文by 许智磊
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <stdio.h>
+using namespace std;
+
+#define Min(a,b) (a)<(b)?(a):(b)
+const int N = 201000;
+int n, m;
+char s[N], s2[N/2];
+
+int cnt[N], rank[N], nrank[N], sa[N], nsa[N], h[N];
+//基数排序，先求SA1, Rank1, 然后有Rank1推出SA2，再由SA2推出Rank2，
+//以此类推，中间排序采用计数排序法
+//h[i] = LCP(rank[i]-1, rank[i]) = lcp(Suffix(Sa[rank[i]-1]), Suffix(i));
+//height[i] = LCP(i-1, i) = lcp(Suffix(sa[i-1]), Suffix(sa[i]));
+//h[i] = height[rank[i]], height[i] = h[sa[i]]
+
+//LCP(i, j) = Min{k-1, k|i+1 <= k <= j}, ioi的论文说的太晦涩，简单的理解，LCP(i, j)
+//就是Min这个集和所有LCP的交集
+//LCP(i, k） = Min(LCP(i, j), LCP(j, k)); (1<=i < j < k <= n)
+//这个有了上一个公式就更容易理解了，相当于吧LCP(i, j)拆成两部分，然后分别求最小值，
+//跟上一个公式其实是一样的
+//还有一个推论：LCP(i, j) <= LCP(k, j); (i <= k);
+
+
+//求h数组的时候还要用到一个重要的性质就是
+//h[i] >= h[i-1], h[i] = LCP(rank[i]-1, rank[i]); 也就是说LCP(rank[i-1], rank[i]) >= h[i-1]-1
+//所以当前的字符串比较只要冲h[i-1]-1开始就好了
+//当然要注意边界条件，当p == 0 或者 h[p-1] <= 0的时候k直接从0开始
+
+//可以证明这样子比较次数不会超过4*n
+
+//刚觉许智磊的论文写得太晦涩了，几个显而易见的公式，搞那么多"吓人"的证明，郁闷了我n久才看懂
+//如果他能吧几个证明的公式说得通俗一点，那这篇论文久很完美了
+void radix_sort()
+{
+    int i, j, k;
+    for(i = 0; i < n; i++) cnt[s[i]]++;
+    for(i = 'a'-1; i <= 'z'; i++) cnt[i] += cnt[i-1];
+    for(i = n-1; i >= 0; i--) sa[--cnt[s[i]]] = i;
+    for(rank[0]=0, i=1; i < n; i++)
+    {
+        rank[sa[i]] = rank[sa[i-1]];
+        if(s[sa[i]]!=s[sa[i-1]]) rank[sa[i]]++;
+    }
+    //rank[sa[n-1]] < n-1可以提前判定，后缀排序已经结束
+    for(k = 1; k<n && rank[sa[n-1]] < n-1; k*=2)
+    {
+        for(i = 0; i < n; i++) cnt[rank[sa[i]]] = i+1;
+        //相同的rank，cnt大的给大的，所以倒着来
+        for(i = n-1; i >= 0; i--)
+            if(sa[i]-k>=0) nsa[--cnt[rank[sa[i]-k]]] = sa[i]-k;
+
+        // max(sa[i]-k)=n-k-1 , so i = n-k;
+        for(i = n-1; i >= n-k; i--)
+            nsa[--cnt[rank[i]]] = i;
+        //更新nrank
+        for(nrank[nsa[0]], i=1; i < n; i++)
+        {
+            nrank[nsa[i]] = nrank[nsa[i-1]];
+            if(rank[nsa[i]] != rank[nsa[i-1]]
+                || rank[nsa[i]+k] != rank[nsa[i-1]+k])
+            nrank[nsa[i]]++;
+        }
+        for(i = 0; i < n; i++){rank[i] = nrank[i]; sa[i] = nsa[i];}
+    }
+}
+
+
+
+void get_lcp_rmq()
+{
+    int p, j, k;
+	for(p = 0; p < n; p++)
+	{
+	    if(rank[p] == 0) {h[p] = 0; continue;}
+	    j = sa[rank[p]-1]; k = 0;
+	    if(p && h[p-1] > 0) k = h[p-1]-1; //k = h[p-1]-1为最后一个匹配的位置，如果k+1不匹配的话
+	    for( ; s[p+k] == s[j+k]; k++);
+	        h[p] = k;
+	}
+}
+
+//位置为i的后缀，在sarray中排在他之前的共同字符数 >= 位置为i-1的后缀与排在其之前
+//的后缀的最长公共前缀
+//所以要求i与其在sarray中排在其之前的最长公共前缀(LCP(rank[i]-1, i))，
+//只要从LCP(rank[i-1]-1, rank[i-1])位置开始即可
+//i在后缀中的排名 = 0，则h[i] = 0;
+int main()
+{
+    int i, j, k;
+    int p1, p2, n1;
+
+    gets(s);
+    n1 = strlen(s);
+    s[n1++]='a'-1;
+    gets(s2);
+    strcat(s,s2);
+    n = strlen(s);
+    radix_sort();
+    //h[i] = height[rank[i]], height[i] = LCP(i-1, i); LCP(i-1, i) = lcp(sa[i-1]);
+    get_lcp_rmq();
+    //for(i = 0; i <= n; i++) printf("h[%d] = %d\n", i, h[i]);
+    int ans = 0;
+    for(i = 0; i < n; i++)
+    {
+        if(rank[i] == 0) continue;
+        if(i < n1)p1 = 1;
+        else p1 = -1;
+
+        k = sa[rank[i]-1];
+        if(k < n1)p2 = 1;
+        else p2 = -1;
+
+        if(p1*p2<1 && h[i]>ans)
+            ans = h[i];
+    }
+    printf("%d\n", ans);
+    return 0;
+}
+
