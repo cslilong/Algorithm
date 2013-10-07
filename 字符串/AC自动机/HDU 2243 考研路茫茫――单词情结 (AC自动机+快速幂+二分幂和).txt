@@ -1,0 +1,154 @@
+HDU 2243 考研路茫茫――单词情结 (AC自动机+快速幂+二分幂和)
+和DNA Sequence差不多的题目，但是从原来的长度为L变成了长度小于等于L的字符串的方案数，并且是至少经过某些特定的节点一次的总方案数，那么我们可以先把不经过任意一个特定节点的方案数算出来，然后取反就行了，二分矩阵幂求和。对于模2^64次方，只需要用unsigned long lnog  就行了。
+#include<stdio.h>
+#include<string.h>
+#include<queue>
+#define N 26
+using namespace std;
+struct trie{
+    bool tag;
+    int next[ N ],fail;
+}data[ 109 ];
+int inp;
+int init( int a ){
+    for( int i=0;i<N;i++ ) data[ a ].next[ i ]=0;
+    data[ a ].fail=0;
+    data[ a ].tag=false;
+    return a;
+}
+void ac_insert( char *a ){
+    int p=0;
+    for( ;*a;a++ ){
+        int d=*a-'a';
+        if( data[ p ].next[ d ]==0 )  data[ p ].next[ d ]=init( ++inp );
+        p=data[ p ].next[ d ];
+    }
+    data[ p ].tag=true;
+}
+void ac_bfs( void ){
+    queue<int> que;
+    for( int i=0;i<N;i++ )
+        if( data[ 0 ].next[ i ] ) que.push( data[ 0 ].next[ i ] );
+    while( que.size(  ) ){
+        int p=que.front(  );
+        if( data[ data[ p ].fail ].tag ) data[ p ].tag=true;
+        for( int i=0;i<N;i++ ){
+            int temp=data[ p ].next[ i ];
+            if( temp ){
+                que.push( temp );
+                data[ temp ].fail=data[ data[ p ].fail ].next[ i ];
+            }
+            else
+                data[ p ].next[ i ]=data[ data[ p ].fail ].next[ i ];
+        }
+        que.pop(  );
+    }
+}
+unsigned long long ma[ 4 ][ 101 ][ 101 ];
+void bfs( void ){
+    queue<int> que;
+    bool tf[ 109 ];
+    memset( tf,false,sizeof( tf ) );
+    que.push( 0 );
+    tf[ 0 ]=true;
+    while( que.size(  ) ){
+        int p=que.front(  );
+        for( int i=0;i<N;i++ ){
+            int temp=data[ p ].next[ i ];
+            if( !data[ temp ].tag ){
+                ma[ 0 ][ p ][ temp ]=1;
+                if( !tf[ temp ] ){
+                    que.push( temp );
+                    tf[ temp ]=true;
+                }
+            }
+        }            
+        que.pop(  );
+    }
+}
+void macpy( int to,int from ){
+    for( int i=0;i<=inp;i++ )
+        for( int j=0;j<=inp;j++ )
+            ma[ to ][ i ][ j ]=ma[ from ][ i ][ j ];
+}
+void cal( int a,int b,int c ){
+    for( int i=0;i<=inp;i++ )
+        for( int j=0;j<=inp;j++ ){
+            ma[ c ][ i ][ j ]=0;
+            for( int k=0;k<=inp;k++ )
+                ma[ c ][ i ][ j ]+=ma[ a ][ i ][ k ]*ma[ b ][ k ][ j ];
+        }
+}
+void binary( int len ){
+    if( len==1 ){
+        macpy( 1,0 );
+        macpy( 2,0 );
+        return;
+    }
+    int mid=len/2;
+    binary( mid );
+    if( len-mid==mid ){
+        cal( 1,2,3 );
+        for( int i=0;i<=inp;i++ )
+            for( int j=0;j<=inp;j++ )
+                ma[ 1 ][ i ][ j ]+=ma[ 3 ][ i ][ j ];
+        cal( 2,2,3 );
+        macpy( 2,3 );
+    }
+    else{
+        cal( 1,2,3 );
+        for( int i=0;i<=inp;i++ )
+            for( int j=0;j<=inp;j++ )
+                ma[ 1 ][ i ][ j ]+=ma[ 3 ][ i ][ j ];
+        cal( 2,2,3 );
+        cal( 3,0,2 );
+        for( int i=0;i<=inp;i++ )
+            for( int j=0;j<=inp;j++ )
+                ma[ 1 ][ i ][ j ]+=ma[ 2 ][ i ][ j ];
+    }
+}
+unsigned long long pv;
+unsigned long long sum( int l ){
+    unsigned long long ret;
+    if( l==1 ){
+        pv=26;
+        return 26;
+    }        
+    int mid=l/2;
+    ret=sum( mid );
+    if( l-mid==mid ){        
+        ret+=ret*pv;
+        pv*=pv;
+        return ret;
+    }
+    ret+=ret*pv;
+    pv=pv*pv*26;
+    ret+=pv;
+    return ret;
+}
+int main( void ){
+    int n,l;
+    while( scanf( "%d%d",&n,&l )+1 ){
+        char str[ 20 ];
+        memset( ma,0,sizeof( ma ) );
+        inp=0;
+        init( 0 );        
+        str[ 1 ]='\0';
+        for( int i=0;i<N;i++ ){
+            str[ 0 ]='a'+i;
+            ac_insert( str );
+            data[ data[ 0 ].next[ i ] ].tag=false;
+        }
+        for( int i=1;i<=n;i++ ){
+            scanf( "%s",str );
+            ac_insert( str );
+        }
+        ac_bfs(  );
+        bfs(  );
+        binary( l );
+        unsigned long long ret=0;
+        for( int i=0;i<=inp;i++ )
+            ret+=ma[ 1 ][ 0 ][ i ];        
+        printf( "%I64u\n",sum( l )-ret );
+    }
+}

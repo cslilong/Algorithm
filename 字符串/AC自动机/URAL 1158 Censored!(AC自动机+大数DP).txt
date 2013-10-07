@@ -1,0 +1,90 @@
+URAL 1158 Censored!(AC自动机+大数DP) 
+
+在做了几道AC自动机DP的题目后，有了一点感觉，这题的DP方程很容易想到，但麻烦的就是答案会超long long要用高精度。直接用java的BigInteger，但是题目数据有一个很坑爹的地方，读入的字符是1-255的，这和java的默认字符集是不一样的，所以要加一句话：
+  Scanner read=new Scanner(System.in,"ISO-8859-1");
+这种数据真是坑爹。。。。
+import java.util.*;
+import java.math.*;
+import java.io.*;
+public class Main {
+static int n,m,p;
+static boolean[] tag=new boolean[109];
+static int[][] next=new int[109][50];
+static int[] fail=new int[109];
+static int inp;
+static int[] tran=new int[256];
+static int init(int a){
+for(int i=0;i<50;i++)
+next[a][i]=0;
+fail[a]=0;
+tag[a]=false;
+return a;
+}
+static void ac_insert(String a){
+int p=0,i=0;
+for(i=0;i<a.length();i++){
+int d=tran[a.charAt(i)];
+if(next[p][d]==0) next[p][d]=init(++inp);
+p=next[p][d];
+}
+tag[p]=true;    
+}
+static void ac_bfs( int a ){
+int[] que=new int[1000];
+int s=0,e=0;
+for(int i=0;i<n;i++)
+if(next[0][i]>0)
+que[e++]=next[0][i];
+while(s!=e){
+int p=que[s++];
+for(int i=0;i<n;i++){
+int temp=next[p][i];
+if(tag[fail[p]]) tag[p]=true;
+if(temp>0){
+que[e++]=temp;
+fail[temp]=next[fail[p]][i];
+}
+else
+next[p][i]=next[fail[p]][i];
+}
+}
+}
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+Scanner read=new Scanner(System.in,"ISO-8859-1");
+n=read.nextInt();
+m=read.nextInt();
+p=read.nextInt();
+inp=0;
+init(0);
+String str=read.next();
+for(int i=0;i<n;i++)
+tran[str.charAt(i)]=i;
+for(int i=1;i<=p;i++){
+str=read.next();
+ac_insert(str);
+}
+ac_bfs(0);
+BigInteger[][] dp=new BigInteger[59][109];
+BigInteger dd=new BigInteger("0");
+for(int i=0;i<=m;i++)
+for(int j=0;j<=inp;j++)
+dp[i][j]=new BigInteger("0");
+dp[0][0]=new BigInteger("1");
+for(int i=0;i<m;i++){
+for(int j=0;j<=inp;j++)
+if(dp[i][j].compareTo(dd)>0){
+for(int k=0;k<n;k++){
+int d=next[j][k];
+if(!tag[d]){
+dp[i+1][d]=dp[i+1][d].add(dp[i][j]);
+}
+}
+}
+}
+for(int i=1;i<=inp;i++)
+dp[m][0]=dp[m][0].add(dp[m][i]);
+System.out.println(dp[m][0].toString());
+}
+
+}

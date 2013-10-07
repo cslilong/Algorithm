@@ -1,0 +1,184 @@
+线段树操作极品题——HDU2871
+原题地址
+http://acm.hdu.edu.cn/showproblem.php?pid=2871
+这是一道线段树操作的极品题，因为它的4个操作刚好覆盖了线段树操作问题的3种处理思路，可以说是把线段树操作的全部内容都包含进去了。
+
+线段树是一种静态的数据结构，因为一棵线段树一旦建成，其形态就永远不会发生变化，改变的仅仅是结点上记录的各种信息的值。因此，对于线段树操作，核心问题也就是如何维护和处理这些信息。总的来说，对于线段树结点信息的维护和处理，有以下3种基本思路：
+（1）左右归中型：
+所谓左右归中，就是用左右子结点存储的信息来得到父结点存储的信息的值，这是最常见的线段树维护方法。举一些简单的例子：比如结点的SUM域表示该结点区间上所有元素的和，那么这个域维护的方法就是“父结点SUM=左子结点SUM+右子结点SUM”，再比如结点的MAX/MIN域表示该结点区间上所有元素的最大/小值，那么维护方法就是“父结点MAX/MIN=max/min{左子结点MAX/MIN,右子结点MAX/MIN}”。这种维护方法也比较简单，只要在每次对子结点进行修改之后upd一下就行了（对于那些自顶向下递归，而且涉及到改值的操作，在递归完左右子结点后一定要记得upd一下），在这之中有一个很重要的思想就是“左右连续段”思想：如果题目中要求任意一个区间内的具有某种性质的最长的连续序列（也就是子区间），比如最长连续上升子序列、01值问题中连续的0段或者非0段（在具体问题中就是连续的空闲段或者占用段）等，可以在每个结点上维护三个域：lS、rS和S，分别表示该结点区间左端（从区间的最左端开始的）具有这种性质的最长连续序列的长度，该结点区间右端（到区间的最右端结束的）具有这种性质的最长连续序列的长度和该区间内具有这种性质的最长连续序列的长度（也就是要求的那个东东），则维护方法为“父结点lS=左子结点lS（左子结点lS<左子结点len）或左子结点len+右子结点lS（左子结点lS=左子结点len），父结点rS类似，父结点S=max{左子结点S,右子结点S,左子结点rS+右子结点lS}”，此外，由于要求的这个区间可能被拆成多个连续的结点区间，因此需要按顺序合并这些区间，合并的方法是：设立S0和S1，S0表示不保证能延伸下去的区间长度，S0=上一个区间的S1+本区间的lS；S1表示可以延伸下去的区间长度，S1=上一个区间的S1+本区间len（如果本区间整个都是满足条件的，即S=len）或本区间的rS（本区间不都是满足条件的，即S<len），取过程中所有S0和区间S的最大值即为结果。
+在HDU2871中，应用左右归中的方法维护的信息就是“最长连续空闲段”的长度，New操作需要；
+
+（2）调整边界型：
+考虑这样一个问题：现在要插入、删除一些[0, 100000)的整数，并且在此过程中不断询问第K小的整数是多少，怎么办？平衡树可以实现，但线段树显然是更好的方法。对每个结点，存储一个K0值表示位于该结点区间内的整数的个数，则查找第K小的时候只需要不断执行以下操作：Kth(A, K)，表示在结点A代表的区间内找第K小的，然后，若K<=结点A的左子结点K0值，则执行Kth(A的左子结点, K)，否则执行Kth(A的右子结点, K-A左子结点的K0)（这和平衡树神似），直到找到叶结点为止。这种方法称为“调整边界型”，即随着结点深入，不断缩小（自顶向下）或扩大（自底向上）范围，最后找到结果。像找第K小这样的操作属于自顶向下型，而像“找到X所在的具有某种性质的最长的连续区间”就属于自底向上型（注意和本题的Free不一样）；
+
+（3）标记辅助型：
+这种维护信息的方法，特点是利用标记来维护信息，即对于某些结点（主要是叶结点，因为其标记不再下放），直接使用标记来得到一些数据，比如对于HDU2871这一题，其中对于叶结点位于的插入线段的标号，使用的就是标记。
+
+下面是本题4个操作的具体实现：
+<1>线段树结点定义：
+本题需要两棵线段树，这是因为New与Free操作对于tot域（插入线段左端点的总个数）会造成不同的影响，具体来说，在New操作中，tot值不会被同时加上（需要另外一个操作加上），然而在Free操作中，tot值会被同时清空，这样就会导致在对某个结点清空（该结点包含在某个Free操作要清空的线段中）并打上0标记之后，如果紧接着又插入一条包含这个结点区间的新线段，则这个结点的0标记就会丧失，这样在紧接着下传的时候，其子结点的tot值就不会被清空（事实上已经被清空了）。所以，将tot域彻底转移到另一棵线段树里。
+struct node {
+    int len, mr, lsc, rsc, sc;
+} T[MAXN << 2];
+struct node0 {
+    int tot;
+    bool mr;
+} T0[MAXN << 2];
+其中lsc、rsc、sc就是连续空闲段的长度（用左右归中的方法维护），mr是一个整体赋值标记，在T中，mr的值若为-1表示无标记（未被整体赋值），若为0表示被整体清空，若大于0表示整体被一条线段覆盖，mr值就是这条线段的编号（为区分不同线段，这里按照输入顺序对每一条New操作插入的线段以1、2……编号），在T0中，mr=1表示在Reset中被整体清空，mr=0表示无标记。
+<2>操作处理：
+1)Reset操作：将T、T0的根结点打上清空标记即可；
+2)New：涉及到两个操作，分别是找最左的长度为x的连续空闲段，以及插入一条线段。对于前者，可以根据lsc、rsc、sc的值，按照“先左子结点，再跨越两个子结点，最后右子结点”的顺序求得（详见代码）；对于后者就不用说了，太容易实现了（注意标记的处理以及upd，另外要插入一个tot）；
+3)Free：也涉及两个操作，分别是找一个点x所在的线段（插入过的线段）长度以及删除一条线段，对于前者可将New插入过的所有线段的左右端点预存起来，然后找到代表区间[x, x]的结点的mr值（也就是结点x被编号为神马的线段覆盖），再在预存的线段中找到即可。对于后者，直接清空即可（不要在T0中打标记，而要单独删除一个tot）；
+4)Get：直接利用T0中的tot找到第K小的值即可；
+
+
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+using namespace std;
+#define re(i, n) for (int i=0; i<n; i++)
+#define re1(i, n) for (int i=1; i<=n; i++)
+#define re2(i, l, r) for (int i=l; i<r; i++)
+#define re3(i, l, r) for (int i=l; i<=r; i++)
+#define rre(i, n) for (int i=n-1; i>=0; i--)
+#define rre1(i, n) for (int i=n; i>0; i--)
+#define rre2(i, r, l) for (int i=r-1; i>=l; i--)
+#define rre3(i, r, l) for (int i=r; i>=l; i--)
+#define LCH(i) (i << 1)
+#define RCH(i) ((i << 1) + 1)
+#define root 1
+const int MAXN = 50001, MAXM = 50002, INF = ~0U >> 2;
+struct node {
+	int len, mr, lsc, rsc, sc;
+} T[MAXN << 2];
+struct node0 {
+	int tot;
+	bool mr;
+} T0[MAXN << 2];
+int n, m_No, L[MAXM], R[MAXM], l0, r0, x, res;
+void mkt(int l, int r, int No)
+{
+	T[No].sc = T[No].lsc = T[No].rsc = T[No].len = r - l + 1; T0[No].mr = 0; T0[No].tot = 0;
+	if (l < r) {
+		T[No].mr = -1; int mid = l + r >> 1;
+		mkt(l, mid, LCH(No)); mkt(mid + 1, r, RCH(No));
+	} else T[No].mr = 0;
+}
+void upd(int No)
+{
+	int lch = LCH(No), rch = RCH(No);
+	if (T[lch].lsc == T[lch].len) T[No].lsc = T[lch].lsc + T[rch].lsc; else T[No].lsc = T[lch].lsc;
+	if (T[rch].rsc == T[rch].len) T[No].rsc = T[lch].rsc + T[rch].rsc; else T[No].rsc = T[rch].rsc;
+	if (T[lch].sc >= T[rch].sc) T[No].sc = T[lch].sc; else T[No].sc = T[rch].sc;
+	if (T[lch].rsc + T[rch].lsc > T[No].sc) T[No].sc = T[lch].rsc + T[rch].lsc;
+}
+void mr_opr(int No, int x)
+{
+	T[No].mr = x;
+	if (x) T[No].sc = T[No].lsc = T[No].rsc = 0; else T[No].sc = T[No].lsc = T[No].rsc = T[No].len;
+}
+void mr_opr0(int No)
+{
+	T0[No].mr = 1; T0[No].tot = 0;
+}
+void dm(int No)
+{
+	int tmp;
+	if ((tmp = T[No].mr) >= 0) {
+		T[No].mr = -1;
+		mr_opr(LCH(No), tmp); mr_opr(RCH(No), tmp);
+	}
+	if (T0[No].mr) {
+		T0[No].mr = 0;
+		T0[LCH(No)].mr = 1; T0[RCH(No)].mr = 1; T0[LCH(No)].tot = T0[RCH(No)].tot = 0;
+	}
+}
+void opr_all(int l, int r, int No)
+{
+	if (l >= l0 && r <= r0) mr_opr(No, x); else {
+		dm(No);
+		int mid = l + r >> 1;
+		if (mid >= l0) opr_all(l, mid, LCH(No));
+		if (mid < r0) opr_all(mid + 1, r, RCH(No));
+		upd(No);
+		T0[No].tot = T0[LCH(No)].tot + T0[RCH(No)].tot;
+	}
+}
+void opr1()
+{
+	if (T[root].sc < x) {res = -1; return;}
+	int l = 0, r = n - 1, No = root, mid;
+	while (l < r) {
+		dm(No); mid = l + r >> 1;
+		if (T[LCH(No)].sc >= x) {r = mid; No = LCH(No);}
+		else if (T[LCH(No)].rsc + T[RCH(No)].lsc >= x) {res = mid - T[LCH(No)].rsc + 1; return;} else {l = mid + 1; No = RCH(No);}
+	}
+	res = l;
+}
+void opr2(int l, int r, int No)
+{
+	if (l == x && r == x) res = T[No].mr; else {
+		dm(No);
+		int mid = l + r >> 1;
+		if (mid >= x) opr2(l, mid, LCH(No));
+		if (mid < x) opr2(mid + 1, r, RCH(No));
+	}
+}
+void opr3()
+{
+	if (T0[root].tot < x) {res = -1; return;}
+	int l = 0, r = n - 1, No = root, mid, K = x, tmp;
+	while (l < r) {
+		dm(No); mid = l + r >> 1;
+		tmp = T0[LCH(No)].tot;
+		if (K <= tmp) {r = mid; No = LCH(No);} else {K -= tmp; l = mid + 1; No = RCH(No);}
+	}
+	res = l;
+}
+void tot_opr(int l, int r, int No, int _tot)
+{
+	if (l == x && r == x) T0[No].tot += _tot; else {
+		dm(No);
+		int mid = l + r >> 1;
+		if (mid >= x) tot_opr(l, mid, LCH(No), _tot);
+		if (mid < x) tot_opr(mid + 1, r, RCH(No), _tot);
+		T0[No].tot = T0[LCH(No)].tot + T0[RCH(No)].tot;
+	}
+}
+int main()
+{
+	char S[20];
+	int m;
+	while (scanf("%d%d", &n, &m) != EOF) {
+		mkt(0, n - 1, root); m_No = 0;
+		re(i, m) {
+			scanf("%s", S);
+			if (!strcmp(S, "Reset")) {
+				l0 = 0; r0 = n - 1; x = 0; opr_all(0, n - 1, root); mr_opr0(root);
+				puts("Reset Now");
+			} else if (!strcmp(S, "New")) {
+				scanf("%d", &x);
+				opr1();
+				if (res == -1) puts("Reject New"); else {
+					l0 = res; r0 = res + x - 1; x = ++m_No; L[m_No] = l0; R[m_No] = r0; opr_all(0, n - 1, root);
+					x = res; tot_opr(0, n - 1, root, 1);
+					printf("New at %d\n", ++res);
+				}
+			} else if (!strcmp(S, "Free")) {
+				scanf("%d", &x); x--;
+				opr2(0, n - 1, root);
+				if (!res) puts("Reject Free"); else {
+					l0 = L[res]; r0 = R[res]; x = 0; opr_all(0, n - 1, root);
+					x = l0; tot_opr(0, n - 1, root, -1);
+					printf("Free from %d to %d\n", ++l0, ++r0);
+				}
+			} else {
+				scanf("%d", &x); opr3();
+				if (res == -1) puts("Reject Get"); else printf("Get at %d\n", ++res);
+			}
+		}
+		puts("");
+	}
+	return 0;
+}

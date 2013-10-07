@@ -1,0 +1,103 @@
+poj 1204 Word Puzzles (ac自动机) 
+总共最多有1000个单词，1000长度，最多1000000个节点。把所有的单词建好trie图后，把所有的字符串都匹配一遍，总共8个方向，8*10^6的复杂度。可能会有相同的串，所以用vector，由于要输出开始位置，所以建图的时候所有的单词倒着加进去。可能会有多解，但只需要输出一种就行了。
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<queue>
+#include<vector>
+#define N 26
+#define RT ( &data[ 0 ] )
+using namespace std;
+struct trie{
+    vector<int> tag;
+    trie *next[ N ];
+    trie *fail;
+    bool vis;
+}data[ 100000 ];
+int inp;
+trie *init( int a  ){
+    for( int i=0;i<N;i++ ) data[ a ].next[ i ]=RT;
+    data[ a ].fail=RT;
+    data[ a ].vis=false;
+    return data+a;
+}
+void ac_insert( char *a,int v ){
+    trie *p=RT;
+    int n=strlen( a );
+    for( n--;n>=0;n-- ){
+        int d=a[ n ]-'A';
+        if( p->next[ d ]==RT ) p->next[ d ]=init( ++inp );
+        p=p->next[ d ];
+    }
+    ( p->tag ).push_back( v );
+}
+void ac_bfs( void ){
+    queue<trie *> que;
+    for( int i=0;i<N;i++ )
+        if( data[ 0 ].next[ i ]!=RT )
+            que.push( data[ 0 ].next[ i ] );
+    while( que.size(  ) ){
+        trie *p=que.front(  );
+        for( int i=0;i<N;i++ ){
+            trie *temp=p->next[ i ];
+            if( temp!=RT ){
+                que.push( temp );
+                temp->fail=p->fail->next[ i ];
+            }
+            else
+                p->next[ i ]=p->fail->next[ i ];
+        }
+        que.pop(  );
+    }
+}
+int l,c,w;
+int anp[ 1009 ][ 2 ];
+char andi[ 1009 ];
+char ma[ 1009 ][ 1009 ];
+char str[ 10000 ];
+void ac_query( int sx,int sy,int dx,int dy ,int v ){
+    trie *p=RT;
+    for( int i=sx,j=sy;i&&i<=l&&j&&j<=c;i+=dx,j+=dy ){
+        int d=ma[ i ][ j ]-'A';
+        p=p->next[ d ];
+        for( trie *temp=p;temp!=RT&&!temp->vis;temp=temp->fail )
+            if( ( temp->tag ).size(  ) ){
+                temp->vis=true;
+                for( int k=0;k<( temp->tag ).size(  );k++ ){
+                    anp[ ( temp->tag )[ k ] ][ 0 ]=i-1;
+                    anp[ ( temp->tag )[ k ] ][ 1 ]=j-1;
+                    andi[ ( temp->tag )[ k ] ]=v;
+                }                
+            }
+    }
+}
+int main( void ){    
+    scanf( "%d%d%d",&l,&c,&w );
+    for( int i=1;i<=l;i++ )
+        for( int j=1;j<=c;j++ )
+            while( !isupper( ma[ i ][ j ]=getchar(  ) ) );
+    init( 0 );
+    for( int i=1;i<=w;i++ ){
+        scanf( "%s",str );
+        ac_insert( str,i );
+    }
+    ac_bfs(  );
+    for( int i=1;i<=l;i++ ){
+        ac_query( i,1,0,1,'G' );
+        ac_query( i,c,0,-1,'C' );        
+        ac_query( i,1,-1,1,'F' );
+        ac_query( i,c,1,-1,'B' );
+        ac_query( i,1,1,1,'H' );
+        ac_query( i,c,-1,-1,'D' );
+    }
+    for( int i=1;i<=c;i++ ){
+        ac_query( 1,i,1,0,'A' );
+        ac_query( l,i,-1,0,'E' );        
+        ac_query( l,i,-1,1,'F' );
+        ac_query( 1,i,1,-1,'B' );
+        ac_query( 1,i,1,1,'H' );
+        ac_query( l,i,-1,-1,'D' );
+    }
+    for( int i=1;i<=w;i++ )
+        printf( "%d %d %c\n",anp[ i ][ 0 ],anp[ i ][ 1 ],andi[ i ] );
+}

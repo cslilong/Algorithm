@@ -1,0 +1,137 @@
+POJ 2778 DNA Sequence(AC自动机+矩阵快速幂)
+
+这题和Censored！是差不多的，但是DP肯定做不了，要换一种方法。可以把AC自动机看成一个有向图，那么我们要求的就是把一些不能走的节点删处后所得到的图里，从0节点走n次后到达任意节点的总方案数，由于节点很少，最多100个，那么这就是一个经典的矩阵乘法题了，先建ac自动机，然后bfs一遍把建立初始矩阵。然后就是二分就幂了。复杂度为 100^3*lg2000000000。这题充分证明了取模的速度之慢。。。一开始500ms，然后把几个取模操作精简了一下就变成125ms了。。。
+#include<stdio.h>
+#include<string.h>
+#include<queue>
+#define N 4
+using namespace std;
+struct trie{
+    bool tag;
+    int next[ N ],fail;
+}data[ 109 ];
+int inp;
+int init( int a ){
+    for( int i=0;i<N;i++ ) data[ a ].next[ i ]=0;
+    data[ a ].fail=0;
+    data[ a ].tag=false;
+    return a;
+}
+int tran( char a ){
+    if( a=='A' ) return 0;
+    if( a=='C' ) return 1;
+    if( a=='T' ) return 2;
+    return 3;
+}
+void ac_insert( char *a ){
+    int p=0;
+    for( ;*a;a++ ){
+        int d=tran( *a );
+        if( data[ p ].next[ d ]==0 )  data[ p ].next[ d ]=init( ++inp );
+        p=data[ p ].next[ d ];
+    }
+    data[ p ].tag=true;
+}
+void ac_bfs( void ){
+    queue<int> que;
+    for( int i=0;i<N;i++ )
+        if( data[ 0 ].next[ i ] ) que.push( data[ 0 ].next[ i ] );
+    while( que.size(  ) ){
+        int p=que.front(  );
+        if( data[ data[ p ].fail ].tag ) data[ p ].tag=true;
+        for( int i=0;i<N;i++ ){
+            int temp=data[ p ].next[ i ];
+            if( temp ){
+                que.push( temp );
+                data[ temp ].fail=data[ data[ p ].fail ].next[ i ];
+            }
+            else
+                data[ p ].next[ i ]=data[ data[ p ].fail ].next[ i ];
+        }
+        que.pop(  );
+    }
+}
+long long ma[ 4 ][ 101 ][ 101 ];
+void bfs( void ){
+    queue<int> que;
+    bool tf[ 109 ];
+    memset( tf,false,sizeof( tf ) );
+    que.push( 0 );
+    tf[ 0 ]=true;
+    while( que.size(  ) ){
+        int p=que.front(  );
+        for( int i=0;i<N;i++ ){
+            int temp=data[ p ].next[ i ];
+            if( !data[ temp ].tag ){
+                ma[ 0 ][ p ][ temp ]=true;
+                if( !tf[ temp ] ){
+                    que.push( temp );
+                    tf[ temp ]=true;
+                }
+            }
+        }            
+        que.pop(  );
+    }
+}
+void macpy( int to,int from ){
+    for( int i=0;i<=inp;i++ )
+        for( int j=0;j<=inp;j++ )
+            ma[ to ][ i ][ j ]=ma[ from ][ i ][ j ];
+}
+void cal( int a,int b,int c ){
+    for( int i=0;i<=inp;i++ )
+        for( int j=0;j<=inp;j++ ){
+            ma[ c ][ i ][ j ]=0;
+            for( int k=0;k<=inp;k++ )
+                ma[ c ][ i ][ j ]+=ma[ a ][ i ][ k ]*ma[ b ][ k ][ j ];
+            ma[ c ][ i ][ j ]%=100000;
+        }
+}
+void binary( int len,int p ){
+    if( len==1 ){
+        macpy( p,0 );
+        return;
+    }
+    bool tf[ 4 ];
+    int l,r;
+    memset( tf,false,sizeof( tf ) );
+    tf[ p ]=true;
+    for( l=1;tf[ l ];l++ );
+    for( r=l+1;tf[ r ];r++ );
+    int mid=len/2;
+    binary( mid,l );
+    if( len-mid>mid ){
+        cal( l,0,r );
+        cal( l,r,p );
+    }
+    else
+        cal( l,l,p );
+}
+int main( void ){
+    int n,m;
+    scanf( "%d%d",&m,&n );
+    char str[ 20 ];
+    inp=0;
+    init( 0 );
+    str[ 1 ]='\0';
+    str[ 0 ]='A';
+    ac_insert( str );
+    str[ 0 ]='T';
+    ac_insert( str );
+    str[ 0 ]='C';
+    ac_insert( str );
+    str[ 0 ]='G';
+    ac_insert( str );
+    for( int i=0;i<N;i++ ) data[ data[ 0 ].next[ i ] ].tag=false;
+    for( int i=1;i<=m;i++ ){
+        scanf( "%s",str );
+        ac_insert( str );
+    }
+    ac_bfs(  );
+    bfs(  );
+    binary( n,1 );
+    int ret=0;
+    for( int i=0;i<=inp;i++ )
+        ret+=ma[ 1 ][ 0 ][ i ];
+    printf( "%d\n",ret0000 );
+}

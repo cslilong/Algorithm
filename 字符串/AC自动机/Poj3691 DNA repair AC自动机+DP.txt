@@ -1,0 +1,95 @@
+Poj3691 DNA repair AC自动机+DP
+第一道自动机DP题，一开始自己想了老半天，有一点感觉，但又不是很清晰，后来直接去看了一下解题报告，恍然大悟，原来AC自动机就是一个有向图。对于任意的字符串都可以匹配到图上的一个节点，也就是对于一个状态。那么用有限的状态就可以覆盖住所有的字符串了。dp[i][j]表示长度为i的串要转化为状态j的串所需的最小cost。那么我们可以得到转态转移方程：
+dp[ i+1 ][ temp ]=min( dp[ i+1 ][ temp ],dp[ i ][ j ]+( tran( s[ i ] )!=k ) );
+
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+#include<queue>
+#define N 4
+using namespace std;
+struct trie{
+    bool tag;
+    int fail,next[ N ];
+}data[ 1009 ];
+int inp;
+int dp[ 1009 ][ 1009 ];
+int tran( char a ){
+    if( a=='A' ) return 0;
+    if( a=='G' ) return 1;
+    if( a=='C' ) return 2;
+    return 3;
+}
+int init( int a ){
+    data[ a ].tag=false;
+    for( int i=0;i<N;i++ ) data[ a ].next[ i ]=0;
+    data[ a ].fail=0;
+    return a;
+}
+void ac_insert( char *a ){
+    int p=0;
+    for( ;*a;a++ ){
+        int d=tran( *a );
+        if( !data[ p ].next[ d ] ) data[ p ].next[ d ]=init( ++inp );
+        p=data[ p ].next[ d ];
+    }
+    data[ p ].tag=true;
+}
+void ac_bfs( void ){
+    queue<int> que;
+    for( int i=0;i<N;i++ )
+        if( data[ 0 ].next[ i ] )
+            que.push( data[ 0 ].next[ i ] );
+    while( que.size(  ) ){
+        int p=que.front(  );
+        if( data[ data[ p ].fail ].tag ) data[ p ].tag=true;
+        for( int i=0;i<N;i++ ){
+            int temp=data[ p ].next[ i ];
+            if( temp ){
+                que.push( temp );
+                data[ temp ].fail=data[ data[ p ].fail ].next[ i ];                
+            }
+            else
+                data[ p ].next[ i ]=data[ data[ p ].fail ].next[ i ];
+        }
+        que.pop(  );
+    }
+}
+int main( void ){
+    int cas=0,n,len;
+    char s[ 1009 ];
+    while( ( scanf( "%d",&n ),n ) ){
+        inp=0;
+        init( 0 );    
+        for( int i=1;i<=n;i++ ){
+            scanf( "%s",s );
+            ac_insert( s );
+        }
+        ac_bfs(  );
+        scanf( "%s",s );
+        len=strlen( s );
+        for( int i=0;i<=len;i++ ) memset( dp[ i ],-1,sizeof( int )*( inp+3 ) );
+        dp[ 0 ][ 0 ]=0;
+        for( int i=0;i<len;i++ )
+            for( int j=0;j<=inp;j++ )
+                if( dp[ i ][ j ]!=-1 ){
+                    for( int k=0;k<N;k++ ){
+                        int temp=data[ j ].next[ k ];
+                        if( !data[ temp ].tag ){
+                            if( dp[ i+1 ][ temp ]==-1 ) dp[ i+1 ][ temp ]=dp[ i ][ j ]+( tran( s[ i ] )!=k );
+                            else dp[ i+1 ][ temp ]=min( dp[ i+1 ][ temp ],dp[ i ][ j ]+( tran( s[ i ] )!=k ) );
+                        }
+                    }
+                        
+                }
+        int temp=100000;
+        for( int i=0;i<=inp;i++ )
+            if( dp[ len ][ i ]!=-1 )
+                temp=min( temp,dp[ len ][ i ] );
+        printf( "Case %d: ",++cas );
+        if( temp==100000 )
+            printf( "-1\n" );
+        else
+            printf( "%d\n",temp );
+    }
+}

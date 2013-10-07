@@ -1,0 +1,106 @@
+HDU 2296 Ring(AC自动机+DP) 
+DP方程很容易就想到了，dp[i][j]表示长度为i的字符串匹配到状态j所能得到的最大weight。每次进入下个状态时，
+weight值的增量为data[ temp ].tag。其中data[ temp ].tag表示状态j表示的字符串所能得到的最大weight。这个在建ac自动机的时候可以预处理出来。蛋疼的地方在于要记录路径，并且是要最短且字典序最小。这个一开始还真没想到什么好办法，所以就暴力把所有的路径都记录了下来，每次更新的时候都strcmp一下，最后31msAC了排到了第六，还有一点小快额。。。后来查了一下才知道，把字符串倒过来搞，就不用记录路径了。。。orz
+#include<stdio.h>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+#define N 26
+using namespace std;
+struct trie{
+    int next[ N ],fail;
+    int tag;
+}data[ 1009 ];
+int inp;
+int init( int a ){
+    for( int i=0;i<N;i++ )data[ a ].next[ i ]=0;
+    data[ a ].fail=0;
+    data[ a ].tag=0;
+    return a;
+}
+void ac_insert( char *a,int v ){
+    int p=0;
+    for( ;*a;a++ ){
+        int d=*a-'a';
+        if( data[ p ].next[ d ]==0 ) data[ p ].next[ d ]=init( ++inp );
+        p=data[ p ].next[ d ];
+    }
+    data[ p ].tag=v;
+}
+void ac_bfs( void ){
+    queue<int> que;
+    for( int i=0;i<N;i++ )
+        if( data[ 0 ].next[ i ] ) que.push( data[ 0 ].next[ i ] );
+    while( que.size(  ) ){
+        int p=que.front(  );
+        for( int i=0;i<N;i++ ){
+            int temp=data[ p ].next[ i ];
+            data[ p ].tag+=data[ data[ p ].fail ].tag;
+            if( temp ){
+                que.push( temp );
+                data[ temp ].fail=data[ data[ p ].fail ].next[ i ];
+            }
+            else
+                data[ p ].next[ i ]=data[ data[ p ].fail ].next[ i ];
+        }
+        que.pop(  );
+    }
+}
+char str[ 109 ][ 20 ];
+int dp[ 51 ][ 1009 ];
+char path[ 51 ][ 1009 ][ 51 ];
+int main( void ){
+    int cas,n,m;
+    scanf( "%d",&cas );
+    for( ;cas;cas-- ){
+        inp=0;
+        init( 0 );
+        scanf( "%d%d",&n,&m );
+        for( int i=0;i<m;i++ )
+            scanf( "%s",str[ i ] );
+        for( int i=0;i<m;i++ ){
+            int temp;
+            scanf( "%d",&temp );
+            ac_insert( str[ i ],temp );
+        }
+        ac_bfs(  );
+        for( int i=0;i<=n;i++ ) memset( dp[ i ],-1,sizeof( int )*( inp+4 ) );
+        int maxi=0,maxj=0;
+        dp[ 0 ][ 0 ]=0;
+        path[ 0 ][ 0 ][ 0 ]='\0';
+        for( int i=0;i<n;i++ )
+            for( int j=0;j<=inp;j++ )
+                if( dp[ i ][ j ]!=-1 ){
+                    for( int d=0;d<N;d++ ){
+                        int temp=data[ j ].next[ d ];
+                        int tval=data[ temp ].tag+dp[ i ][ j ];
+                        int tf=0;
+                        if( tval>dp[ i+1 ][ temp ] ){
+                            dp[ i+1 ][ temp ]=tval;
+                            strcpy( path[ i+1 ][ temp ],path[ i ][ j ] );
+                            int len=strlen( path[ i+1 ][ temp ] );
+                            path[ i+1 ][ temp ][ len ]=d+'a';
+                            path[ i+1 ][ temp ][ len+1 ]='\0';
+                            tf=1;
+                        }
+                        else if( tval==dp[ i+1 ][ temp ] ){
+                            int len=strlen( path[ i ][ j ] );
+                            path[ i ][ j ][ len ]=d+'a';
+                            path[ i ][ j ][ len+1 ]='\0';
+                            if( strcmp( path[ i ][ j ],path[ i+1 ][ temp ] )<0 ){
+                                strcpy( path[ i+1 ][ temp ],path[ i ][ j ] );
+                                tf=1;
+                            }
+                            path[ i ][ j ][ len ]='\0';
+                        }
+                        if( tf ){
+                            if( tval>dp[ maxi ][ maxj ] )
+                                maxi=i+1,maxj=temp;
+                            else if( tval==dp[ maxi ][ maxj ]&&i+1<=maxi&&strcmp( path[ maxi ][ maxj ],path[ i+1 ][ temp ] )>0 )
+                                maxi=i+1,maxj=temp;
+                        }
+                    }
+                }
+        printf( "%s\n",path[ maxi ][ maxj ] );
+    }
+}

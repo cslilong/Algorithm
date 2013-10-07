@@ -1,0 +1,103 @@
+ZOJ 3430 Detect the Virus AC自动机匹配
+这题很明显的AC自动机匹配，但是坑爹的地方在于对于字符串解码之后，得到的字符串是0-255之间的，包括了‘\0’，所以就不能直接返回字符串了，要用int，并且记录长度，不然会悲剧，交了21次才过，郁闷。。。中间各种WA和RE。
+#include<stdio.h>
+#include<string.h>
+#include<queue>
+#define RT (&root)
+using namespace std;
+struct trie{
+    int tag;
+    trie *fail;
+    trie *next[ 260 ];
+    trie(  ){ }
+} root;
+int table[ 128 ]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,0,63,52,53,54,55,56,57,58,59,60,61,0,0,0,0,0,0,0,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,0,0,0,0,0,0,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,0,0,0,0,0
+};
+
+void init( trie *temp ){
+    for( int i=0;i<260;i++ ) temp->next[ i ]=RT;
+    temp->tag=0;
+    temp->fail=RT;
+}
+void ac_insert( int *a,int len,int v ){
+    trie *p=RT;
+    for( int i=0;i<len;i++,a++ ){
+        if( p->next[ *a ]==RT ){
+            trie *temp=p->next[ *a ]=new trie;
+            init( temp );
+        }
+        p=p->next[ *a ];
+    }
+    p->tag=v;
+}
+
+void ac_bfs( void ){
+    queue<trie *> que;
+    for( int i=0;i<260;i++ )
+        if( root.next[ i ]!=RT ){
+            que.push( root.next[ i ] );
+            (root.next[ i ])->fail=RT;
+        }
+    while( que.size(  ) ){
+        trie *p=que.front(  );
+        for( int i=0;i<260;i++ ){
+            if( p->next[ i ]!=RT ){
+                p->next[ i ]->fail=p->fail->next[ i ];                
+                que.push( p->next[ i ] );
+            }
+            else{
+                p->next[ i ]=p->fail->next[ i ];
+            }
+                
+        }
+        que.pop(  );
+    }
+}
+bool tf[ 26000 ];
+int ac_query( int *a,int len ){
+    int ret=0;
+    trie *p=RT;
+    memset( tf,false,sizeof( tf ) );
+    for( int i=0;i<len;i++,a++ ){
+        p=p->next[ *a ];
+        for( trie *temp=p;temp!=RT;temp=temp->fail ){
+            if( temp->tag&&!tf[ temp->tag ] ) ret++;
+            tf[ temp->tag ]=true;
+        }            
+    }
+    return ret;
+}
+char str[ 10000 ];
+int ss[ 10000 ];
+int decode( char *a ){
+    int n=strlen( a ),i,p=0,cnt;
+    for( cnt=0,i=n-1;a[ i ]=='=';cnt++,i-- );
+    for( i=0;i<n;i+=4 ){       
+        int temp=( table[ a[ i ] ]<<18 )|( table[ a[ i+1 ] ]<<12 )|( table[ a[ i+2 ] ]<<6 )|( table[ a[ i+3 ] ] );
+        for( int j=2;j>=0;j-- ){
+            ss[ p+j ]=temp&255;
+            temp>>=8;
+        }
+        p+=3;
+    }
+    return p-cnt;
+}
+int main( void ){
+    int n,m;
+    while( scanf( "%d",&n )+1 ){
+        init( RT );
+        for( int i=1;i<=n;i++ ){
+            scanf( "%s",str );
+            int len=decode( str );
+            ac_insert( ss,len,i );        
+        }
+        ac_bfs(  );
+        scanf( "%d",&m );
+        for( int i=1;i<=m;i++ ){
+            scanf( "%s",str );
+            int len=decode( str );
+            printf( "%d\n",ac_query( ss,len ) );
+        }
+        printf( "\n" );
+    }
+}
