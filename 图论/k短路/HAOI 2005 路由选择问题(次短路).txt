@@ -1,0 +1,172 @@
+HAOI 2005 路由选择问题
+Posted by CmYkRgB123 On 2009 - 四月 - 14日 14 : 54 : 18 1 COMMENT 54 views 
+前两问是最短路，第三问是标准的次短路径。求法是先求出最短路径，然后枚举每条从S到T的最短路径上的边，删除以后再求一次最短路径，保留最小值就是次短路径。
+
+
+ /* 
+ * Problem: HAOI2005 route
+ * Author: Guo Jiabao
+ * Time: 2009.4.14 14:05
+ * State: Solved
+ * Memo: Dijkstra 次短路径
+*/
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+const int MAXN=51,MAXM=MAXN*MAXN*2,INF=0x7FFFFFF;
+using namespace std;
+struct edge
+{
+	edge *next,*op;
+	int t,c;
+}ES[MAXM],*V[MAXN],*SPE[MAXN];
+int N,S,T,P,SPC,S0,S1,S2,EC=-1;
+int sp[MAXN];
+bool mf[MAXN],vis[MAXN];
+inline void addedge(int a,int b,int c)
+{
+	ES[++EC].next=V[a];
+	V[a]=ES+EC; V[a]->t=b; V[a]->c=c;
+	ES[++EC].next=V[b];
+	V[b]=ES+EC; V[b]->t=a; V[b]->c=c;
+	V[a]->op=V[b]; V[b]->op=V[a];
+}
+ 
+int adjm[MAXN][MAXN];
+void init()
+{
+	int i,j,c;
+	freopen("route.in","r",stdin);
+	freopen("route.out","w",stdout);
+	scanf("%d%d%d",&N,&S,&T);
+	for (i=1;i<=N;i++)
+	{
+		for (j=1;j<=N;j++)
+		{
+			scanf("%d",&c);
+			adjm[i][j]=c;
+			if (i>=j && adjm[i][j]!=adjm[j][i])
+				c=1575;
+			if (i<j && c)
+				addedge(i,j,c);
+		}
+	}
+	scanf("%d",&P);
+	for (i=1;i<=P;i++)
+	{
+		scanf("%d",&c);
+		mf[c]=true;
+	}
+}
+void dijkstra()
+{
+	int i,j,Mini;
+	for (i=1;i<=N;i++)
+		sp[i]=INF,vis[i]=false;
+	sp[S]=0;
+	for (i=S;i;)
+	{
+		vis[i]=true;
+		for (edge *e=V[i];e;e=e->next)
+		{
+			if (!mf[j=e->t] && sp[i] + e->c < sp[j])
+				sp[j]=sp[i] + e->c;
+		}
+		Mini=INF;i=0;
+		for (j=1;j<=N;j++)
+			if (!vis[j] && sp[j] < Mini)
+			{
+				Mini=sp[j];
+				i=j;
+			}
+	}
+}
+void dfs(int i)
+{
+	vis[i]=true;
+	for (edge *e=V[i];e;e=e->next)
+	{
+		int j=e->t;
+		if (sp[j] + e->c == sp[i])
+		{
+			SPE[++SPC]=e->op;
+			if (!vis[j])
+				dfs(j);
+		}
+	}
+}
+void solve()
+{
+	int i,c;
+	S2=INF;
+	dijkstra();
+	S0=sp[T];
+	memset(mf,0,sizeof(mf));
+	dijkstra();
+	S1=sp[T];
+	memset(vis,0,sizeof(vis));
+	dfs(T);
+	for (i=1;i<=SPC;i++)
+	{
+		edge *e=SPE[i];
+		c=e->c;
+		e->c=INF;
+		dijkstra();
+		e->c=c;
+		c=sp[T];
+		if (c<S2)
+			S2=c;
+	}
+}
+int main()
+{
+	init();
+	solve();
+	printf("%d %d %dn",S0,S1,S2);
+	return 0;
+} 
+
+http://www.ruvtex.cn/cogs/problem/pdetail.php?pid=22
+
+【问题描述】
+
+X城有一个含有N个节点的通信网络，在通信中，我们往往关心信息从一个节点I传输到节点J的最短路径。遗憾的是，由于种种原因，线路中总有一些节点会出故障，因此在传输中要避开故障节点。
+任务一：在己知故障节点的情况下，求避开这些故障节点，从节点I到节点J的最短路径S0。
+任务二：在不考虑故障节点的情况下，求从节点I到节点J的最短路径S1、第二最短路径S2。
+
+【输入文件】
+
+第1行： N I J (节点个数 起始节点 目标节点)
+第2—N+1行： Sk1 Sk2…SkN (节点K到节点J的距离为SkJ K=1，2，……，N)
+最后一行： P T1 T2……Tp (故障节点的个数及编号)
+
+【输出文件】
+
+S0 S1 S2 (S1<=S2 从节点I到节点J至少有两条不同路径)
+
+【输入输出样例】
+
+
+
+
+route.in
+
+5 1 5
+0 10 5 0 0
+10 0 0 6 20
+5 0 0 30 35
+0 6 30 0 6
+0 20 35 6 0
+1 2
+
+route.out
+
+40 22 30
+
+【约束条件】
+
+(1)N<=50 N个节点的编号为1，2，…，N
+(2)Skj为整数，Skj<=100，(K，J=1，2…，N 若Skj=0表示节点K到节点J没线路)
+(3)P<=5 

@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  	<script>
+  		if(top!=window){top.location=location.href;}
+  	
+    	var ginit_time = new Date().getTime();
+ 		var gend_time = 0;
+    </script>
+	     <title>pku2499(第k短路) - 心尘的日志 - 网易博客</title>
+	<meta name="Author" content="心尘,guichun147">
+	<meta name="Keywords" content="pku2499(第k短路),日志,因为真实所以精彩,心尘,guichun147,网易博客,网易,blog">
+	<meta name="Description" content="#include&amp;lt;iostream&amp;gt;&lt;BR&gt;using namespace std;&lt;BR&gt;const int Emax=1000005;&lt;BR&gt;const int Nmax=1005;&lt;BR&gt;const int inf=INT_MAX;&lt;BR&gt;struct node{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; int x,f;&amp;nbsp;&amp;nbsp; &lt;BR&gt;}list[Emax];&lt;BR&gt;int len=1;&lt;BR&gt;struct edge{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; int next;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; int d;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; int w;&amp;nbsp;&amp;nbsp; &lt;BR&gt;}g[Emax],rg[Emax]; //保存原图和逆图 &lt;BR&gt;int p[Nmax],rp[Nmax];&lt;BR&gt;int dist[Nmax];,心尘的日志,知我者谓我心忧；不知我者谓我何求！,心尘的网易博客">
+    <meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<link rel="shortcut icon" href="http://b1.bst.126.net/0902000/style/common/favicon.ico" />
+<script type="text/javascript">try{document.execCommand('BackgroundImageCache',false,true);}catch(e){}</script>
+<link type="text/css" rel="stylesheet" href="/style/css/base/src/00-htc.css"/>
+
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core1.css" />
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core2.css" />
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core3.css" />
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core4.css" />
+	
+
+  <script type="text/javascript" src="http://b1.bst.126.net/0902000/style/css/fixed/fixedThemeInit.js"></script>  
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/fixed/4013/o.css" id="_$$_link_layout"/>
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/fixed/4013/s.css"  id="_$$_link_theme"/> 
+
+ 
+<script type="text/JavaScript">
+<!--//--><![CDATA[//><!--
+var UD = {
+     status       : 'prev',
+     themeId      :  4013,
+     hostId       :  34530090,
+     visitorId    :  0,
+     visitorIP	  :  '218.75.236.136',
+     visitorAvatar:	 '',
+     hostPath     : '/guichun147',
+     hostName     : 'guichun147', 
+     pageName     : 'prevBlogPerma',
+     visitorRank  : '-100',
+     visitorName  : '', 
+     hostNickname : '心尘',
+     visitorNickname : '',
+     commentRank  : -100,
+     externHash   : '',
+     hasAdminCircles : 'false',
+     hostImgUrl   : 'http://ava.bimg.126.net/photo/CniTw5gfVD7-8hTrhrkyWQ==/170855310865736205.jpg',
+     themeFileId  : '-1252249571864',
+     serverName   : 'blog.163.com',
+     dataDigest	  : 'null',
+     lastModifyTime : '',
+     visitorUserType: [12,42],
+     uuid			: 'bbf836fe-87ee-4f86-bca8-391cc8a247be',
+     speedTest		: 0,
+     migStat		: -1,
+     isAudit		: true
+};   
+
+if(UD.pageName == "prevHome" || UD.pageName == "editHome"){
+	var date = new Date();
+	date.setMinutes(0,0,0);
+	UD.weatherGenTime = date.getTime();
+}
+
+//--><!]]>
+</script>
+
+
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/core1.js"></script>
+<script type="text/javascript" src="http://b1.bst.126.net/0902000/js/gen/core_ext.js"></script>
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/core2.js"></script>
+<script type="text/javascript" src="http://b1.bst.126.net/0902000/js/gen/core3.js"></script>
+
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/interface.js"></script>
+
+<script type="text/javascript" src="http://b1.bst.126.net/0902000/js/gen/interface_ext.js"></script>
+
+
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/blog.js"></script>
+  </head> 
+  <body lang="zh" id="blog-163-com">   
+    <div id="tptlbr" style="display:none">&nbsp;</div>
+    <div class="bggb" id="blog-163-com-body">
+      <div class="innerlayer" id="_$$_inner_layer"><div class="g_p_none"><span class="a_a">&nbsp;</span></div>
+
+<script language="JavaScript">
+<!--//--><![CDATA[//><!--
+ 	if (NEBlog==undefined) 
+		var NEBlog={};
+		
+	
+	NEBlog.gPermalink_BlogCiters = [];
+//--><!]]>
+</script>
+
+
+<div class="g_p_none">
+  
+  <!-- 单篇日志预览-内容 -->
+  <div class="g_c_container g_p_hide " id="_$$_blog_perma" >
+  <div id="layoutType" class="mdl_new ">
+    <div class="mdl_new_main">
+       <div class="mdl_new_mainc">
+         <div>
+<!-- 单篇日志预览-菜单 -->
+         	<div style="display:block;padding-top:6px; border-bottom-width: 1px; border-bottom-style: dashed;" class="g_h_25 brd01">
+			    	<a class="g_p_block g_w_45 g_p_right g_t_right n_ n33c g_t_14 c05" id="newerBlogLink" style="display:none;"><p class="g_p_right g_w_95 g_t_hide g_c_hand g_t_12" id="newerBlogTitle">&nbsp;</p></a>
+			   		<a class="g_p_block g_w_45 g_p_left g_t_left n_ n34 g_t_14 c05" id="olderBlogLink" style="display:none;"><p class="g_w_95 g_t_hide g_c_hand g_p_left g_t_12" id="olderBlogTitle">&nbsp;</p></a>
+			    <div class="g_p_clear g_t_space">&nbsp;</div>
+			</div>	
+	        <div class="mdl_new_diray">
+		        <p class="g_p_center g_t_wrap g_t_left g_t_20 g_c_pdin c07" id="blogtitle_fks_085071086083088065084084087095087082084064084086095067" style="margin:20px auto 10px;"><span style="font-family: '微软雅黑','黑体',Arial,Helvetica,Sans-Serif;">pku2499(第k短路)</span></p>
+			    <div class="g_p_center g_t_right g_c_pdin g_h_20 c08" style="margin-bottom: 15px;">
+			        <div class="g_p_left">
+			        	<a id="aBelongClsfks_085071086083088065084084087095087082084064084086095067" class="c05" href="#" onclick="NEBlog.gPermaLinkPage.updownMenu.openSameClass('fks_087065082084082070080082082095087082084064084086095067', '图论');">图论</a>
+			        	&nbsp;&nbsp;<span class="g_t_12 c08">2008-11-03 16:51</span>
+			        	<span class="c08">&nbsp;&nbsp;阅读<nobr id="accessCount_fks_085071086083088065084084087095087082084064084086095067">119</nobr>&nbsp;&nbsp;&nbsp;评论<nobr id="comCount_fks_085071086083088065084084087095087082084064084086095067">0</nobr></span>
+			        	<span class="c08">&nbsp;</span>
+			        </div>
+			        <div>字号：
+			          <a id="bigfont" href="#" class="g_c_ul c05" onclick="NEBlog.gPermaLinkPage.updownMenu.changeFont('blogtext_fks_085071086083088065084084087095087082084064084086095067', 1);return false;" style="font-size:12px;">大</a><span class="g_t_bold c07" id="bigfont_off" style="display:none;">大</span>&nbsp;
+			          <a id="middlefont" href="#" class="g_c_ul c05" onclick="NEBlog.gPermaLinkPage.updownMenu.changeFont('blogtext_fks_085071086083088065084084087095087082084064084086095067', 2);return false;" style="font-size:12px;">中</a><span class="g_t_bold c07" id="middlefont_off" style="display:none;">中</span>&nbsp;
+			          <a id="smallfont" class="g_c_ul c05" href="#" onclick="NEBlog.gPermaLinkPage.updownMenu.changeFont('blogtext_fks_085071086083088065084084087095087082084064084086095067', 3);return false;" style="display:none;font-size:12px;">小</a><span class="g_t_bold c07" id="smallfont_off" style="display:inline;">小</span>
+			        </div>
+		   		</div>
+		   	    
+				<div class="g_blog_list">
+					<div class="g_t_center g_c_pdin g_p_center c07 content" id="blogtext_fks_085071086083088065084084087095087082084064084086095067">
+					  <div class="ns_content">
+					   #include&lt;iostream&gt;<BR>using namespace std;<BR>const int Emax=1000005;<BR>const int Nmax=1005;<BR>const int inf=INT_MAX;<BR>struct node{<BR>&nbsp;&nbsp;&nbsp; int x,f;&nbsp;&nbsp; <BR>}list[Emax];<BR>int len=1;<BR>struct edge{<BR>&nbsp;&nbsp;&nbsp; int next;<BR>&nbsp;&nbsp;&nbsp; int d;<BR>&nbsp;&nbsp;&nbsp; int w;&nbsp;&nbsp; <BR>}g[Emax],rg[Emax]; //保存原图和逆图 <BR>int p[Nmax],rp[Nmax];<BR>int dist[Nmax];<BR>int out[Nmax];<BR>bool visit[Nmax];<BR>int n,m,s,t,k;<BR>void init(){<BR>&nbsp;&nbsp;&nbsp; memset(p,-1,sizeof(p));<BR>&nbsp;&nbsp;&nbsp; memset(rp,-1,sizeof(rp));<BR>&nbsp;&nbsp;&nbsp; memset(out,0,sizeof(out));&nbsp;&nbsp;&nbsp;&nbsp; <BR>}<BR>void readdata(){<BR>&nbsp;&nbsp;&nbsp; int x,y,pow;<BR>&nbsp;&nbsp;&nbsp; scanf("%d%d",&amp;n,&amp;m);<BR>&nbsp;&nbsp;&nbsp; for(int i=0;i&lt;m;i++){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; scanf("%d%d%d",&amp;x,&amp;y,&amp;pow);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; g[i].next=p[x]; g[i].w=pow; g[i].d=y;&nbsp; p[x]=i;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rg[i].next=rp[y]; rg[i].w=pow; rg[i].d=x; rp[y]=i;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; scanf("%d%d%d",&amp;s,&amp;t,&amp;k);<BR>&nbsp;&nbsp;&nbsp; if(s==t) k++;<BR>}<BR>void dijkstra(){<BR>&nbsp;&nbsp;&nbsp; int minv,u;<BR>&nbsp;&nbsp;&nbsp; memset(visit,0,sizeof(visit));<BR>&nbsp;&nbsp;&nbsp; for(int i=1;i&lt;=n;i++) dist[i]=inf; <BR>&nbsp;&nbsp;&nbsp; dist[t]=0; <BR>&nbsp;&nbsp;&nbsp; while(true){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; minv=inf;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(int j=1;j&lt;=n;j++){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(!visit[j] &amp;&amp; dist[j]&lt;minv){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; minv=dist[j]; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; u=j;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(minv==inf) break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; visit[u]=true;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(int j=rp[u];j!=-1;j=rg[j].next){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(!visit[rg[j].d] &amp;&amp; dist[u]+rg[j].w&lt;dist[rg[j].d])<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dist[rg[j].d]=dist[u]+rg[j].w;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp; <BR>}<BR>void swap(int a,int b){<BR>&nbsp;&nbsp;&nbsp;&nbsp; node tmp=list[a];<BR>&nbsp;&nbsp;&nbsp;&nbsp; list[a]=list[b];<BR>&nbsp;&nbsp;&nbsp;&nbsp; list[b]=tmp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>}<BR>void heap(int i){<BR>&nbsp;&nbsp;&nbsp;&nbsp; int lchild=2*i,rchild=2*i+1,mins=i;<BR>&nbsp;&nbsp;&nbsp;&nbsp; if(lchild&lt;=len &amp;&amp; list[lchild].f&lt;list[mins].f) mins=lchild;<BR>&nbsp;&nbsp;&nbsp;&nbsp; if(rchild&lt;=len &amp;&amp; list[rchild].f&lt;list[mins].f) mins=rchild;<BR>&nbsp;&nbsp;&nbsp;&nbsp; if(mins!=i){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; swap(list[i],list[mins]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; heap(mins);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>}<BR>void inheap(node key){<BR>&nbsp;&nbsp;&nbsp;&nbsp; list[++len]=key;<BR>&nbsp;&nbsp;&nbsp;&nbsp; int i=len;<BR>&nbsp;&nbsp;&nbsp;&nbsp; while(i&gt;1 &amp;&amp; list[i/2].f&gt;list[i].f){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; swap(list[i/2],list[i]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i=i/2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp; <BR>}<BR>node getmin(){<BR>&nbsp;&nbsp;&nbsp; node mins=list[1];<BR>&nbsp;&nbsp;&nbsp; list[1]=list[len--];<BR>&nbsp;&nbsp;&nbsp; if(len&gt;1) heap(1);<BR>&nbsp;&nbsp;&nbsp; return mins;&nbsp;&nbsp;&nbsp;&nbsp; <BR>}<BR>int pri_bfs(){<BR>&nbsp;&nbsp;&nbsp; int ds;<BR>&nbsp;&nbsp;&nbsp; node front,rear;<BR>&nbsp;&nbsp;&nbsp; list[len].x=s; list[len].f=dist[s];<BR>&nbsp;&nbsp;&nbsp; while(len&gt;0){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; front=getmin();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; out[front.x]++;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(out[t]==k) return front.f;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(out[front.x]&gt;k) continue;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(int i=p[front.x];i!=-1;i=g[i].next){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(out[g[i].d]&gt;=k) continue; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ds=front.f-dist[front.x]; // g(front.x)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rear.x=g[i].d; rear.f=ds+g[i].w+dist[g[i].d];<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inheap(rear);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; return -1;<BR>}<BR>void solve(){<BR>&nbsp;&nbsp;&nbsp; dijkstra();&nbsp; <BR>&nbsp;&nbsp;&nbsp; printf("%d\n",pri_bfs());&nbsp;&nbsp; <BR>}<BR>int main(){<BR>&nbsp;&nbsp;&nbsp; init();<BR>&nbsp;&nbsp;&nbsp; readdata();<BR>&nbsp;&nbsp;&nbsp; solve();<BR>&nbsp;&nbsp;&nbsp; system("pause");<BR>&nbsp;&nbsp;&nbsp; return 0;<BR>}<BR>
+					  </div>
+					</div>
+				</div>
+	         </div>
+             <div class="g_tab_btn00 bdb g_t_left" id="cssTabBar_fks_085071086083088065084084087095087082084064084086095067">
+             
+						<div class="bdl" id="ShareDiv_fks_085071086083088065084084087095087082084064084086095067"><a class="c05" href="#" onclick="NEBlog.gPermaLinkPage.updownMenu.upDownCities('fks_085071086083088065084084087095087082084064084086095067','blog/34530090200810345151552.track','blog/static/34530090200810345151552');return false;" >引用(<nobr id="tbCount_fks_085071086083088065084084087095087082084064084086095067">?</nobr>)<span class="n_ n32 g_p_none">&nbsp;</span></a></div>
+						<div class="bdl" id="RecommendDiv_fks_085071086083088065084084087095087082084064084086095067"><a class="c05" href="#" onclick="NEBlog.gPermaLinkPage.recommend();return false;" >推荐(<nobr id="recommendCount_fks_085071086083088065084084087095087082084064084086095067">?</nobr>)<span class="n_ n32 g_p_none">&nbsp;</span></a></div>
+						<div class="c08 bdl bdr">评论(<nobr id="comCountMid_fks_085071086083088065084084087095087082084064084086095067">?</nobr>)</div>
+					<div class="c08 bdl bdr last">阅读(<nobr id="accessCountMid_fks_085071086083088065084084087095087082084064084086095067">?</nobr>)</div>
+
+		    	<input id="openCom_fks_085071086083088065084084087095087082084064084086095067" type="hidden" value="-1"/>
+			    <input id="openShare_fks_085071086083088065084084087095087082084064084086095067" type="hidden" value="-1"/>
+			    <input id="selectedLayout" type="hidden" value="0"/>
+			</div>
+			<div id="share_fks_085071086083088065084084087095087082084064084086095067" class="g_t_left" style="display:none;"></div>
+			<div id="com_fks_085071086083088065084084087095087082084064084086095067">
+<!-- 单篇日志预览-菜单 -->
+         	<div class="ns_links">
+         	
+			   		<p class="c05"><a class="c05" id="olderBlogLinkBottom" style="display:none;">上一篇：<span id="olderBlogTitleBottom">&nbsp;</span></a>
+			    <div class="g_p_clear g_t_space">&nbsp;</div>
+			    	<p class="c05"><a class="c05" id="newerBlogLinkBottom" style="display:none;">下一篇：<span id="newerBlogTitleBottom">&nbsp;</span></a>
+			</div>
+				<div id="blogReader_fks_085071086083088065084084087095087082084064084086095067"></div>
+				<div class="g_p_relative g_h_1"  style="display: block;">
+	                <div class="ns_mtt c08 brd01" id="ComDiv_fks_085071086083088065084084087095087082084064084086095067">评论</div>
+	    			<div id="comShow_fks_085071086083088065084084087095087082084064084086095067"></div>
+	  				<div id="comPub_fks_085071086083088065084084087095087082084064084086095067" class="g_h_1"></div>	
+	  			 </div>
+  			 </div>
+          </div>
+          
+       </div>
+	</div>
+	<div class="mdl_new_side brd01">
+		<div id="aboutMeBasic"></div>
+	    <div id="recentBlogs"></div>
+		<div id="postsense"></div>
+     </div>
+
+   <div class="g_p_clear g_t_space">&nbsp;</div>
+   </div>    
+ </div>
+</div>
+
+<!-- 生成模块脚本 -->
+<script language="JavaScript">
+	function initPage(){
+    	var _$$_blog_perma = new netease.ui.module.Module("日志",null,$("_$$_blog_perma"),null,"",{parent:"_$$_module_container_center"});
+	}
+</script>
+</div>
+<div class="wsy topbar" id="_$$_TopBar">
+	<div class="g_menu_llk sep">
+      <span id="sysmsgs" style="display:none;">
+      	<div class="g_hom_sys">
+			<div class="icn_arrow">&nbsp;</div>
+			<div id="sysmsgsContent" class="g_hom_sys_cnt"></div>
+			<a class="a-close" onclick="closeSysMsg();return false;">关闭</a>
+		</div>
+	  </span>
+      <ul class="fl topbar2">
+	      <li class="noline"><a href="http://www.163.com/?frompersonalbloghome" target="_blank">网易首页</a></li>
+	      <li class="chose"><a id="$_topbarItmes" class="arrow" href="javascript:void(0);" onClick="toggleBlogItems(event);">网易博客</a>
+	        <ol class="ch-list" id="blog_items" style="display:none" onClick="stopBubble(event);">
+	          <li><a href="http://blog.163.com/?frompersonalbloghome" target="_blank">博客首页</a></li>
+	          <li><a href="http://pp.blog.163.com/?frompersonalbloghome" target="_blank">博客拍拍</a></li>
+	          <li><a href="http://blog.163.com/public/theme/?frompersonalbloghome" target="_blank">精美风格</a></li>
+	          <li><a href="http://q.163.com/#home?frompersonalbloghome" target="_blank">博客圈子</a></li>
+	          <li><a href="http://huodong.163.com/?frompersonalbloghome" target="_blank">博客活动</a></li>
+	          	<li><a href="http://my.163.com/?frompersonalbloghome" target="_blank">娱乐中心</a></li>
+	          <li><div class="line brd01"></div></li>
+	          <li><a href="http://blog.163.com/findFriend.do?type=5?frompersonalbloghome" target="_blank">找 朋 友</a></li>
+	          <li><a href="http://blog.163.com/clone/clone.html?frompersonalbloghome" target="_blank">博客复制</a></li>
+	          <li><a href="http://blog.163.com/services/wapblog.html?frompersonalbloghome" target="_blank">手机博客</a></li>
+	          <li><a href="http://blog.163.com/services/emsblog.html?frompersonalbloghome" target="_blank">短信写博</a></li>
+	          <li><div class="line brd01"></div></li>
+	          <li style="background-image: none;"><a href="http://blog.163.com/services/all.html?frompersonalbloghome">更多&gt;&gt;</a></li>
+	        </ol>
+	      </li>
+      </ul>
+      <form id="rmndtplfm" method="get" action="/search"><input class="bd01" type="text" name="q" disabled="true" value="" id="rmndtplin"/><input type="hidden" name="t" value="blog"/>
+      <a class="bd01" id="rmndtplsr" href="http://blog.163.com/search?frompersonalsearch" target="_blank">搜 索</a></form>
+	</div>
+    <div class="g_menu_rlk sep" id="_$$_TopBarRight">
+    
+    </div>
+</div>
+      <div class="bgtt wsy">
+<div class="bg10 wsy" id="_$$_Top_Outer">
+  <div class="bg11 ht wkg" id="_$$_Top_Inner">
+    <div class="flash ht" id="_$$_Top_Flash"></div>
+    <div class="logo" onclick="window.location.href='http://blog.163.com/login.html';return false;">&nbsp;</div>
+    <div class="title" id="_$$_Top_Title">
+    </div>
+  </div>
+</div>
+<div class="bg20 wsy">
+  <div class="bg21 hn c02 wkg advnav">
+    <div class="wnl hn">&nbsp;</div>
+    <div class="wnr hn">&nbsp;</div>
+    <div class="wnc hn" style="position:relative; z-index:100;">
+      <div class="hn g_menu_nv">
+        <div class="hn item ">
+          <a hidefocus="true" href="http://guichun147.blog.163.com/" onclick="">首页</a>
+        </div>
+        <div class="hn item seltag">
+          <a hidefocus="true" href="http://guichun147.blog.163.com/blog/" onclick="">日志</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://guichun147.blog.163.com/album/" onclick="">相册</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://guichun147.blog.163.com/music/" onclick="">音乐</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://guichun147.blog.163.com/collection/" onclick="">收藏</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://guichun147.blog.163.com/friends/" onclick="">博友</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://guichun147.blog.163.com/profile/" onclick="">关于我</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bgtf wsy"><div class="bgtf_ hz wkg"><div class="wzl hz">&nbsp;</div><div class="wzr hz">&nbsp;</div><div class="wzc hz">&nbsp;</div></div></div>
+<div class="bgmt wsy"><div class="bgmt_ hy wkg"><div class="wyl hy">&nbsp;</div><div class="wyr hy">&nbsp;</div><div class="wyc hy">&nbsp;</div></div></div>
+<div class="bg40 wsy">
+  <div class="bg41 wkg g_p_hide" id="_$$_module_container">
+	  <div class="wml bgml g_p_fill">&nbsp;</div>
+	  <div class="wmr bgmr g_p_fill">&nbsp;</div>
+	  <div class="wml mtl">&nbsp;</div><div class="wml mbl">&nbsp;</div>
+	  <div class="wmr mtr">&nbsp;</div><div class="wmr mbr">&nbsp;</div>
+	  <div class="wmc"><div id="layout_ctrl" class="css_inr_1 innerLayout">
+	    <div class="wql hm" id="_$$_module_container_left" index="0"></div>
+	    <div class="wqc hm" index="1">
+<!-- 封禁的提示 -->
+<div id="_$_prohibit_user_content" style="display:none;border:1px solid #AAAAAA;background-color:#FFFFDC;margin:10px 10px 10px 150px;height:60px;width:610px;">
+		<div style="text-align:left;margin:10px 0px 0px 10px">
+		<img src="http://blog.163.com/style/common/exclamation.gif" style="margin:0px 10px 0px 20px;float:left"/>
+		<span style="color:#575757;line-height:20px;">很抱歉，因为您在网易相册发布了违规信息，账号被屏蔽。被屏蔽期间他人无法访问您的相册。<br>
+			去<a style="color:#0000FF;line-height:20px;text-decoration:underline;" target="_blank" href="http://help.163.com/07/0129/11/360I4UJQ007525K2.html">帮助中心</a>，了解如何重新恢复服务。</span></div>
+</div>		    <div id="_$$_module_container_center"></div>
+	    </div>
+	    <div class="wqr hm" id="_$$_module_container_right" index="2"></div>
+	    <div class="g_p_clear">&nbsp;</div>
+	  </div></div>
+  </div>        
+</div>
+<div class="bgmf wsy"><div class="bgmf_ hx wkg"><div class="wxl hx">&nbsp;</div><div class="wxr hx">&nbsp;</div><div class="wxc hx">&nbsp;</div></div></div>
+<div class="bg50 wsy">
+  <div class="bg51 hf wkg c10">
+    <div class="g_menu_bt fmgtp">
+      <a target="_blank" href="http://corp.163.com/index_gb.html">公司简介</a><span>-</span>
+      <a target="_blank" href="http://gb.corp.163.com/gb/contactus.html">联系方法</a><span>-</span>
+      <a target="_blank" href="http://corp.163.com/gb/job/job.html">招聘信息</a><span>-</span>
+      <a target="_blank" href="http://help.163.com/?b13abk1">客户服务</a><span>-</span>
+      <a target="_blank" href="http://corp.163.com/gb/legal/legal.html">相关法律</a><span>-</span>
+      <a href="http://jz.163.com" >互动营销</a><span>-</span>
+      	  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://guichun147.blog.163.com/rss/">
+	      <a target="_blank" href="http://guichun147.blog.163.com/rss/" class="p_ p0">&nbsp;</a>
+    </div>
+    <div>网易公司版权所有 &copy;1997-2009</div>
+  </div>
+</div>
+      </div>
+    </div>
+    <div id="_$$_outer_layer"></div>
+    <div class="g_p_none">
+	  <input type="hidden" id="$_oppoPageUrlForLogin" value="/guichun147/blog/static/34530090200810345151552/edit/"/>
+    </div>
+  <script language="JavaScript">     
+  	function initUD(){
+       UD.body=$("_$$_inner_layer");
+       UD.layer=$("_$$_outer_layer");
+       UD.window=$("blog-163-com-body");
+       UD.bar=$("theme_selector_pointer");
+     }
+  </script>
+   
+<script language="JavaScript">
+// <![CDATA[
+     var g_urlPrefix="";
+     function g_initCommon(){
+         var _arr = ["rmdtpxt","rmdtplgn"];
+         for (var i=_arr.length-1;i>=0;i--){
+              _o = $(_arr[i]);
+              if(i==0)_o && (_o.onclick=function(){exitAfterLogged();return false;});
+              else if(i==1)_o && (_o.onclick=function(){showLoginDlg('blog.163.com');return false;});
+         }
+         topFromUrsLogin();
+     } 
+	function g_initUtil(){
+		TopSearch.init();
+	}
+// ]]>
+</script>
+
+<style type="text/css">
+<!--/*--><![CDATA[/*><!--*/
+#messageZone {top:0px; right:20px; background:#ffffae; width:100px; position:fixed!important;
+	position:absolute;font-family: Arial,Helvetica,sans-serif; padding:4px;font-size:12px;}
+/*]]>*/-->
+</style>
+
+<script type='text/javascript' src='http://b.bst.126.net/js/utils/InfoAlertPad.js'></script>
+ 
+  
+  <script language="javascript">  
+  function initAll(){
+  	try{  		
+  		initUD();
+  		g_initCommon();
+  		initFlash(0);  		
+		  showPageTopBar({serverName:'blog.163.com',serverHostName:'blog.163.com'});
+		initPage();
+  		window.setTimeout("g_initUtil();",3000);
+  		
+  		//顶部博客子菜单的显示
+  		Event.observe(document.body,'click',hideBlogItems);
+  		
+  		//主题风格需要做的事情
+  		if(typeof _$$_initFixedTheme == 'function'){
+  			_$$_initFixedTheme(4013);
+  		}
+ 	 }catch(e){}
+  }
+  initAll();
+  </script>
+ 
+
+	<script language="JavaScript">
+			function onVisitorInfoLoad(_p){	
+				var _s = $('visitorInfoJs').readyState;
+				if (_p && _s!='loaded'&&_s!='complete') return;
+				
+				gLoadPermaLink(1, 'prev', 'fks_085071086083088065084084087095087082084064084086095067', 20, -100, 
+					'pku2499(第k短路)', 'blog/static/34530090200810345151552', '34530090200810345151552', 'http://q.163.com', 
+					0, 1,	'off', '0'
+);
+					
+				topFromUrsLogin();
+			}		
+		  			  			  	
+	  		var ver = new Date().getTime();
+	  		var setNone163Cookie = getUrlParam("setNone163Cookie");
+	  		var setCookieStr = ""
+	  		if(setNone163Cookie)
+	  		   setCookieStr = "&setNone163Cookie="+setNone163Cookie;
+	  		document.write('<script type="text/javascript" onreadystatechange="onVisitorInfoLoad(true);" onload="onVisitorInfoLoad();" id="visitorInfoJs" src="http://blog.163.com/js/static/visitorInfo.js?host=guichun147&mode=prev&channel=blog&blogId=fks_085071086083088065084084087095087082084064084086095067&pubTime=1225702311552&v=' + ver + setCookieStr+'"></'+'script>');
+  	</script>
+		
+  
+  </body>
+</html>

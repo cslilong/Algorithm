@@ -1,0 +1,130 @@
+PKU 1639 Picnic Planning(最小度限制生成树）(2009-04-14 22:24:53)标签：图论 杂谈   分类：图论 
+思路：这道题 在算法艺术与信息学竞赛中有详细解释，这里附上实现代码。
+
+源代码：
+
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+const int INF = 10000000;
+const int MAXN = 22;
+int edge[MAXN][MAXN], visit[MAXN];
+int cost[MAXN][MAXN], point[MAXN];
+int K, cnt, largest ;
+void input()
+{
+      int x, y, i, j, n, dist;
+      map<string, int> mymap;
+      string name1, name2;
+      for(i = 0; i < MAXN; i ++)
+            for(j = i; j < MAXN; j ++)
+                  cost[i][j] = cost[j][i] = INF;
+      mymap["Park"] = 1;
+      cnt = 1;
+      cin >> n;
+      for(i = 0; i < n; i ++) {
+            cin >> name1 >> name2 >> dist;
+            if(mymap[name1]) x = mymap[name1];
+            else  x = mymap[name1] = ++ cnt;
+            if(mymap[name2]) y = mymap[name2];
+            else  y = mymap[name2] = ++ cnt;
+            if(cost[x] [y] > dist)
+                  cost[x][y] = cost[y][x] = dist;
+      }
+      cin >> K;
+}
+void dfs(int ver,int count, int &ax, int &ay)
+{
+      if(visit[ver]) return;
+      if(ver == 1) {
+           int largest = 0;
+           for(int i = 1; i < count; i ++)
+                if(cost[point[i]][point[i - 1]] > largest) {
+                      ax = point[i]; ay = point[i - 1];
+                      largest = cost[ax][ay];
+                }
+           return;
+      }
+      for(int i = 1; i <= cnt; i ++)
+           if(edge[ver][i]) {
+                visit[ver] = 1;
+                point[count] = ver;
+                dfs(i, count + 1, ax, ay);
+                visit[ver] = 0;
+           }
+}
+
+int prim()  //求结点2到cnt的最小生成树
+{
+      int i, mn, minimum = 0;
+      int opt[MAXN], pre[MAXN];
+      bool flag[MAXN];
+      for(i = 2; i <= cnt; i ++) {
+           pre[i] = 2;
+           flag[i] = false;
+           opt[i] = cost[2][i];
+      }
+      flag[2] = true;
+      int ver, number = cnt - 2;
+      while(number --) {
+           mn = INF + 1;
+           for(i = 2; i <= cnt; i ++)
+                 if(! flag[i] && mn > opt[i]) {
+                       mn = opt[i]; ver = i;
+                 }
+           minimum += mn;
+           flag[ver]=true;
+           edge[ver][pre[ver]] = 1;
+           edge[pre[ver]][ver] = 1;
+           for(i = 2; i <= cnt; i ++)
+                 if(! flag[i] && opt[i] > cost[ver][i]) {
+                       opt[i] = cost[ver][i];
+                       pre[i] = ver;
+                 }
+      }
+      return minimum;
+}
+void solve()
+{
+      int i, j, m, ver, minimum, mn;
+      bool flag[MAXN];
+      memset(edge, 0, sizeof(edge));
+      minimum = prim();
+      mn = INF;
+      for(i= 2;i <= cnt; i ++)
+           if(mn > cost[i][1]) {
+                 ver = i; mn = cost[i][1];
+           }
+      minimum += mn;
+      edge[ver][1]=edge[1][ver] = 1;
+      for(i = 2; i <= K && i < cnt; i ++) {
+            int cmost = INF;
+            int p1, p2, ax, ay;
+            p1 = p1 = ax = ay = 0;
+            for(j = 2; j <= cnt; j ++) {
+                  if(! edge[j][1] && cost[j][1]<INF) {
+                        memset(visit, 0, sizeof(visit));
+                        memset(point, 0, sizeof(point));
+                        dfs(j, 0, ax, ay);
+                        if(cost[1][j] - cost[ax][ay] < cmost) {
+                               cmost = cost[1][j] - cost[ax][ay];
+                               p1 = ax; p2 = ay;ver = j;
+                        }
+                  }
+            }
+            if(cmost < 0) minimum += cmost;
+            else break;
+            edge[1][ver] = edge[ver][1] = 1;
+            edge[p1][p2] = edge[p2][p1] = 0;
+      }
+      cout << "Total miles driven: " << minimum << endl;
+}
+int main()
+{
+      input();
+      solve();
+      return(0);
+}
+
+ 

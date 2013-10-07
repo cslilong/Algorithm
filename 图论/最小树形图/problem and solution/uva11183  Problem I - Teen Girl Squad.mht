@@ -1,0 +1,514 @@
+From: <¨®¨¦ Microsoft Internet Explorer 5 ¡À¡ê¡ä?>
+Subject: Problem I - Teen Girl Squad
+Date: Mon, 24 Aug 2009 23:52:41 +0800
+MIME-Version: 1.0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://uva.onlinejudge.org/external/111/11183.html
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML xmlns=3D"http://www.w3.org/TR/REC-html40" xmlns:v =3D=20
+"urn:schemas-microsoft-com:vml" xmlns:o =3D=20
+"urn:schemas-microsoft-com:office:office" xmlns:w =3D=20
+"urn:schemas-microsoft-com:office:word"><HEAD><TITLE>Problem I - Teen =
+Girl Squad</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dwindows-1252">
+<META content=3DWord.Document name=3DProgId>
+<META content=3D"MSHTML 6.00.2900.5848" name=3DGENERATOR>
+<META content=3D"Microsoft Word 11" name=3DOriginator><LINK=20
+href=3D"i_files/filelist.xml" rel=3DFile-List><LINK =
+href=3D"i_files/editdata.mso"=20
+rel=3DEdit-Time-Data><!--[if !mso]>
+<STYLE>v\:* {
+	BEHAVIOR: url(#default#VML)
+}
+o\:* {
+	BEHAVIOR: url(#default#VML)
+}
+w\:* {
+	BEHAVIOR: url(#default#VML)
+}
+.shape {
+	BEHAVIOR: url(#default#VML)
+}
+</STYLE>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Shahriar Manzoor</o:Author>
+  <o:LastAuthor>Shahriar Manzoor</o:LastAuthor>
+  <o:Revision>118</o:Revision>
+  <o:TotalTime>299</o:TotalTime>
+  <o:Created>2004-05-14T06:35:00Z</o:Created>
+  <o:LastSaved>2007-02-20T07:00:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>295</o:Words>
+  <o:Characters>1687</o:Characters>
+  <o:Company>ACM/ICPC</o:Company>
+  <o:Lines>14</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>1979</o:CharactersWithSpaces>
+  <o:Version>11.5606</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>BestFit</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState=3D"false" LatentStyleCount=3D"156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<STYLE>@font-face {
+	font-family: MS Mincho;
+}
+@font-face {
+	font-family: Verdana;
+}
+@font-face {
+	font-family: @MS Mincho;
+}
+@page Section1 {size: 595.45pt 841.7pt; margin: .8in .8in 67.7pt .8in; =
+mso-header-margin: .5in; mso-footer-margin: .5in; mso-paper-source: 0; }
+P.MsoNormal {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: black; FONT-FAMILY: "Times =
+New Roman"; mso-style-parent: ""; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoNormal {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: black; FONT-FAMILY: "Times =
+New Roman"; mso-style-parent: ""; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoNormal {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: black; FONT-FAMILY: "Times =
+New Roman"; mso-style-parent: ""; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-fareast-font-family: "Times New Roman"
+}
+H1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: black; =
+FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; =
+mso-outline-level: 1
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 18pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: =
+Arial; mso-pagination: widow-orphan; mso-outline-level: 2; =
+mso-style-next: Normal
+}
+H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 13pt; MARGIN: 12pt 0in 3pt; FONT-FAMILY: =
+Arial; mso-pagination: widow-orphan; mso-outline-level: 3; =
+mso-style-next: Normal
+}
+H4 {
+	FONT-WEIGHT: normal; FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: =
+black; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-outline-level: 4; mso-style-next: Normal
+}
+H5 {
+	FONT-WEIGHT: normal; FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: =
+black; FONT-FAMILY: "Times New Roman"; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-outline-level: 5; mso-style-next: Normal
+}
+P.MsoHeader {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoHeader {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoHeader {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+P.MsoFooter {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+LI.MsoFooter {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+DIV.MsoFooter {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+mso-pagination: widow-orphan; mso-fareast-font-family: "Times New Roman"
+}
+P.MsoCaption {
+	FONT-WEIGHT: bold; FONT-SIZE: 18pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: =
+Arial; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New =
+Roman"; mso-style-next: Normal
+}
+LI.MsoCaption {
+	FONT-WEIGHT: bold; FONT-SIZE: 18pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: =
+Arial; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New =
+Roman"; mso-style-next: Normal
+}
+DIV.MsoCaption {
+	FONT-WEIGHT: bold; FONT-SIZE: 18pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: =
+Arial; mso-pagination: widow-orphan; mso-fareast-font-family: "Times New =
+Roman"; mso-style-next: Normal
+}
+P.MsoBodyText {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "MS Mincho"; mso-ansi-language: EN-GB; =
+mso-fareast-language: SV
+}
+LI.MsoBodyText {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "MS Mincho"; mso-ansi-language: EN-GB; =
+mso-fareast-language: SV
+}
+DIV.MsoBodyText {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Times New Roman"; =
+TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "MS Mincho"; mso-ansi-language: EN-GB; =
+mso-fareast-language: SV
+}
+P.MsoBodyText2 {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: black; FONT-FAMILY: "Times =
+New Roman"; TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-fareast-font-family: "Times New Roman"; =
+mso-bidi-font-weight: bold
+}
+LI.MsoBodyText2 {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: black; FONT-FAMILY: "Times =
+New Roman"; TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-fareast-font-family: "Times New Roman"; =
+mso-bidi-font-weight: bold
+}
+DIV.MsoBodyText2 {
+	FONT-SIZE: 12pt; MARGIN: 0in 0in 0pt; COLOR: black; FONT-FAMILY: "Times =
+New Roman"; TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-bidi-font-size: 10.0pt; mso-fareast-font-family: "Times New Roman"; =
+mso-bidi-font-weight: bold
+}
+A:link {
+	COLOR: #009999; TEXT-DECORATION: none; mso-text-animation: none; =
+text-underline: none; text-line-through: none
+}
+SPAN.MsoHyperlink {
+	COLOR: #009999; TEXT-DECORATION: none; mso-text-animation: none; =
+text-underline: none; text-line-through: none
+}
+A:visited {
+	COLOR: purple; TEXT-DECORATION: underline; text-underline: single
+}
+SPAN.MsoHyperlinkFollowed {
+	COLOR: purple; TEXT-DECORATION: underline; text-underline: single
+}
+P {
+	FONT-SIZE: 12pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: =
+"Times New Roman"; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "Times New Roman"; mso-margin-top-alt: auto; =
+mso-margin-bottom-alt: auto
+}
+PRE {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; FONT-FAMILY: "Courier New"; =
+mso-pagination: widow-orphan; mso-fareast-font-family: "Courier New"; =
+tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt =
+412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt
+}
+TT {
+	FONT-FAMILY: "Courier New"; mso-fareast-font-family: "Courier New"; =
+mso-ascii-font-family: "Courier New"; mso-hansi-font-family: "Courier =
+New"; mso-bidi-font-family: "Courier New"
+}
+P.preformatted {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; LAYOUT-GRID-MODE: char; =
+FONT-FAMILY: "Courier New"; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "Times New Roman"; mso-style-name: preformatted
+}
+LI.preformatted {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; LAYOUT-GRID-MODE: char; =
+FONT-FAMILY: "Courier New"; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "Times New Roman"; mso-style-name: preformatted
+}
+DIV.preformatted {
+	FONT-SIZE: 10pt; MARGIN: 0in 0in 0pt; LAYOUT-GRID-MODE: char; =
+FONT-FAMILY: "Courier New"; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "Times New Roman"; mso-style-name: preformatted
+}
+P.paragraph {
+	FONT-SIZE: 12pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: =
+"Times New Roman"; TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "Times New Roman"; mso-margin-top-alt: auto; =
+mso-margin-bottom-alt: auto; mso-style-name: paragraph
+}
+LI.paragraph {
+	FONT-SIZE: 12pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: =
+"Times New Roman"; TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "Times New Roman"; mso-margin-top-alt: auto; =
+mso-margin-bottom-alt: auto; mso-style-name: paragraph
+}
+DIV.paragraph {
+	FONT-SIZE: 12pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: =
+"Times New Roman"; TEXT-ALIGN: justify; mso-pagination: widow-orphan; =
+mso-fareast-font-family: "Times New Roman"; mso-margin-top-alt: auto; =
+mso-margin-bottom-alt: auto; mso-style-name: paragraph
+}
+P.text {
+	FONT-SIZE: 8pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: =
+Verdana; mso-pagination: widow-orphan; mso-fareast-font-family: "Times =
+New Roman"; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; =
+mso-bidi-font-family: "Times New Roman"; mso-style-name: text
+}
+LI.text {
+	FONT-SIZE: 8pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: =
+Verdana; mso-pagination: widow-orphan; mso-fareast-font-family: "Times =
+New Roman"; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; =
+mso-bidi-font-family: "Times New Roman"; mso-style-name: text
+}
+DIV.text {
+	FONT-SIZE: 8pt; MARGIN-LEFT: 0in; MARGIN-RIGHT: 0in; FONT-FAMILY: =
+Verdana; mso-pagination: widow-orphan; mso-fareast-font-family: "Times =
+New Roman"; mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; =
+mso-bidi-font-family: "Times New Roman"; mso-style-name: text
+}
+SPAN.StyleArial16pt {
+	FONT-WEIGHT: bold; FONT-FAMILY: Arial; mso-ascii-font-family: Arial; =
+mso-hansi-font-family: Arial; mso-bidi-font-family: Arial; =
+mso-style-name: "Style Arial 16 pt"; mso-ansi-font-size: 16.0pt
+}
+SPAN.SpellE {
+	mso-style-name: ""; mso-spl-e: yes
+}
+SPAN.GramE {
+	mso-style-name: ""; mso-gram-e: yes
+}
+DIV.Section1 {
+	page: Section1
+}
+</STYLE>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext=3D"edit" spidmax=3D"9218"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext=3D"edit">
+  <o:idmap v:ext=3D"edit" data=3D"1"/>
+ </o:shapelayout></xml><![endif]--></HEAD>
+<BODY lang=3DEN-US style=3D"tab-interval: .5in" vLink=3Dpurple =
+link=3D#009999>
+<DIV class=3DSection1>
+<P class=3DMsoNormal style=3D"TEXT-ALIGN: center" align=3Dcenter><B=20
+style=3D"mso-bidi-font-weight: normal"><SPAN=20
+style=3D"FONT-SIZE: 28pt; FONT-FAMILY: Arial; mso-bidi-font-size: =
+10.0pt">Problem=20
+I</SPAN></B><SPAN style=3D"FONT-FAMILY: Arial"><BR></SPAN><B=20
+style=3D"mso-bidi-font-weight: normal"><SPAN=20
+style=3D"FONT-SIZE: 20pt; FONT-FAMILY: Arial; mso-bidi-font-size: =
+24.0pt">Teen=20
+Girl Squad </SPAN></B><SPAN style=3D"FONT-FAMILY: Arial"><BR><B=20
+style=3D"mso-bidi-font-weight: normal">Input: </B>S<SPAN=20
+style=3D"mso-bidi-font-weight: bold">tandard =
+Input<o:p></o:p></SPAN></SPAN></P>
+<P class=3DMsoNormal style=3D"TEXT-ALIGN: center" align=3Dcenter><B=20
+style=3D"mso-bidi-font-weight: normal"><SPAN style=3D"FONT-FAMILY: =
+Arial">Output:=20
+</SPAN></B><SPAN style=3D"FONT-FAMILY: Arial; mso-bidi-font-weight: =
+bold">Standard=20
+Output <o:p></o:p></SPAN></P>
+<P class=3DMsoNormal style=3D"TEXT-ALIGN: center" align=3Dcenter><SPAN=20
+style=3D"FONT-FAMILY: Arial"><o:p>&nbsp;</o:p></SPAN></P>
+<DIV align=3Dright>
+<TABLE class=3DMsoNormalTable=20
+style=3D"mso-cellspacing: 1.5pt; mso-padding-alt: 0in 5.4pt 0in 5.4pt"=20
+cellPadding=3D0 border=3D0>
+  <TBODY>
+  <TR style=3D"mso-yfti-irow: 0; mso-yfti-firstrow: yes; =
+mso-yfti-lastrow: yes">
+    <TD=20
+    style=3D"PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; =
+PADDING-BOTTOM: 0.75pt; PADDING-TOP: 0.75pt">
+      <P class=3DMsoNormal><I><SPAN style=3D"FONT-SIZE: 10pt">-- 3 =
+spring rolls=20
+      please.<BR>-- MSG'D!!<BR>-- Oh! My stomach lining! =
+</SPAN></I><SPAN=20
+      style=3D"mso-bidi-font-size: =
+12.0pt"><o:p></o:p></SPAN></P></TD></TR></TBODY></TABLE></DIV>
+<P style=3D"TEXT-ALIGN: right" align=3Dright><TT><SPAN=20
+style=3D"FONT-SIZE: 10pt">Strong Bad</SPAN></TT><SPAN =
+style=3D"FONT-FAMILY: Arial">=20
+<o:p></o:p></SPAN></P>
+<P class=3Dparagraph>You are part of a group of <B>n</B> teenage girls =
+armed with=20
+<SPAN class=3DSpellE>cellphones</SPAN>. You have some news you want to =
+tell=20
+everyone in the group. The problem is that no two of you are in the same =
+room,=20
+and you must communicate using only <SPAN =
+class=3DSpellE>cellphones</SPAN>. What's=20
+worse is that due to excessive usage, your parents have refused to pay =
+your=20
+<SPAN class=3DSpellE>cellphone</SPAN> bills, so you must distribute the =
+news by=20
+calling each other in the cheapest possible way. You will call several =
+of your=20
+<SPAN class=3DGramE>friends,</SPAN> they will call some of their =
+friends, and so=20
+on until everyone in the group hears the news. </P>
+<P class=3Dparagraph>Each of you is using a different phone service =
+provider, and=20
+you know the price of girl <SPAN class=3DGramE>A</SPAN> calling girl B =
+for all=20
+possible A and B. Not all of your friends like each other, and some of =
+them will=20
+never call people they don't like. Your job is to find the cheapest =
+possible=20
+sequence of calls so that the news spreads from you to all <B>n</B>-1 =
+other=20
+members of the group. </P>
+<H5><SPAN class=3DStyleArial16pt><SPAN=20
+style=3D"FONT-SIZE: 16pt; mso-bidi-font-size: =
+10.0pt">Input<o:p></o:p></SPAN></SPAN></H5>
+<P class=3DMsoNormal=20
+style=3D"TEXT-ALIGN: justify; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt =
+229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt =
+641.2pt 687.0pt 732.8pt">The=20
+first line of input gives the number of cases, <B>N </B><SPAN=20
+style=3D"mso-bidi-font-weight: bold">(N&lt;150)</SPAN>. <B>N</B> test =
+cases=20
+follow. Each one starts with two lines containing <B>n</B>=20
+<NOBR>(0&lt;=3D<B>n</B>&lt;=3D1000)</NOBR> and <B>m</B> <NOBR>(0 &lt;=3D =
+<B>m</B>=20
+&lt;=3D 40,000)</NOBR>. Girls are numbered from 0 to =
+<NOBR><B>n</B>-1</NOBR>, and=20
+you are girl 0. The next <B>m</B> lines will each contain 3 integers, =
+<B>u</B>,=20
+<B>v</B> and <B>w</B>, meaning that a call from girl <B>u</B> to girl =
+<B>v</B>=20
+costs <B>w</B> cents <NOBR>(0 &lt;=3D <B>w</B> &lt;=3D 1000)</NOBR>. No =
+other calls=20
+are possible because of grudges, rivalries and because they are, like, =
+lame. The=20
+input file size is around 1200 KB.</P>
+<P class=3DMsoNormal=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><o:p>&nbsp;</o:p></P>
+<H4=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><SPAN=20
+class=3DStyleArial16pt><SPAN=20
+style=3D"FONT-SIZE: 16pt; mso-bidi-font-size: 10.0pt">Output=20
+<o:p></o:p></SPAN></SPAN></H4>
+<P class=3DMsoNormal style=3D"TEXT-ALIGN: justify">For each test case, =
+output one=20
+line containing "Case #<B>x</B>:" followed by the cost of the cheapest =
+method of=20
+distributing the news. If there is no solution, print "Possums!" =
+instead.</P>
+<P class=3DMsoNormal=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><o:p>&nbsp;</o:p></P>
+<H1=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><SPAN=20
+style=3D"FONT-SIZE: 16pt; FONT-FAMILY: Arial; mso-bidi-font-size: =
+12.0pt; mso-bidi-font-weight: normal; mso-bidi-font-style: =
+italic">Sample=20
+Input<SPAN=20
+style=3D"mso-spacerun: =
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+</SPAN><SPAN=20
+style=3D"mso-tab-count: =
+2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=20
+</SPAN><SPAN=20
+style=3D"mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN>Output =
+for Sample=20
+Input<o:p></o:p></SPAN></H1>
+<TABLE class=3DMsoNormalTable=20
+style=3D"BORDER-RIGHT: medium none; BORDER-TOP: medium none; BACKGROUND: =
+#cccccc; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none; =
+BORDER-COLLAPSE: collapse; mso-padding-alt: 0in 5.4pt 0in 5.4pt; =
+mso-border-alt: solid windowtext .5pt"=20
+cellSpacing=3D0 cellPadding=3D0 border=3D1>
+  <TBODY>
+  <TR style=3D"mso-yfti-irow: 0; mso-yfti-firstrow: yes; =
+mso-yfti-lastrow: yes">
+    <TD=20
+    style=3D"BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; =
+BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: =
+0in; BORDER-LEFT: windowtext 1pt solid; WIDTH: 239.4pt; PADDING-TOP: =
+0in; BORDER-BOTTOM: windowtext 1pt solid; mso-border-alt: solid =
+windowtext .5pt"=20
+    vAlign=3Dtop width=3D319><PRE>4</PRE><PRE>2</PRE><PRE>1</PRE><PRE>0 =
+1 10</PRE><PRE>2</PRE><PRE>1</PRE><PRE>1 0 =
+10</PRE><PRE>4</PRE><PRE>4</PRE><PRE>0 1 10</PRE><PRE>0 2 10</PRE><PRE>1 =
+3 20</PRE><PRE>2 3 30</PRE><PRE>4</PRE><PRE>4</PRE><PRE>0 1 =
+10</PRE><PRE>1 2 20</PRE><PRE>2 0 30</PRE><PRE>2 3 100<B><SPAN =
+style=3D"FONT-SIZE: 11pt"><o:p></o:p></SPAN></B></PRE></TD>
+    <TD=20
+    style=3D"BORDER-RIGHT: windowtext 1pt solid; PADDING-RIGHT: 5.4pt; =
+BORDER-TOP: windowtext 1pt solid; PADDING-LEFT: 5.4pt; PADDING-BOTTOM: =
+0in; BORDER-LEFT: medium none; WIDTH: 243pt; PADDING-TOP: 0in; =
+BORDER-BOTTOM: windowtext 1pt solid; mso-border-alt: solid windowtext =
+.5pt; mso-border-left-alt: solid windowtext .5pt"=20
+    vAlign=3Dtop width=3D324><PRE>Case #1: 10</PRE><PRE>Case #2: =
+Possums!</PRE><PRE>Case #3: 40</PRE><PRE>Case #4: =
+130</PRE><PRE><o:p>&nbsp;</o:p></PRE></TD></TR></TBODY></TABLE>
+<DIV class=3DMsoNormal=20
+style=3D"TEXT-ALIGN: center; tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt =
+229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt =
+641.2pt 687.0pt 732.8pt"=20
+align=3Dcenter>
+<HR align=3Dcenter width=3D"100%" SIZE=3D3>
+</DIV>
+<P class=3DMsoNormal=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><B><SPAN=20
+style=3D"COLOR: windowtext; FONT-FAMILY: Arial; mso-bidi-font-size: =
+12.0pt">Problem=20
+setter: Igor <SPAN =
+class=3DSpellE>Naverniouk</SPAN><o:p></o:p></SPAN></B></P>
+<P class=3DMsoNormal=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><B=20
+style=3D"mso-bidi-font-weight: normal"><SPAN=20
+style=3D"COLOR: windowtext; FONT-FAMILY: Arial; mso-bidi-font-size: =
+12.0pt"><o:p>&nbsp;</o:p></SPAN></B></P>
+<P class=3DMsoNormal=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><SPAN=20
+style=3D"COLOR: windowtext; mso-bidi-font-size: =
+12.0pt"><o:p>&nbsp;</o:p></SPAN></P>
+<P class=3DMsoNormal=20
+style=3D"tab-stops: 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt =
+320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt =
+732.8pt"><o:p>&nbsp;</o:p></P></DIV></BODY></HTML>

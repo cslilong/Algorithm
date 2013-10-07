@@ -1,0 +1,38 @@
+动态规划的题目，老师布置的作业，有的实在不会做：
+1036 Gangsters，AC，比较基础的DP题目
+1037 没看
+1038 不会，据说要状态压缩。
+1157 LITTLE SHOP OF FLOWERS，AC，IOI的经典DP，中学时就见过。用了n^3的方法
+1160 Post Office，AC，又是IOI的DP，这个题目就比较难，要预先把各个村庄的欧氏距离计算出来。我是参考资料做出来的。
+1170 Shopping Offers，AC，还是IOI的经典题目。由于数据量不大，五维数组拿下。题目的数据输入输出比较麻烦。
+1179 Polygon，AC，自己感觉比较简单。记得要维护两个状态，最大最小。因为负数乘负数有是正数
+1691 Painting A Board，不会。人人都说是搜索，也有说是状态压缩的DP。
+1692 Crossed Matchings，AC，看似简单的DP。实际挺难想，对于我而言。
+1695 Magazine Delivery，AC，总感觉解题的思想是仿求最短路的
+1260 Pearls，AC，也算是比较简单的DP
+
+二分图的题目，自己找的，基本都AC，偶尔要看看解题报告
+1274 The Perfect Stall，最最最简单的二分图
+2536 Gopher II，比1274稍稍复杂一点点
+1325 Machine Schedule，建模时要变通一下，也是典型的二分图
+1469 COURSES，也是典型的二分图
+3020 Antenna Placement，这个题目的建模方法真是比较难，仿照国际象棋棋盘的黑白格子那样将棋盘划分为两类，建立二分图求解。这题我的代码写得一团糟。
+2446 Chessboard，和3020的建图一样，两个题目可以互相变通。
+1087 A Plug for UNIX，综合题，考察图的传递闭包，二分图，模型转化，以及输入的数据处理。我用STL了事。
+
+最短路问题：
+1511 Invitation Cards，典型的单源最短路问题，但是很卡时间。找了个SPFA的模板套过去。这题绝对是检验你的模板是否高效的题目，引得我们校队的同学争相刷时间。
+3259 Wormholes，用Bellman-Ford检查图是否带负环，边表存储图
+2394 Checking an Alibi，也是典型的单源最短路径，邻接矩阵的Dij足够应付。
+
+差分约束系统，一知半解中，基本了解怎么建图，怎么检查负环：
+1201 Intervals，典型的差分约束系统，Bellman求最短路，上课的例题。
+1716 Integer Intervals，1201的简化版。
+1364 King，题目的意思超恶心，差分约束系统，求图中是否存在负环。
+2983 Is the Information Reliable?，差分约束系统，要会对等号进行转化。
+
+杂题，训练STL：
+1420 Spreadsheet，很简单的模拟，但是没有人做，因为POJ没有说清楚数据规模。
+3287 Open Source，很麻烦的字符串题目，用map拿下。
+2833 The Average，最大堆以及最小堆，STL的make_heap拿下
+2421 Constructing Roads，最小生成树的变种，用STL的queue优化Dij算法。

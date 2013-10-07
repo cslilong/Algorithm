@@ -1,0 +1,500 @@
+POJ 1639 最小度限制生成树
+2008年11月06日 星期四 17:42最小度限制生成树即为对度有限制的最小生成树，Lrj书上经典的例子。这里度限制是指只对一个顶点的度数有限制，而如果是所有的点都有限制的话,那就是NP问题了。
+
+
+
+
+具体步骤：（算法的证明可以参照lrj的《算法艺术和信息学竞赛》）
+
+（我们假定度有限制的结点为V0）
+
+1. 求出除去V0，其他每个森林的最小生成树（除去V0后，其他的点不一定都是连通的）。
+       2. 在每个森林中找出与V0距离最近的点，并与V0相连（此时即为一棵生成树，这棵生成树的根结点为V0，即在与V0相连时，要修改前驱数组pre[]）。
+
+3. 循环 （度数 – 森林数）次，每次找到g[0][i] – max_value[i]最小的i结点，其中max_value[i]为Vi到V0的路径上不与V0相连的边的最大权值。
+
+如果g[0][i] – max_value[i] >= 0说明已经是最优解了，退出。
+
+否则加入g[0][i]这条边，删去Vi到V0的路径上不与V0相连的最大权值的边。
+
+
+
+
+这里算法的瓶颈在于如何快速快速找到“Vi到V0的路径上不与V0相连的边的最大权值”。一开始我是用O(kn2)的模拟，即每次从Vi向上找到根结点，求出最大权值。提交上去16ms。
+
+Lrj书上说可以用max_value[i]记录Vi到V0的路径上不与V0相连的边的最大权值，而初始化和维护都只要O(n)，想了半天，发现其实就是递推呀。我们可以从Vi向上找到根结点，再用栈反向递推回来，即：
+
+max_value[Stack[i]] = MAX(max_value[Stack[i + 1]], g[Stack[i]][ pre[Stack[i]]]
+
+还可以用数组max_value_v记录最大权值的边的起点。这样每次只要直接比较g[0][i] – max_value[i]，找到最小值，然后添加(i, 0)边，并修改Vi到V[max_value_v[i]]的前驱数组pre[]，再，反向递推求出V[max_value_v[i]]到 V0路径上结点的max_value值。
+
+这样第3步的复杂度就降为O(kn)。
+
+
+
+
+但可能是程序在输入上用map，处理比较慢，结果还是16ms(晕......)，POJ这题数据太弱了，(n <= 20)。
+
+
+
+
+
+
+
+参考程序：（太长了，只能分两页了...baidu咋不让多写几个字呢......）
+
+http://hi.baidu.com/czyuan%5Facm/blog/item/8cc45b1ff6423cf2e0fe0bf9.html
+
+http://hi.baidu.com/czyuan%5Facm/blog/item/93fe181cce6db08c87d6b6fa.html
+ 
+
+#pragma warning (disable:4786)
+
+#include <iostream>
+
+#include <fstream>
+
+#include <climits>
+
+#include <queue>
+
+#include <map>
+
+#include <string>
+
+using namespace std;
+
+
+const int maxn = 25;
+
+
+struct node
+
+{
+
+       int v, w;
+
+};
+
+
+struct cmp
+
+{
+
+       bool operator() (const node &a, const node &b)
+
+       {
+
+              return a.w > b.w; // >是从小到大.
+
+       }
+
+};
+
+
+int n, m, s; // n个点，m条边，s为原点. V0点为有度数限制的点，最小度限制生成树以V0为根结点.
+
+int num; // 表示除去V0后相互独立的连通子图数目.
+
+int minV0[maxn]; // minV0[i]表示第i个连通子图中与V0距离最短的结点.
+
+int total; // 限制的度数.
+
+int dist[maxn]; // dist[i]表示点i到最小生成树的最短距离。(即i点到最小生成树点中的最短距离)
+
+int g[maxn][maxn]; // 用二维数组来记录图。
+
+bool p[maxn]; // 判断该点是否已经在最小生成树里了.
+
+int pre[maxn]; // 记录该点的前驱，用来输出最短路径。
+
+int max_value[maxn], max_value_v[maxn]; // max_value[i]记录从Vi到V0的路径上不与V0相连的边的最大权值，权值为g[max_value_v[i]][pre[max_value_v[i]]].
+
+priority_queue <node, vector<node>, cmp> Q;
+
+map <string, int> Map;
+
+int ans;
+
+
+void Prim(void);
+
+void Solve(void);
+
+void Cal_max_value(int t);
+
+
+int main(void)
+
+{
+
+       int i, j;
+
+       string name1, name2;
+
+       int a, b, w;
+
+       map <string, int>::iterator iter;
+
+       // 初始化。
+
+    Map.clear();
+
+    Map["Park"] = 0;
+
+    for (i = 0; i <= maxn - 1; i++)
+
+       {
+
+              dist[i] = INT_MAX;
+
+              pre[i] = -1;
+
+              for (j = 0; j <= maxn - 1; j++)
+
+              {
+
+                     g[i][j] = INT_MAX;
+
+              }
+
+       }
+
+       n = 0;
+
+       cin >> m;
+
+    for (i = 1; i <= m; i++)
+
+    {
+
+        cin >> name1 >> name2 >> w;
+
+        iter = Map.find(name1);
+
+        if (iter == Map.end())
+
+        { // 说明该结点还不存在.
+
+            n++;
+
+            Map[name1] = n;
+
+        }
+
+        a = Map[name1];
+
+        iter = Map.find(name2);
+
+        if (iter == Map.end())
+
+        { // 说明该结点还不存在.
+
+            n++;
+
+            Map[name2] = n;
+
+        }
+
+        b = Map[name2];
+
+        if (g[a][b] > w)
+
+        {
+
+            g[a][b] = g[b][a] = w;
+
+        }
+
+    }
+
+    cin >> total; // 输入限制的度数.
+
+     memset(p, 0, sizeof(p)); num = 0;
+
+     for (i = 1; i <= n; i++)
+
+     {
+
+         if (!p[i])
+
+         {
+
+             s = i;
+
+             num++; minV0[num] = s;
+
+            // 求除去限制结点的最小生成树.
+
+            Prim();
+
+         }
+
+     }
+
+       ans = 0;
+
+       for (i = 1; i <= n; i++) ans += dist[i];
+
+       // 求最小度限制生成树.
+
+    Solve();
+
+    printf("Total miles driven: %d\n", ans);
+
+       return 0;
+
+}
+
+
+void Prim(void)
+
+{
+
+       int i, j, k;
+
+       node mini, temp;
+
+       while (!Q.empty()) Q.pop();
+
+       dist[s] = 0;
+
+       temp.v = s; temp.w = 0;
+
+       Q.push(temp);
+
+       for (k = 1; k <= n; k++)
+
+       { // 要循环n次，为了计算该连通子图中与V0距离最短的结点.
+
+              while (!Q.empty())
+
+              {
+
+                     mini = Q.top();
+
+                     Q.pop();
+
+                     j = mini.v;
+
+                     if (!p[j])
+
+                     { // 说明是当前这点还未计算过.
+
+                            p[j] = 1;
+
+                            if (g[0][j] < g[0][minV0[num]])
+
+                            { // 比较是否是该连通子图中与V0距离最短的结点.
+
+                                minV0[num] = j;
+
+                            }
+
+                            for (i = 1; i <= n; i++)
+
+                            {
+
+                                   if (i != j && !p[i] && dist[i] > g[j][i])
+
+                                   {
+
+                                          dist[i] = g[j][i];
+
+                                          pre[i] = j;
+
+                                          temp.w = dist[i]; temp.v = i;
+
+                                          Q.push(temp);
+
+                                   }
+
+                            }
+
+                            break;
+
+                     }
+
+              }
+
+       }
+
+}
+void Cal_max_value(int t)
+
+{ // 计算t即他的所有父亲和祖宗结点的max_value值.
+
+    int i, j, k;
+
+    int Stack[maxn]; // 栈中记录t结点的所有父亲和祖宗结点.
+
+    int top(-1);
+
+    i = t;
+
+    while (pre[i] != 0 && pre[i] != -1)
+
+    {
+
+              p[i] = 1;
+
+        Stack[++top] = i;
+
+        i = pre[i];
+
+    }
+
+    if (top < 0) return ;
+
+       j = Stack[top];
+
+       max_value[j] = g[j][pre[j]];
+
+       max_value_v[j] = j;
+
+    // 递推求出从Vt到V0整条路径上的结点的max_value值.
+
+    for (i = top - 1; i >= 0; i--)
+
+    {
+
+              j = Stack[i]; k = Stack[i + 1];
+
+        if (max_value[k] > g[j][pre[j]])
+
+        {
+
+            max_value[j] = max_value[k];
+
+            max_value_v[j] = max_value_v[k];
+
+        }
+
+        else
+
+        {
+
+            max_value[j] = g[j][pre[j]];
+
+            max_value_v[j] = j;
+
+        }
+
+    }
+
+}
+
+
+void Solve(void)
+
+{
+
+    int i, j, k, l;
+
+    int mini, opti_i, opti_maxV; // mini记录最小的差值，opti_i为差值最小时的i值.
+
+    // 每个独立的连通子图连接V0点.
+
+    for (k = 1; k <= num; k++)
+
+    {
+
+        ans += g[0][minV0[k]];
+
+        // 最小度限制生成树以V0为根结点.
+
+       j = minV0[k]; i = pre[j]; // i为j的前驱.
+
+        while (i != -1)
+
+        {
+
+            l = i;
+
+            i = pre[l];
+
+            pre[l] = j;
+
+            j = l;
+
+        }
+
+        pre[minV0[k]] = 0;
+
+    }
+
+    // 初始化max_value数组.
+
+    memset(p, 0, sizeof(p));
+
+    for (i = 1; i <= n; i++)
+
+    {
+
+        if (!p[i])
+
+        {
+
+            Cal_max_value(i);
+
+        }
+
+    }
+
+    for (k = 1; k <= total - num; k++)
+
+    {
+
+           mini = 0; // 添加的边 - 删去的边，一定是小于0的，否则break.
+
+        for (i = 1; i <= n; i++)
+
+        {
+
+            if (pre[i] == 0) continue; // 说明0和i之间已经有连线了.
+
+            // 从Vi开始遍历到根结点，找到Vi到V0的路径上不与V0相连的边的最大权值.
+
+            if (g[0][i] - max_value[i] < mini)
+
+            {
+
+                mini = g[0][i] - max_value[i];
+
+                opti_i = i; opti_maxV = max_value_v[i];
+
+            }
+
+        }
+
+        if (mini == 0) break; // 说明已经无法再找到更优的解了.
+
+        ans += mini;
+
+        // 删去Vi到V0的路径上不与V0相连的最大权值的边.
+
+        pre[opti_maxV] = -1;
+
+        j = opti_i; i = pre[j]; // i为j的前驱.
+
+        while (i != -1)
+
+        {
+
+            l = i;
+
+            i = pre[l];
+
+            pre[l] = j;
+
+            j = l;
+
+        }
+
+        pre[opti_i] = 0;
+
+        Cal_max_value(opti_maxV);
+
+    }
+
+}

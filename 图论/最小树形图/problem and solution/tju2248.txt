@@ -1,0 +1,108 @@
+#include <cstdio>
+#include <cstring>
+using namespace std;
+ 
+const unsigned int maxn=128,NOEDGE=~0;
+unsigned int G[maxn][maxn];
+int N,M;
+int res; 
+
+template <class T>
+void update(T& o,const T& x){
+	if(o>x)
+		o=x;
+}
+bool vis[maxn]; 
+void dfs(int v){
+	vis[v]=true;
+	for(int i=2;i<=N;++i)
+		if((!vis[i])&&G[v][i]!=NOEDGE)
+			dfs(i); 
+}
+bool possible(){
+	memset(vis,0,sizeof(vis));
+	dfs(1);
+	for(int i=2;i<=N;++i)
+		if(!vis[i])
+			return false;
+	return true;
+}
+int pre[maxn];
+bool del[maxn];
+void solve(){
+	int num=N;
+	memset(del,0,sizeof(del));
+	for(;;){
+		int i;
+		for(i=2;i<=N;++i){
+			if(del[i])continue;
+			pre[i]=i;
+			G[i][i]=NOEDGE;
+			for(int j=1;j<=N;++j){
+				if(del[j])continue;
+				if(G[j][i]<G[pre[i]][i])
+					pre[i]=j;
+			}
+		}
+		for(i=2;i<=N;++i){
+			if(del[i])continue;
+			int j=i;
+			memset(vis,0,sizeof(vis));
+			while(!vis[j]&&j!=1){
+				vis[j]=true;
+				j=pre[j];
+			}
+			if(j==1)continue;
+			i=j;
+			res+=G[pre[i]][i];
+			for(j=pre[i];j!=i;j=pre[j]){
+				res+=G[pre[j]][j];
+				del[j]=true;
+			}
+			for(j=1;j<=N;++j){
+				if(del[j])continue;
+				if(G[j][i]!=NOEDGE)
+					G[j][i]-=G[pre[i]][i];
+			}
+			for(j=pre[i];j!=i;j=pre[j]){
+				for(int k=1;k<=N;++k){
+					if(del[k])continue;
+					update(G[i][k],G[j][k]);
+					if(G[k][j]!=NOEDGE)
+						update(G[k][i],G[k][j]-G[pre[j]][j]);
+				}
+			}
+			for(j=pre[i];j!=i;j=pre[j]){
+				del[j]=true;
+			}
+			break;
+		}
+		if(i>N){
+			for(int i=2;i<=N;++i){
+				if(del[i])continue;
+				res+=G[pre[i]][i];
+			}
+			break;
+		}
+	}
+}
+int main(){
+	for(;;){
+		scanf("%d%d",&N,&M);
+		if(N==0)break;
+		memset(G,NOEDGE,sizeof(G));
+		for(int i=0;i<M;++i){
+			unsigned int a,b,c;
+			scanf("%u%u%u",&a,&b,&c);
+			update(G[a][b],c);
+		}
+		if(!possible()){
+			puts("impossible"); 
+		}
+		else{
+			res=0; 
+			solve();
+			printf("%d\n",res);
+		}
+	}
+}

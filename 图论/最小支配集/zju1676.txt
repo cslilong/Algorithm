@@ -1,0 +1,200 @@
+http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemId=1676
+
+
+
+const
+  inf='input.txt';
+var
+  n,e,m,p,vs,vt,ans:longint;
+  side,tside:array [1..4000] of record
+                                 x,y,op,next,link:longint;
+                                 c:extended;
+                               end;
+  lastside,fa,cur,d,num,v,ansl:array [0..1000] of longint;
+  sm:array [1..400] of boolean;
+  flow:extended;
+
+procedure add(x,y,c,ll:longint);
+begin
+  inc(e);
+  side[e].x:=x; side[e].y:=y; side[e].c:=c; side[e].op:=e+1;
+  side[e].next:=lastside[x]; lastside[x]:=e; side[e].link:=ll;
+  inc(e);
+  side[e].x:=y; side[e].y:=x; side[e].c:=0; side[e].op:=e-1;
+  side[e].next:=lastside[y]; lastside[y]:=e; side[e].link:=ll;
+end;
+
+procedure init;
+var
+  i,j,x,y,c:longint;
+begin
+  readln(n,m);
+  fillchar(lastside,sizeof(lastside),0);
+  p:=n;
+  e:=0;
+  for i:=1 to m do
+    begin
+      readln(x,y,c);
+      inc(p);
+      add(x,p,maxlongint,i);
+      add(y,p,maxlongint,i);
+      inc(p);
+      add(p-1,p,c,i);
+      add(p,x,maxlongint,i);
+      add(p,y,maxlongint,i);
+    end;
+  vs:=1; vt:=n;
+  c:=p; p:=n; n:=c;
+end;
+
+procedure relabel(k:longint);
+var
+  i,min:longint;
+begin
+  min:=n-1;
+  cur[k]:=lastside[k];
+  i:=cur[k];
+  while i>0 do
+    with side[i] do
+      begin
+        if (c>0) and (d[y]<min) then min:=d[y];
+        i:=next;
+      end;
+  d[k]:=min+1;
+end;
+
+procedure change;
+var
+  i:longint;
+  nf:extended;
+begin
+  nf:=10e8;
+  i:=vt;
+  while i<>vs do
+    begin
+      if side[fa[i]].c<nf then nf:=side[fa[i]].c;
+      i:=side[fa[i]].x;
+    end;
+  i:=vt;
+  while i<>vs do
+    begin
+      side[fa[i]].c:=side[fa[i]].c-nf;
+      side[side[fa[i]].op].c:=side[side[fa[i]].op].c+nf;
+      i:=side[fa[i]].x;
+    end;
+  flow:=flow+nf;
+end;
+
+procedure sap;
+var
+  i:longint;
+begin
+  fillchar(d,sizeof(d),0);
+  fillchar(num,sizeof(num),0);
+  for i:=1 to n do
+    cur[i]:=lastside[i];
+  num[0]:=n;
+  i:=vs;
+  while d[vs]<n do
+    begin
+      while cur[i]>0 do
+        with side[cur[i]] do
+          if (c>0) and (d[x]=d[y]+1) then break
+                                     else cur[i]:=next;
+      if cur[i]=0 then
+        begin
+          dec(num[d[i]]);
+          if num[d[i]]=0 then break;
+          relabel(i);
+          inc(num[d[i]]);
+          if i<>vs then i:=side[fa[i]].x;
+        end
+      else
+        begin
+          fa[side[cur[i]].y]:=cur[i];
+          i:=side[cur[i]].y;
+          if i=vt then
+            begin
+              change;
+              i:=vs;
+            end;
+        end;
+    end;
+end;
+
+procedure dfs(k:longint);
+var
+  i:longint;
+begin
+  v[k]:=1;
+  i:=lastside[k];
+  while i>0 do
+    with side[i] do
+      begin
+        if (v[y]=0)and(c>1e-9) then dfs(y);
+        i:=next;
+      end;
+end;
+
+procedure print;
+var
+  i:longint;
+begin
+  fillchar(sm,sizeof(sm),false);
+  ans:=0;
+  for i:=1 to e do
+    with side[i] do
+      if (((v[x]=2) and (v[y]=1)) or (c<0)) and not sm[link] then
+        begin
+          inc(ans);
+          ansl[ans]:=link;
+          sm[link]:=true;
+        end;
+  writeln(ans);
+  for i:=1 to ans do write(ansl[i],' '); writeln; writeln;
+end;
+
+procedure work;
+var
+  l,r,mid:extended;
+  i:longint;
+begin
+  for i:=1 to e do tside[i]:=side[i];
+  l:=0; r:=10e8;
+  while true do
+    begin
+      mid:=(l+r)/2;
+      flow:=0;
+      fillchar(sm,sizeof(sm),false);
+      for i:=1 to e do
+        begin
+          side[i]:=tside[i];
+          if i mod 2=1 then
+            begin
+              side[i].c:=side[i].c-mid;
+              if side[i].c<0 then flow:=flow+side[i].c;
+            end;
+        end;
+      sap;
+      if abs(flow)<1e-6 then break;
+      if flow>0 then l:=mid
+                else r:=mid;
+    end;
+  fillchar(v,sizeof(v),0);
+  dfs(1);
+  for i:=1 to n do
+    if v[i]=1 then v[i]:=2;
+  dfs(p);
+  print;
+end;
+
+begin
+  assign(input,inf);
+  reset(input);
+  repeat
+    init;
+    work;
+  until seekeof(input);
+  close(input);
+end.
+

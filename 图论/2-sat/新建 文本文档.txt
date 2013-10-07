@@ -1,0 +1,46 @@
+此类问题理解合取式的含义就不难
+
+
+
+POJ 2723 - Get Luffy Out(中等)
+
+http://acm.pku.edu.cn/JudgeOnline/problem?id=2723
+
+POJ 2749 - Building roads(较难)
+
+http://acm.pku.edu.cn/JudgeOnline/problem?id=2749
+
+解法：二分 + 2-SAT判定
+
+
+
+POJ 3207 - Ikki's Story IV - Panda's Trick(基础)
+
+http://acm.pku.edu.cn/JudgeOnline/problem?id=3207
+
+解法：简单的2-sat，不过其他方法更快
+
+
+
+POJ 3648- Wedding(中等)
+
+http://acm.pku.edu.cn/JudgeOnline/problem?id=3648
+
+解法：用2-sat做会比较有意思，但是暴搜照样0ms
+
+
+
+POJ 3678 - Katu Puzzle(基础)
+
+http://acm.pku.edu.cn/JudgeOnline/problem?id=3678
+
+解法：直接按合取式构图验证就行了
+
+
+
+POJ 3683 - Priest John's Busiest Day(中等)
+
+http://acm.pku.edu.cn/JudgeOnline/problem?id=3683
+
+解法：n^2枚举点之间的相容性构图，求解2-SAT
+

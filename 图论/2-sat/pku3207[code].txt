@@ -1,0 +1,110 @@
+
+pku3207 Ikki's Story IV - Panda's Trick首先声明这个题目范围有问题，搞得RE了几次！
+
+2-SAT的基础题，问题在于建图！
+
+我们可以根据边建图，如果两条边i，j相交，则它们不能同时在圆外或圆内，则我们连接顶点2*i-1和2*j ，
+
+2*i和2*j-1，说明选择2*i，2*i-1分别表示i这条边是在圆内还是圆外，因为我们这里连接的是双向边，所以
+
+在后面求强连通分量是，只需求连通分量！
+
+源代码：
+
+#include <iostream>
+using namespace std;
+const int M=1005;
+int n,m;
+int be[M];
+struct NODE
+{
+    int id,next;
+}nd[100*M];
+struct P
+{
+   int x,y;
+}p[M];
+int cnt;
+void Make_G()
+{
+     int i,j;
+     memset(nd,-1,sizeof(nd));
+     int end=2*n+1;
+     for(i=1;i<n;i++)
+      for(j=i+1;j<=n;j++)
+      {
+         if ((p[i].x>p[j].x&&p[i].y>p[j].y&&p[j].y>p[i].x)||(p[j].y>p[i].y&&p[j].x>p[i].y&&p[i].y>p[j].x))
+         {
+           nd[end].next=nd[2*i-1].next;
+           nd[end].id=2*j;
+           nd[2*i-1].next=end;
+           end++;
+           nd[end].next=nd[2*j].next;
+           nd[end].id=2*i-1;
+           nd[2*j].next=end;
+           end++;
+           
+           nd[end].next=nd[2*i].next;
+           nd[end].id=2*j-1;
+           nd[2*i].next=end;
+           end++;
+           nd[end].next=nd[2*j-1].next;
+           nd[end].id=2*i;
+           nd[2*j-1].next=end;
+           end++;
+         }
+      }
+}
+void read()
+{
+    int i;
+    for(i=1;i<=n;i++)
+    {
+       scanf("%d%d",&p[i].x,&p[i].y);
+    }
+    Make_G();
+}
+bool use[M];
+void dfs(int u)
+{
+    int i;
+    be[u]=cnt;
+    use[u]=1;
+    for(i=nd[u].next;i!=-1;i=nd[i].next)
+    {
+       int v=nd[i].id;
+       if(use[v])continue;
+       dfs(v);
+    }
+}
+void work()
+{
+    int i;
+    cnt=0;
+    memset(use,0,sizeof(use));
+    for(i=1;i<=2*n;i++)
+    {
+      if(!use[i])
+      {
+        cnt++;
+        dfs(i);
+      }
+    }
+    for(i=1;i<=n;i++)
+    {
+      if(be[2*i-1]==be[2*i]){
+        printf("the evil panda is lying again\n");
+        return;
+      }
+    }
+    printf("panda is telling the truth...\n");   
+}
+int main()
+{
+    while(scanf("%d%d",&m,&n)!=EOF)
+    {
+      read();
+      work();
+    }
+    return 0;
+}

@@ -1,0 +1,66 @@
+一点图论——用Kosaraju算法求强连通分量2009-05-06 01:41最近看了不少图论方面的内容，复习了一下旧的知识，又学了一些新的知识
+------------------------------------------------------------------------------------------------------------------------
+强连通分量 Strongly connected components:
+在一个有向图中，满足点集中的任意两点互相可达的最大点集。
+
+Kosaraju算法实现步骤：
+1.深搜后序遍历有向图，记录每个点的访问顺序(order);
+2.按照1中的顺序(order)的逆顺序，再次深搜遍历原先有向图的转置图(原先的边反向);
+3.步骤2中，能在一次dfs中遍历到的点，在同一个强连通分量中;
+
+实现代码：
+vector<int> adj[ MAXN ] ; //正向邻接表
+vector<int> radj[ MAXN ] ; //反向邻接表
+vector<int> ord; //后序访问顺序
+
+void dfs1 ( int v )
+{
+    int i,u;
+    for ( i=0 , vis[v]=true; i<adj[v].size() ; i++ )
+        if ( !vis[u=adj[v][i]] )
+            dfs1(u);
+    ord.push_back(v);
+}
+
+void dfs2 ( int v )
+{
+    int i,u;
+    for ( i=0,map[v]=cnt,vis[v]=true; i<radj[v].size() ; i++ )
+        if ( !vis[u=radj[v][i]] )
+            dfs2(u);
+}
+
+void kosaraju ()
+{
+    int i;
+    memset(vis,false,sizeof(vis));
+    ord.clear();
+    for ( i=0 ; i<tot ; i++ )
+        if ( !vis[i] )
+            dfs1(i);
+    memset(vis,false,sizeof(vis));
+    for ( cnt=0,i=ord.size()-1 ; i>=0 ; i-- )
+        if ( !vis[ord[i]] )
+        {
+            dfs2(ord[i]);
+            cnt++;
+        }
+}
+
+求强连通分量是图论中的一个基本技巧，可以将一个有向图中的若干个强连通分量看做是一个点（缩点），从而方便求解问题。
+
+部分基础题目：
+
+POJ 1236 - Network of Schools
+http://acm.pku.edu.cn/JudgeOnline/problem?id=1236
+
+POJ 2553 - The Bottom of a Graph
+http://acm.pku.edu.cn/JudgeOnline/problem?id=2553
+
+POJ 2186 - Popular Cows
+http://acm.pku.edu.cn/JudgeOnline/problem?id=2186
+
+POJ 3592 - Instantaneous Transference
+http://acm.pku.edu.cn/JudgeOnline/problem?id=3592
+
+ 

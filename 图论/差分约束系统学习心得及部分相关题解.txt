@@ -1,0 +1,194 @@
+差分约束系统学习心得及部分相关题解——poj3159,poj1364,poj1716,poj1201,poj3169,poj12752008年05月04日 星期日 10:52最近几天系统得学习了一些差分约束系统的原理，特此记录如下：
+所谓差分约束系统，是指一组不定方程(A,x,T,b)，其中A的每行有一个1，一个-1，其余为0，x为解向量，T为<=或>=组成的向量，b为约束矢量。具体来说，就是每行都具有 xi-xj >=|<= bi 的形式。约束的目标是使得目标函数xt-xs最大或最小。
+这是典型的线性规划的个案，但是也可以转化为图论来做，利用最短路（或最长路）方法可以实现高效的解决方案。
+
+
+下面通过poj上的部分例题来详细解释如下：
+poj3159 Candies
+这是我接触差分约束的第一题。设S[a]为kid a获得的candies数，则每一行代表的约束是S[b]-S[a]<=c，目标函数是使得S=S[N]-S[1]最大。
+利用差分约束的思想建图，对于每一条约束，从a向b做一条长为c的边，则从1到N的最短路即为所求。由于本题c皆为非负数，所以可以用Dijkstra高效解决。
+核心代码（构图）：
+void input()
+{
+int i,xx,yy,ll;
+scanf("%d %d",&n,&m);
+memset(nodes,-1,(n+1)*sizeof(int));
+for (i=0;i<m;++i)
+{
+   scanf("%d %d %d",&xx,&yy,&ll);
+   --xx;
+   --yy;
+   sts[i].py=yy;
+   sts[i].pl=ll;
+   sts[i].next=nodes[xx];
+   nodes[xx]=i;
+}
+}
+
+poj1364 King
+注意到本题的约束是>和<，然而我们需要的是>=或者<=，所以必须有所转化。幸好是整数规划，所以我们可以转化如下：
+x<a -》 x<=a-1
+x>b -》 x>=b+1
+然而需要注意的是，差分约束必须保证所有的不等式具有同样的不等号才能正确运行！所以我们把所有符号转为<=，然后构图，做Bellman_ford。
+核心代码（构图）：
+bool input()
+{
+scanf("%d",&n);
+if (n==0)
+   return 0;
+scanf("%d",&m);
+int si,ni,ki,i;
+for (i=0;i<m;++i)
+{
+   scanf("%d %d %s %d",&si,&ni,oi,&ki);
+   if (oi[0]=='g')
+   {
+    px[i]=si-1;
+    py[i]=si+ni;
+    pl[i]=-ki-1;
+   }
+   else
+   {
+    px[i]=si+ni;
+    py[i]=si-1;
+    pl[i]=ki-1;
+   }
+}
+return 1;
+}
+
+poj1716 Integer Intervals
+poj1201 Intervals
+后者是前者的进化版，所以我们以后者为例。
+令S[i]为从0到i-1中数的个数，则以下为约束条件：
+s[bi]-S[ai]>=ci
+1>=S[i+1]-S[i]>=0
+注意本题要求的是最小值，而按照>=号建图后发现图中有负环，怎么办呢？
+其实很简单，本题求的不是最短路，而是最长路！而Bellman_ford依然可以承担此项重任！
+核心代码（构图）：
+void input()
+{
+int xx,yy,cc,i;
+scanf("%d",&n);
+st=10000;
+ed=0;
+m=0;
+for (i=0;i<n;++i)
+{
+   scanf("%d %d %d",&xx,&yy,&cc);
+   px[m]=xx;
+   py[m]=yy+1;
+   pl[m]=cc;
+   if (st>xx)
+    st=xx;
+   if (ed<yy+1)
+    ed=yy+1;
+   ++m;
+}
+for (i=st;i<ed;++i)
+{
+   px[m]=i;
+   py[m]=i+1;
+   pl[m]=0;
+   ++m;
+}
+for (i=ed;i>st;--i)
+{
+   px[m]=i;
+   py[m]=i-1;
+   pl[m]=-1;
+   ++m;
+}
+for (i=st;i<=ed;++i)
+   dps[i]=MAXS;
+dps[ed]=0;
+}
+
+poj3169 Layout
+本题是求约束下的最大值，只要依<=建图并求最短路即可！
+核心代码（构图）：
+void input()
+{
+scanf("%d %d %d",&n,&ml,&md);
+m=0;
+int i,xx,yy,ll;
+for (i=0;i<ml;++i)
+{
+   scanf("%d %d %d",&xx,&yy,&ll);
+   --xx;
+   --yy;
+   px[m]=xx;
+   py[m]=yy;
+   pl[m]=ll;
+   ++m;
+}
+for (i=0;i<md;++i)
+{
+   scanf("%d %d %d",&xx,&yy,&ll);
+   --xx;
+   --yy;
+   px[m]=yy;
+   py[m]=xx;
+   pl[m]=-ll;
+   ++m;
+}
+for (i=1;i<n;++i)
+{
+   px[m]=i;
+   py[m]=i-1;
+   pl[m]=0;
+   ++m;
+}
+}
+
+poj1275 Cashier Employment
+这是我很久以前就从黑书上见到的题目，但是因为当时自己才疏学浅，怎么都写不出来。现在搞懂了差分约束，发现其实不是那么难的！
+利用差分约束寻找可行解，在所有可行解中二分最优。
+核心代码（构图）：
+void createmap(int sum)
+{
+int i,j;
+m=0;
+for (i=1;i<25;++i)
+{
+   px[m]=i-1;
+   py[m]=i;
+   pl[m]=0;
+   ++m;
+}
+for (i=1;i<25;++i)
+{
+   px[m]=i;
+   py[m]=i-1;
+   pl[m]=-t[i];
+   ++m;
+}
+px[m]=0;
+py[m]=24;
+pl[m]=sum;
+++m;
+for (j=1;j<25;++j)
+{
+   i=(j-1+8)%24+1;
+   px[m]=j;
+   py[m]=i;
+   if (i>j)
+    pl[m]=r[i];
+   else
+    pl[m]=r[i]-sum;
+   ++m;
+}
+}
+
+总论：
+感谢各位大牛小牛们能耐心看到这里，在此我准备用一些简单的语句来总结差分约束系统的应用特性：
+>=，求最小值，做最长路；
+<=，求最大值，做最短路。
+边都是从后往前～～～
+<=构图。
+有负环说明无解。
+求不出最短路（为Inf）为任意解。
+>=构图时类似。
+
+以上为我的一点短见，希望各位大牛不吝批评指正！！！
+ 

@@ -1,0 +1,275 @@
+
+USACO MAR08 Gold Cow Jogging 牛跑步
+Posted by CmYkRgB123 On 2008 - 九月 - 29日 09 : 49 : 47 ADD COMMENTS 216 views
+
+这是一个K短路径问题，解决方法有Yen算法等等。但是这并不是一个一般的K短路径问题，这是一个有向无环图。所以可以考虑动态规划(记忆化搜索)的思想解决。
+
+记顶点i到目标点N的k短路径的长度为Dis[i,k]。可以知道每个顶点Dis[i,*]，都是由大于i的顶点j，Dis[j,*]推得的。由于源点和目标都是确定的，我们可以从目标节点倒推回源点。
+
+建立原图的逆向图，即从1开始到N。记从顶点1到i的当前路径的长度为S，访问顶点i邻接的顶点j，令新的到j的路径长度F为S+ (i,j)。把F加入到Dis[j]中，并只保留前K小的。然后访问顶点j。如果F大于所有Dis[j]，则不能用该路径松弛顶点j，不访问j。当全部访问完以后，按照要求输出Dis[N]即可。
+
+对于维护Dis[i]，可以使用堆、甚至平衡树等高级数据结构。但是考虑到K并不是很大，维护一个数组即可。当插入新的元素V时，如果已有的数目不足K，直接插入；如果已经为K，在这K个元素中找到最大值Max，如果V=Max，不必插入。
+
+时间复杂度为O(M*K)
+
+
+/*
+ID: cmykrgb1
+PROG: cowjog
+LANG: C++
+*/
+#include <iostream>
+#define MAX 1001
+#define MAXK 101
+#define INF 0x7fffffff
+ 
+using namespace std;
+ 
+class list
+{
+public:
+	list *next;
+	int p,v;
+	list(int tp,int tv)
+	{
+		p=tp;
+		v=tv;
+		next=0;
+	}
+};
+ 
+class tadjl
+{
+public:
+	list *first,*last;
+	tadjl()
+	{
+		first=last=0;
+	}
+	void ins(int p,int v)
+	{
+		if (first)
+			last=last->next=new list(p,v);
+		else
+			first=last=new list(p,v);
+	}
+};
+ 
+class monotony
+{
+public:
+	int Size,cnt;
+	int C[MAXK];
+	monotony(int K)
+	{
+		Size=K;
+		cnt=0;
+	}
+	bool ins(int v)
+	{
+		int i,j,max=0;
+		if (cnt<Size)
+		{
+			C[cnt++]=v;
+		}
+		else
+		{
+			for (i=0;i<cnt;i++)
+			{
+				if (C[i]>max)
+				{
+					max=C[i];
+					j=i;
+				}
+			}
+			if (v>=max)
+				return false;
+			C[j]=v;
+		}
+		return true;
+	}
+};
+ 
+int N,M,K;
+tadjl adjl[MAX];
+monotony *Dis[MAX];
+ 
+void init()
+{
+	int i,a,b,v;
+	freopen("cowjog.in","r",stdin);
+	freopen("cowjog.out","w",stdout);
+	cin >> N >> M >> K;
+	for (i=1;i<=M;i++)
+	{
+		cin >> a >> b >> v;
+		adjl[b].ins(a,v);
+	}
+	for (i=1;i<=N;i++)
+	{
+		Dis[i]=new monotony(K);
+	}
+	for (i=0;i<K;i++)
+	{
+		Dis[N]->C[i]=INF;
+	}
+}
+ 
+void dfs(int i,int S)
+{
+	int j,v,F;
+	bool succ;
+	list *k;
+	for (k=adjl[i].first;k;k=k->next)
+	{
+		j=k->p;
+		v=k->v;
+		F=v+S;
+		succ=Dis[j]->ins(F);
+		if (succ && j!=N)
+		{
+			dfs(j,F);
+		}
+	}
+}
+ 
+inline int cmp(const void *a,const void *b)
+{
+	return *(int *)a-*(int *)b;
+}
+ 
+void print()
+{
+	int i;
+	qsort(Dis[N]->C,K,sizeof(Dis[N]->C[0]),cmp);
+	for (i=0;i<K;i++)
+	{
+		if (Dis[N]->C[i]!=INF)
+			cout << Dis[N]->C[i];
+		else
+			cout << -1;
+		cout << endl;
+	}
+}
+ 
+int main()
+{
+	init();
+	dfs(1,0);
+	print();
+	return 0;
+}
+
+
+官方题解
+
+参考翻译
+
+翻译By BYVoid
+
+我们正在考虑的一个无环图，我们希望找到的K ≤ 100最短路径。由于图是环自然有序的顶点，动态规划是一个很好的第一种办法。
+
+假设我们知道顶点i到谷仓顶点N的K短路径，我们可以用来计算从顶点i – 1到N的K短路径。我们认为所有从顶点的i – 1 的出边。假设顶点的i – 1有d个出边，这d个出边的末端顶点都大于的i – 1，我们可以从每个这些顶点计算K短路径。
+
+考虑将要计算的顶点的i – 1至所有这些d * K条路径，顶点i – 1到N的K短路径顶将来自与这些d * K条路径。我们可以通过合并这些d列表中项目，有效地维护一个列表，存储从i-1到N的K短路径。在每一个顶点需要d * K的时间。计算所有的顶点为O(MK)时间。既然M = 10000和K = 100，这将是约1000000个操作。
+
+原文
+
+We are given an acyclic graph and we wish to find the K ≤ 100 shortest paths. Since the graph is acyclic with a natural ordering to the vertices, Dynamic Programming is a good first approach.
+
+Suppose that we knew the K shortest paths starting at each vertex i for i ≥ l and going downhill to the barn at vertex N. Then, to compute the K shortest such paths beginning at vertex i-1, we consider all outgoing edges from vertex i-1. Suppose that vertex i-1 has d outgoing edges. The ends of these d edges are all larger than i-1 and we have computed the K shortest paths from each of these. We can consider prepending vertex i-1 to all of these d*K paths. The best K paths starting at vertex i-1 will come from these d*K paths. We can efficiently compute a sorted list of the K best paths starting at vertex i-1 by merging these d lists of K items. This requires d*K time at each vertex. Summing over all vertices yields O(MK) time. With M=10,000 and K=100, this will be around 1,000,000 operations, which works.
+官方程序
+
+
+
+#include <stdio.h>
+ 
+const int BIG = 1000000000;
+ 
+const int MAXN = 2000;
+const int MAXE = 20000;
+const int MAXK = 200;
+ 
+int n,e,k;
+int ea[MAXE];
+int eb[MAXE];
+int elen[MAXE];
+int d[MAXN];
+int *out[MAXN];
+int *len[MAXN];
+int path[MAXN][MAXK];
+ 
+int ei[MAXN];
+ 
+int main() {
+ 
+  FILE *fin;
+ 
+  fin = fopen("cowjog.in", "r");
+  fscanf(fin, "%d %d %d", &n, &e, &k);
+  for(int i = 0; i < n; ++i){
+    d[i] = 0;
+  }
+  for(int i = 0; i < e; ++i){
+    int a,b,l;
+    fscanf(fin, "%d %d %d", &b, &a, &l);
+    --a; --b;
+    ++d[a];
+  }
+  fclose(fin);
+ 
+  out[0] = &eb[0];
+  len[0] = &elen[0];
+  for(int i = 1; i < n; ++i){
+    out[i] = out[i-1] + d[i-1];
+    len[i] = len[i-1] + d[i-1];
+  }
+ 
+  fin = fopen("cowjog.in", "r");
+  fscanf(fin, "%d %d %d", &n, &e, &k);
+  for(int i = 0; i < n; ++i){
+    d[i] = 0;
+  }
+  for(int i = 0; i < e; ++i){
+    int a,b,l;
+    fscanf(fin, "%d %d %d", &b, &a, &l);
+    --a; --b;
+    out[a][d[a]] = b;
+    len[a][d[a]] = l;
+    ++d[a];
+  }
+  fclose(fin);
+ 
+ 
+  path[n-1][0] = 0;
+  for(int i = 1; i < k; ++i){
+    path[n-1][i] = BIG;
+  }
+ 
+  for(int i = n-2; i >= 0; --i){
+    for(int j = 0; j < d[i]; ++j){
+      ei[j] = 0;
+    }
+    for(int j = 0; j < k; ++j){
+      int best_m = 0;
+      int best_d = BIG;
+      for(int m = 0; m < d[i]; ++m){
+	if(len[i][m] + path[out[i][m]][ei[m]] < best_d) {
+	  best_m = m;
+	  best_d = len[i][m] + path[out[i][m]][ei[m]];
+	}
+      }
+      path[i][j] = best_d;
+      ++ei[best_m];
+    }
+  }
+ 
+  FILE *fout = fopen("cowjog.out", "w");
+  for(int i = 0; i < k; ++i){
+    fprintf(fout, "%dn", (path[0][i] == BIG) ? -1 : path[0][i]);
+  }
+  fclose(fout);
+ 
+ 
+  return(0);
+}

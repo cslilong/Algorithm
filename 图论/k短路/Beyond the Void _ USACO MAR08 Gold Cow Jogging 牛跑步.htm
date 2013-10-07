@@ -1,0 +1,909 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="zh-CN">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Beyond the Void  &raquo; USACO MAR08 Gold Cow Jogging 牛跑步</title>
+<meta name="generator" content="WordPress 2.8.4" /> <!-- leave this for stats -->
+<meta name="description" content="Be confident, and then I will win!" />
+<meta name="keywords" content="OI" />
+<link rel="stylesheet" href="http://www.byvoid.com/blog/wp-content/themes/sunstream/style.css" type="text/css" media="all" />
+<link rel="alternate" type="application/rss+xml" title="Beyond the Void RSS Feed" href="http://feeds2.feedburner.com/byvoid" />
+<link rel="shortcut icon" href="http://www.byvoid.com/favicon.ico" />
+<link rel="pingback" href="http://www.byvoid.com/blog/xmlrpc.php" />
+
+	<link rel='archives' title='2009年九月' href='http://www.byvoid.com/blog/2009/09/' />
+	<link rel='archives' title='2009年八月' href='http://www.byvoid.com/blog/2009/08/' />
+	<link rel='archives' title='2009年七月' href='http://www.byvoid.com/blog/2009/07/' />
+	<link rel='archives' title='2009年六月' href='http://www.byvoid.com/blog/2009/06/' />
+	<link rel='archives' title='2009年五月' href='http://www.byvoid.com/blog/2009/05/' />
+	<link rel='archives' title='2009年四月' href='http://www.byvoid.com/blog/2009/04/' />
+	<link rel='archives' title='2009年三月' href='http://www.byvoid.com/blog/2009/03/' />
+	<link rel='archives' title='2009年二月' href='http://www.byvoid.com/blog/2009/02/' />
+	<link rel='archives' title='2009年一月' href='http://www.byvoid.com/blog/2009/01/' />
+	<link rel='archives' title='2008年十二月' href='http://www.byvoid.com/blog/2008/12/' />
+	<link rel='archives' title='2008年十一月' href='http://www.byvoid.com/blog/2008/11/' />
+	<link rel='archives' title='2008年十月' href='http://www.byvoid.com/blog/2008/10/' />
+	<link rel='archives' title='2008年九月' href='http://www.byvoid.com/blog/2008/09/' />
+	<link rel='archives' title='2008年八月' href='http://www.byvoid.com/blog/2008/08/' />
+	<link rel='archives' title='2008年七月' href='http://www.byvoid.com/blog/2008/07/' />
+	<link rel='archives' title='2008年六月' href='http://www.byvoid.com/blog/2008/06/' />
+	<link rel='archives' title='2008年四月' href='http://www.byvoid.com/blog/2008/04/' />
+	<link rel='archives' title='2008年三月' href='http://www.byvoid.com/blog/2008/03/' />
+	<link rel='archives' title='2008年二月' href='http://www.byvoid.com/blog/2008/02/' />
+	<link rel='archives' title='2008年一月' href='http://www.byvoid.com/blog/2008/01/' />
+	<link rel='archives' title='2007年十二月' href='http://www.byvoid.com/blog/2007/12/' />
+	<link rel='archives' title='2007年十一月' href='http://www.byvoid.com/blog/2007/11/' />
+<link rel="alternate" type="application/rss+xml" title="Beyond the Void &raquo; USACO MAR08 Gold Cow Jogging 牛跑步 评论 Feed" href="http://www.byvoid.com/blog/usaco-mar08-gold-cow-jogging/feed/" />
+<link rel='stylesheet' id='wp-pagenavi-css'  href='http://www.byvoid.com/blog/wp-content/plugins/wp-pagenavi/pagenavi-css.css?ver=2.50' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.byvoid.com/blog/wp-content/plugins/kpicasa-gallery/highslide/highslide.js?ver=4.1.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.byvoid.com/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.byvoid.com/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='Beyond the Void' href='http://www.byvoid.com/blog' />
+<link rel='start' title='改用WordPress' href='http://www.byvoid.com/blog/rfwp/' />
+<link rel='prev' title='USACO MAR08 Gold Pearl Pairing 珍珠分对' href='http://www.byvoid.com/blog/usaco-mar08-gold-pearl-pairing/' />
+<link rel='next' title='USACO FEB08 Bronze Dining Cows  晚餐队列安排' href='http://www.byvoid.com/blog/usaco-feb08-bronze-dining-cows/' />
+<meta name="generator" content="WordPress 2.8.4" />
+<link rel='stylesheet' href='http://www.byvoid.com/blog/wp-content/plugins/kpicasa-gallery/kpicasa_gallery.css' type='text/css' media='screen' />
+<link rel='stylesheet' href='http://www.byvoid.com/blog/wp-content/plugins/kpicasa-gallery/highslide/highslide.css' type='text/css' media='screen' />
+<link rel='stylesheet' href='http://www.byvoid.com/blog/wp-content/plugins/kpicasa-gallery/highslide/kpicasa.css' type='text/css' media='screen' />
+<!--[if lt IE 7]>
+<link rel='stylesheet' type='text/css' href='http://www.byvoid.com/blog/wp-content/plugins/kpicasa-gallery/highslide/highslide-styles-ie6.css' />
+<![endif]-->
+<script type='text/javascript' src='http://www.byvoid.com/blog/wp-content/plugins/kpicasa-gallery/swfobject.js'></script>
+<script type='text/javascript'>
+	hs.graphicsDir      = 'http://www.byvoid.com/blog/wp-content/plugins/kpicasa-gallery/highslide/graphics/';
+	hs.showCredits      = false;
+	hs.outlineType      = 'rounded-white';
+	hs.wrapperClassName = 'highslide-white';
+	if (hs.registerOverlay) {
+		hs.registerOverlay({ thumbnailId: null, overlayId: 'controlbar', position: 'top right', hideOnMouseOut: true });
+	}
+</script>
+
+<!-- Start Of Script Generated By CodeBox -->
+	<link rel="stylesheet" href="http://www.byvoid.com/blog/wp-content/plugins/wp-codebox/css/codebox.css" type="text/css" media="screen" />
+	<script language="javascript" type="text/javascript" src="http://www.byvoid.com/blog/wp-includes/js/jquery/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="http://www.byvoid.com/blog/wp-content/plugins/wp-codebox/js/codebox.js" ></script>
+<!-- End Of Script Generated By CodeBox -->
+
+<!-- Start Of Script Generated By WP-PostViews 1.50 -->
+<script type='text/javascript' src='http://www.byvoid.com/blog/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+jQuery.ajax({type:'GET',url:'http://www.byvoid.com/blog/wp-content/plugins/wp-postviews/wp-postviews.php',data:'postviews_id=297',cache:false});/* ]]> */
+</script>
+<!-- End Of Script Generated By WP-PostViews 1.50 -->
+<style type="text/css">
+/* <![CDATA[ */
+img.latex { vertical-align: middle; border: none; }
+/* ]]> */
+</style>
+<!-- wp thread comment 1.4.9.4.002 -->
+<style type="text/css" media="screen">
+.editComment, .editableComment, .textComment{
+	display: inline;
+}
+.comment-childs{
+	border: 1px solid #999;
+	margin: 5px 2px 2px 4px;
+	padding: 4px 2px 2px 4px;
+	background-color: #444444;
+}
+.chalt{
+	background-color: #000000;
+}
+#newcomment{
+	border:1px dashed #777;width:90%;
+}
+#newcommentsubmit{
+	color:red;
+}
+.adminreplycomment{
+	border:1px dashed #777;
+	width:99%;
+	margin:4px;
+	padding:4px;
+}
+.mvccls{
+	color: #999;
+}
+			
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="content">
+
+<div id="top"> 
+<div class="blogname">
+	<h1><a href="http://www.byvoid.com/blog/" title="Beyond the Void">Beyond the Void</a></h1>
+	<h2>Be confident, and then I will win!</h2>
+</div>
+<div class="menu">
+	 <ul>
+		<li><a href="http://www.byvoid.com/blog/../">站点首页</a></li>
+		<li><a href="http://www.byvoid.com/blog/">博客首页</a></li>
+		<li class="page_item page-item-60"><a href="http://www.byvoid.com/blog/guestbook/" title="留言本">留言本</a></li>
+<li class="page_item page-item-62"><a href="http://www.byvoid.com/blog/about/" title="关于">关于</a></li>
+<li class="page_item page-item-109"><a href="http://www.byvoid.com/blog/links/" title="链接">链接</a></li>
+<li class="page_item page-item-114"><a href="http://www.byvoid.com/blog/tag/" title="标签云集">标签云集</a></li>
+<li class="page_item page-item-229"><a href="http://www.byvoid.com/blog/original/" title="我的原创">我的原创</a></li>
+<li class="page_item page-item-684"><a href="http://www.byvoid.com/blog/gallery/" title="相册">相册</a></li>
+	</ul>
+	  
+</div>
+
+</div>
+<div id="rightcol">
+
+
+<div id="sidebar">
+	
+	<ul>
+	<li id="text-439470391" class="widget widget_text">			<div class="textwidget"><ul>
+<li><a href="http://feeds2.feedburner.com/byvoid"><img src="http://feeds2.feedburner.com/~fc/byvoid?bg=FFCC66&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></li>
+</ul></div>
+		</li>
+<li id="categories-163760361" class="widget widget_categories"><h2 class="widgettitle">分类目录</h2>
+		<ul>
+	<li class="cat-item cat-item-8"><a href="http://www.byvoid.com/blog/cate/game-and-entertainment/" title="游戏娱乐">Game and Entertainment</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://www.byvoid.com/blog/cate/internet-searching/" title="网闻搜捕">Internet Searching</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.byvoid.com/blog/cate/knowledge-explosion/" title="知识爆炸">Knowledge Explosion</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.byvoid.com/blog/cate/life-and-thought/" title="生活与思考">Life and Thought</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.byvoid.com/blog/cate/my-design/" title="我的创意">My Design</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.byvoid.com/blog/cate/olympiad-informatics/" title="信息学奥林匹克">Olympiad Informatics</a>
+</li>
+	<li class="cat-item cat-item-550"><a href="http://www.byvoid.com/blog/cate/slns/" title="我的题解">Solutions</a>
+<ul class='children'>
+	<li class="cat-item cat-item-578"><a href="http://www.byvoid.com/blog/cate/slns/haoi-slns/" title="查看 HAOI 下的所有文章">HAOI</a>
+</li>
+	<li class="cat-item cat-item-555"><a href="http://www.byvoid.com/blog/cate/slns/noi-slns/" title="NOI">NOI</a>
+</li>
+	<li class="cat-item cat-item-556"><a href="http://www.byvoid.com/blog/cate/slns/pku-slns/" title="北京大学OJ">Pku</a>
+</li>
+	<li class="cat-item cat-item-554"><a href="http://www.byvoid.com/blog/cate/slns/poi-slns/" title="POI">POI</a>
+</li>
+	<li class="cat-item cat-item-557"><a href="http://www.byvoid.com/blog/cate/slns/ural-slns/" title="Ural大学OJ">Ural</a>
+</li>
+	<li class="cat-item cat-item-553"><a href="http://www.byvoid.com/blog/cate/slns/usaco-slns/" title="USACO">USACO</a>
+</li>
+	<li class="cat-item cat-item-558"><a href="http://www.byvoid.com/blog/cate/slns/zju-slns/" title="浙江大学OJ">Zju</a>
+</li>
+	<li class="cat-item cat-item-628"><a href="http://www.byvoid.com/blog/cate/slns/os/" title="查看 其他来源 下的所有文章">其他来源</a>
+</li>
+</ul>
+</li>
+		</ul>
+</li>
+<li id="search-2" class="widget widget_search"><form role="search" method="get" id="searchform" action="http://www.byvoid.com/blog/" >
+	<div><label class="screen-reader-text" for="s">搜索：</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="搜索" />
+	</div>
+	</form></li>
+<li id="archives-2" class="widget widget_archive"><h2 class="widgettitle">存档</h2>
+		<select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'> <option value="">选择月份</option> 	<option value='http://www.byvoid.com/blog/2009/09/'> 2009年九月 &nbsp;(2)</option>
+	<option value='http://www.byvoid.com/blog/2009/08/'> 2009年八月 &nbsp;(2)</option>
+	<option value='http://www.byvoid.com/blog/2009/07/'> 2009年七月 &nbsp;(3)</option>
+	<option value='http://www.byvoid.com/blog/2009/06/'> 2009年六月 &nbsp;(14)</option>
+	<option value='http://www.byvoid.com/blog/2009/05/'> 2009年五月 &nbsp;(16)</option>
+	<option value='http://www.byvoid.com/blog/2009/04/'> 2009年四月 &nbsp;(28)</option>
+	<option value='http://www.byvoid.com/blog/2009/03/'> 2009年三月 &nbsp;(21)</option>
+	<option value='http://www.byvoid.com/blog/2009/02/'> 2009年二月 &nbsp;(17)</option>
+	<option value='http://www.byvoid.com/blog/2009/01/'> 2009年一月 &nbsp;(5)</option>
+	<option value='http://www.byvoid.com/blog/2008/12/'> 2008年十二月 &nbsp;(21)</option>
+	<option value='http://www.byvoid.com/blog/2008/11/'> 2008年十一月 &nbsp;(21)</option>
+	<option value='http://www.byvoid.com/blog/2008/10/'> 2008年十月 &nbsp;(23)</option>
+	<option value='http://www.byvoid.com/blog/2008/09/'> 2008年九月 &nbsp;(6)</option>
+	<option value='http://www.byvoid.com/blog/2008/08/'> 2008年八月 &nbsp;(11)</option>
+	<option value='http://www.byvoid.com/blog/2008/07/'> 2008年七月 &nbsp;(19)</option>
+	<option value='http://www.byvoid.com/blog/2008/06/'> 2008年六月 &nbsp;(22)</option>
+	<option value='http://www.byvoid.com/blog/2008/04/'> 2008年四月 &nbsp;(29)</option>
+	<option value='http://www.byvoid.com/blog/2008/03/'> 2008年三月 &nbsp;(9)</option>
+	<option value='http://www.byvoid.com/blog/2008/02/'> 2008年二月 &nbsp;(3)</option>
+	<option value='http://www.byvoid.com/blog/2008/01/'> 2008年一月 &nbsp;(6)</option>
+	<option value='http://www.byvoid.com/blog/2007/12/'> 2007年十二月 &nbsp;(3)</option>
+	<option value='http://www.byvoid.com/blog/2007/11/'> 2007年十一月 &nbsp;(21)</option>
+ </select>
+</li>
+	        <li id="wp-cumulus" class="widget wp_cumulus_widget">							<h2 class="widgettitle">标签</h2>
+						<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ --><script type="text/javascript" src="http://www.byvoid.com/blog/wp-content/plugins/wp-cumulus/swfobject.js"></script><div id="wpcumuluswidgetcontent"><p style="display:none;"><a href='http://www.byvoid.com/blog/tag/%e4%ba%8c%e5%88%86%e5%9b%be/' class='tag-link-132' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>二分图</a>
+<a href='http://www.byvoid.com/blog/tag/%e4%bd%8d%e8%bf%90%e7%ae%97/' class='tag-link-18' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>位运算</a>
+<a href='http://www.byvoid.com/blog/tag/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92/' class='tag-link-86' title='46个主题' rel="tag" style='font-size: 18.070175438596pt;'>动态规划</a>
+<a href='http://www.byvoid.com/blog/tag/%e5%8f%91%e7%8e%b0/' class='tag-link-30' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>发现</a>
+<a href='http://www.byvoid.com/blog/tag/%e5%93%88%e5%b8%8c/' class='tag-link-180' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>哈希</a>
+<a href='http://www.byvoid.com/blog/tag/%e5%9b%be%e8%ae%ba/' class='tag-link-143' title='10个主题' rel="tag" style='font-size: 9.2280701754386pt;'>图论</a>
+<a href='http://www.byvoid.com/blog/tag/%e5%ad%97%e7%ac%a6%e4%b8%b2/' class='tag-link-145' title='7个主题' rel="tag" style='font-size: 8.4912280701754pt;'>字符串</a>
+<a href='http://www.byvoid.com/blog/tag/%e5%bf%83%e6%80%81/' class='tag-link-34' title='11个主题' rel="tag" style='font-size: 9.4736842105263pt;'>心态</a>
+<a href='http://www.byvoid.com/blog/tag/%e6%80%9d%e8%80%83/' class='tag-link-38' title='5个主题' rel="tag" style='font-size: 8pt;'>思考</a>
+<a href='http://www.byvoid.com/blog/tag/%e6%90%9c%e7%b4%a2/' class='tag-link-51' title='18个主题' rel="tag" style='font-size: 11.19298245614pt;'>搜索</a>
+<a href='http://www.byvoid.com/blog/tag/%e6%9c%80%e7%9f%ad%e8%b7%af%e5%be%84/' class='tag-link-314' title='14个主题' rel="tag" style='font-size: 10.210526315789pt;'>最短路径</a>
+<a href='http://www.byvoid.com/blog/tag/%e6%a0%91%e5%bd%a2%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92/' class='tag-link-361' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>树形动态规划</a>
+<a href='http://www.byvoid.com/blog/tag/%e7%8c%8e%e5%a5%87/' class='tag-link-31' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>猎奇</a>
+<a href='http://www.byvoid.com/blog/tag/%e7%9c%81%e9%80%89/' class='tag-link-74' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>省选</a>
+<a href='http://www.byvoid.com/blog/tag/%e7%9c%81%e9%98%9f%e5%9f%b9%e8%ae%ad%e6%97%a5%e5%bf%97/' class='tag-link-212' title='7个主题' rel="tag" style='font-size: 8.4912280701754pt;'>省队培训日志</a>
+<a href='http://www.byvoid.com/blog/tag/%e7%a6%bb%e6%95%a3%e5%8c%96/' class='tag-link-289' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>离散化</a>
+<a href='http://www.byvoid.com/blog/tag/%e7%bd%91%e7%bb%9c%e6%b5%81/' class='tag-link-128' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>网络流</a>
+<a href='http://www.byvoid.com/blog/tag/%e8%ae%a1%e7%ae%97%e5%87%a0%e4%bd%95/' class='tag-link-75' title='7个主题' rel="tag" style='font-size: 8.4912280701754pt;'>计算几何</a>
+<a href='http://www.byvoid.com/blog/tag/%e8%b5%84%e6%96%99/' class='tag-link-24' title='14个主题' rel="tag" style='font-size: 10.210526315789pt;'>资料</a>
+<a href='http://www.byvoid.com/blog/tag/%e8%bd%ac%e6%8a%98/' class='tag-link-40' title='12个主题' rel="tag" style='font-size: 9.719298245614pt;'>转折</a>
+<a href='http://www.byvoid.com/blog/tag/%e8%bf%9e%e9%80%9a%e5%88%86%e9%87%8f/' class='tag-link-144' title='5个主题' rel="tag" style='font-size: 8pt;'>连通分量</a>
+<a href='http://www.byvoid.com/blog/tag/%e9%80%92%e5%bd%92/' class='tag-link-50' title='11个主题' rel="tag" style='font-size: 9.4736842105263pt;'>递归</a>
+<a href='http://www.byvoid.com/blog/tag/1997/' class='tag-link-400' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>1997</a>
+<a href='http://www.byvoid.com/blog/tag/1998/' class='tag-link-412' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>1998</a>
+<a href='http://www.byvoid.com/blog/tag/1999/' class='tag-link-433' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>1999</a>
+<a href='http://www.byvoid.com/blog/tag/2000/' class='tag-link-448' title='7个主题' rel="tag" style='font-size: 8.4912280701754pt;'>2000</a>
+<a href='http://www.byvoid.com/blog/tag/2001/' class='tag-link-475' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>2001</a>
+<a href='http://www.byvoid.com/blog/tag/2008/' class='tag-link-158' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>2008</a>
+<a href='http://www.byvoid.com/blog/tag/c/' class='tag-link-21' title='12个主题' rel="tag" style='font-size: 9.719298245614pt;'>C++</a>
+<a href='http://www.byvoid.com/blog/tag/cogs/' class='tag-link-141' title='9个主题' rel="tag" style='font-size: 8.9824561403509pt;'>COGS</a>
+<a href='http://www.byvoid.com/blog/tag/design/' class='tag-link-20' title='13个主题' rel="tag" style='font-size: 9.9649122807018pt;'>Design</a>
+<a href='http://www.byvoid.com/blog/tag/haoi/' class='tag-link-73' title='9个主题' rel="tag" style='font-size: 8.9824561403509pt;'>HAOI</a>
+<a href='http://www.byvoid.com/blog/tag/linux/' class='tag-link-44' title='16个主题' rel="tag" style='font-size: 10.701754385965pt;'>Linux</a>
+<a href='http://www.byvoid.com/blog/tag/noi/' class='tag-link-46' title='18个主题' rel="tag" style='font-size: 11.19298245614pt;'>NOI</a>
+<a href='http://www.byvoid.com/blog/tag/noi2009/' class='tag-link-546' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>NOI2009</a>
+<a href='http://www.byvoid.com/blog/tag/noip/' class='tag-link-14' title='10个主题' rel="tag" style='font-size: 9.2280701754386pt;'>NOIP</a>
+<a href='http://www.byvoid.com/blog/tag/oi/' class='tag-link-17' title='13个主题' rel="tag" style='font-size: 9.9649122807018pt;'>OI</a>
+<a href='http://www.byvoid.com/blog/tag/php/' class='tag-link-15' title='10个主题' rel="tag" style='font-size: 9.2280701754386pt;'>php</a>
+<a href='http://www.byvoid.com/blog/tag/pku/' class='tag-link-551' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>pku</a>
+<a href='http://www.byvoid.com/blog/tag/poi/' class='tag-link-397' title='34个主题' rel="tag" style='font-size: 15.122807017544pt;'>POI</a>
+<a href='http://www.byvoid.com/blog/tag/treap/' class='tag-link-244' title='7个主题' rel="tag" style='font-size: 8.4912280701754pt;'>Treap</a>
+<a href='http://www.byvoid.com/blog/tag/ubuntu/' class='tag-link-45' title='8个主题' rel="tag" style='font-size: 8.7368421052632pt;'>Ubuntu</a>
+<a href='http://www.byvoid.com/blog/tag/ural/' class='tag-link-342' title='7个主题' rel="tag" style='font-size: 8.4912280701754pt;'>Ural</a>
+<a href='http://www.byvoid.com/blog/tag/usaco/' class='tag-link-16' title='62个主题' rel="tag" style='font-size: 22pt;'>USACO</a>
+<a href='http://www.byvoid.com/blog/tag/windows/' class='tag-link-35' title='6个主题' rel="tag" style='font-size: 8.2456140350877pt;'>Windows</a></p><p>WP Cumulus Flash tag cloud by <a href="http://www.roytanck.com">Roy Tanck</a> requires Flash Player 9 or better.</p></div><script type="text/javascript">var widget_so5942927 = new SWFObject("http://www.byvoid.com/blog/wp-content/plugins/wp-cumulus/tagcloud.swf?r=8695237", "tagcloudflash", "220", "180", "9", "#FFFFCC");widget_so5942927.addParam("wmode", "transparent");widget_so5942927.addParam("allowScriptAccess", "always");widget_so5942927.addVariable("tcolor", "0xFFFFFF");widget_so5942927.addVariable("tcolor2", "0xFFFFFF");widget_so5942927.addVariable("hicolor", "0xFFFFFF");widget_so5942927.addVariable("tspeed", "100");widget_so5942927.addVariable("distr", "true");widget_so5942927.addVariable("mode", "tags");widget_so5942927.addVariable("tagcloud", "%3Ctags%3E%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e4%25ba%258c%25e5%2588%2586%25e5%259b%25be%2F%27+class%3D%27tag-link-132%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3E%E4%BA%8C%E5%88%86%E5%9B%BE%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e4%25bd%258d%25e8%25bf%2590%25e7%25ae%2597%2F%27+class%3D%27tag-link-18%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3E%E4%BD%8D%E8%BF%90%E7%AE%97%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e5%258a%25a8%25e6%2580%2581%25e8%25a7%2584%25e5%2588%2592%2F%27+class%3D%27tag-link-86%27+title%3D%2746%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+18.070175438596pt%3B%27%3E%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e5%258f%2591%25e7%258e%25b0%2F%27+class%3D%27tag-link-30%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3E%E5%8F%91%E7%8E%B0%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e5%2593%2588%25e5%25b8%258c%2F%27+class%3D%27tag-link-180%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3E%E5%93%88%E5%B8%8C%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e5%259b%25be%25e8%25ae%25ba%2F%27+class%3D%27tag-link-143%27+title%3D%2710%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.2280701754386pt%3B%27%3E%E5%9B%BE%E8%AE%BA%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e5%25ad%2597%25e7%25ac%25a6%25e4%25b8%25b2%2F%27+class%3D%27tag-link-145%27+title%3D%277%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.4912280701754pt%3B%27%3E%E5%AD%97%E7%AC%A6%E4%B8%B2%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e5%25bf%2583%25e6%2580%2581%2F%27+class%3D%27tag-link-34%27+title%3D%2711%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.4736842105263pt%3B%27%3E%E5%BF%83%E6%80%81%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e6%2580%259d%25e8%2580%2583%2F%27+class%3D%27tag-link-38%27+title%3D%275%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8pt%3B%27%3E%E6%80%9D%E8%80%83%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e6%2590%259c%25e7%25b4%25a2%2F%27+class%3D%27tag-link-51%27+title%3D%2718%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+11.19298245614pt%3B%27%3E%E6%90%9C%E7%B4%A2%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e6%259c%2580%25e7%259f%25ad%25e8%25b7%25af%25e5%25be%2584%2F%27+class%3D%27tag-link-314%27+title%3D%2714%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+10.210526315789pt%3B%27%3E%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e6%25a0%2591%25e5%25bd%25a2%25e5%258a%25a8%25e6%2580%2581%25e8%25a7%2584%25e5%2588%2592%2F%27+class%3D%27tag-link-361%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3E%E6%A0%91%E5%BD%A2%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e7%258c%258e%25e5%25a5%2587%2F%27+class%3D%27tag-link-31%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3E%E7%8C%8E%E5%A5%87%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e7%259c%2581%25e9%2580%2589%2F%27+class%3D%27tag-link-74%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3E%E7%9C%81%E9%80%89%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e7%259c%2581%25e9%2598%259f%25e5%259f%25b9%25e8%25ae%25ad%25e6%2597%25a5%25e5%25bf%2597%2F%27+class%3D%27tag-link-212%27+title%3D%277%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.4912280701754pt%3B%27%3E%E7%9C%81%E9%98%9F%E5%9F%B9%E8%AE%AD%E6%97%A5%E5%BF%97%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e7%25a6%25bb%25e6%2595%25a3%25e5%258c%2596%2F%27+class%3D%27tag-link-289%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3E%E7%A6%BB%E6%95%A3%E5%8C%96%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e7%25bd%2591%25e7%25bb%259c%25e6%25b5%2581%2F%27+class%3D%27tag-link-128%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3E%E7%BD%91%E7%BB%9C%E6%B5%81%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e8%25ae%25a1%25e7%25ae%2597%25e5%2587%25a0%25e4%25bd%2595%2F%27+class%3D%27tag-link-75%27+title%3D%277%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.4912280701754pt%3B%27%3E%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e8%25b5%2584%25e6%2596%2599%2F%27+class%3D%27tag-link-24%27+title%3D%2714%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+10.210526315789pt%3B%27%3E%E8%B5%84%E6%96%99%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e8%25bd%25ac%25e6%258a%2598%2F%27+class%3D%27tag-link-40%27+title%3D%2712%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.719298245614pt%3B%27%3E%E8%BD%AC%E6%8A%98%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e8%25bf%259e%25e9%2580%259a%25e5%2588%2586%25e9%2587%258f%2F%27+class%3D%27tag-link-144%27+title%3D%275%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8pt%3B%27%3E%E8%BF%9E%E9%80%9A%E5%88%86%E9%87%8F%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F%25e9%2580%2592%25e5%25bd%2592%2F%27+class%3D%27tag-link-50%27+title%3D%2711%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.4736842105263pt%3B%27%3E%E9%80%92%E5%BD%92%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F1997%2F%27+class%3D%27tag-link-400%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3E1997%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F1998%2F%27+class%3D%27tag-link-412%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3E1998%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F1999%2F%27+class%3D%27tag-link-433%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3E1999%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F2000%2F%27+class%3D%27tag-link-448%27+title%3D%277%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.4912280701754pt%3B%27%3E2000%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F2001%2F%27+class%3D%27tag-link-475%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3E2001%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2F2008%2F%27+class%3D%27tag-link-158%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3E2008%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fc%2F%27+class%3D%27tag-link-21%27+title%3D%2712%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.719298245614pt%3B%27%3EC%2B%2B%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fcogs%2F%27+class%3D%27tag-link-141%27+title%3D%279%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.9824561403509pt%3B%27%3ECOGS%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fdesign%2F%27+class%3D%27tag-link-20%27+title%3D%2713%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.9649122807018pt%3B%27%3EDesign%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fhaoi%2F%27+class%3D%27tag-link-73%27+title%3D%279%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.9824561403509pt%3B%27%3EHAOI%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Flinux%2F%27+class%3D%27tag-link-44%27+title%3D%2716%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+10.701754385965pt%3B%27%3ELinux%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fnoi%2F%27+class%3D%27tag-link-46%27+title%3D%2718%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+11.19298245614pt%3B%27%3ENOI%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fnoi2009%2F%27+class%3D%27tag-link-546%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3ENOI2009%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fnoip%2F%27+class%3D%27tag-link-14%27+title%3D%2710%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.2280701754386pt%3B%27%3ENOIP%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Foi%2F%27+class%3D%27tag-link-17%27+title%3D%2713%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.9649122807018pt%3B%27%3EOI%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fphp%2F%27+class%3D%27tag-link-15%27+title%3D%2710%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+9.2280701754386pt%3B%27%3Ephp%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fpku%2F%27+class%3D%27tag-link-551%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3Epku%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fpoi%2F%27+class%3D%27tag-link-397%27+title%3D%2734%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+15.122807017544pt%3B%27%3EPOI%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Ftreap%2F%27+class%3D%27tag-link-244%27+title%3D%277%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.4912280701754pt%3B%27%3ETreap%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fubuntu%2F%27+class%3D%27tag-link-45%27+title%3D%278%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.7368421052632pt%3B%27%3EUbuntu%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fural%2F%27+class%3D%27tag-link-342%27+title%3D%277%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.4912280701754pt%3B%27%3EUral%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fusaco%2F%27+class%3D%27tag-link-16%27+title%3D%2762%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+22pt%3B%27%3EUSACO%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.byvoid.com%2Fblog%2Ftag%2Fwindows%2F%27+class%3D%27tag-link-35%27+title%3D%276%E4%B8%AA%E4%B8%BB%E9%A2%98%27+rel%3D%22tag%22+style%3D%27font-size%3A+8.2456140350877pt%3B%27%3EWindows%3C%2Fa%3E%3C%2Ftags%3E");widget_so5942927.write("wpcumuluswidgetcontent");</script>	        </li>
+		<li id="linkcat-4" class="widget widget_links"><h2 class="widgettitle">链接分类1</h2>
+
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.chencch852.cn/" rel="friend" title="陈昶昊" target="_blank">ChenCCH852</a></li>
+<li><a href="http://feyu.blogbus.com/" rel="friend" target="_blank">gx.feyu</a></li>
+<li><a href="http://www.mengyalan.cn/" rel="friend" title="Oracle" target="_blank">Mengyalan</a></li>
+<li><a href="http://www.mathlinks.ro/Forum/weblog.php?w=881" rel="friend" target="_blank">zkw的OI实验室</a></li>
+<li><a href="http://www.zqzas.cn/" rel="friend met co-worker neighbor" title="Mahao" target="_blank">Zqzas</a></li>
+<li><a href="http://hi.baidu.com/swq27" target="_blank">漫步云端的小奇q</a></li>
+
+	</ul>
+</li>
+
+<li id="linkcat-178" class="widget widget_links"><h2 class="widgettitle">链接分类2</h2>
+
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.billwsy.com" target="_blank">BillWSY</a></li>
+<li><a href="http://www.immortalleyuan.com/blog/" target="_blank">C&#8217; est La vie</a></li>
+<li><a href="http://www.cai0715.cn" target="_blank">Cai0715 OI Blog</a></li>
+<li><a href="http://www.gccfeli.cn" target="_blank">Felicia</a></li>
+<li><a href="http://www.goleenuoer.com.cn/" rel="friend" target="_blank">goleenuoer</a></li>
+<li><a href="http://www.heavenfox.org/" target="_blank">HeavenFox</a></li>
+<li><a href="http://www.lazychild.cn/blog/" target="_blank">LRY&#8217;s Blog</a></li>
+<li><a href="http://www.matrix67.com/blog/" target="_blank">Matrix67</a></li>
+<li><a href="http://hi.baidu.com/satil" target="_blank">Satily</a></li>
+<li><a href="http://cuitianyi.com" rel="acquaintance" target="_blank">tianyi</a></li>
+<li><a href="http://wandsea.com.cn/" target="_blank">Wandsea</a></li>
+<li><a href="http://hi.baidu.com/marforever" target="_blank">Wangyin</a></li>
+<li><a href="http://www.lastland.cn/" rel="friend met co-worker colleague co-resident" target="_blank">梦里醉逍遥</a></li>
+<li><a href="http://www.zhangnan1992.cn" rel="friend" target="_blank">辩机</a></li>
+
+	</ul>
+</li>
+
+<li id="views-3" class="widget widget_views"><h2 class="widgettitle">Views</h2>
+<ul>
+<li><a href="http://www.byvoid.com/blog/string-hash-compare/"  title="各种字符串Hash函数比较">各种字符串Hash函数比较</a> - 1,403 </li><li><a href="http://www.byvoid.com/blog/noip-allsolutions/"  title="NOIP2000-2007 全部题解">NOIP2000-2007 全部题解</a> - 1,305 </li><li><a href="http://www.byvoid.com/blog/scc-tarjan/"  title="有向图强连通分量的Tarjan算法">有向图强连通分量的Tarjan算法</a> - 1,213 </li><li><a href="http://www.byvoid.com/blog/cpp-fstream/"  title="C++中fstream的用法">C++中fstream的用法</a> - 1,005 </li><li><a href="http://www.byvoid.com/blog/biconnect/"  title="图的割点、桥与双连通分支">图的割点、桥与双连通分支</a> - 919 </li><li><a href="http://www.byvoid.com/blog/hungary/"  title="匈牙利算法">匈牙利算法</a> - 880 </li><li><a href="http://www.byvoid.com/blog/noi-2008-solution/"  title="NOI 2008 解题报告">NOI 2008 解题报告</a> - 823 </li><li><a href="http://www.byvoid.com/blog/noi-2008-employee/"  title="NOI 2008 志愿者招募 employee">NOI 2008 志愿者招募 employee</a> - 800 </li><li><a href="http://www.byvoid.com/blog/match-km/"  title="二分图带权匹配 KM算法与费用流模型建立">二分图带权匹配 KM算法与费用流模型建立</a> - 795 </li><li><a href="http://www.byvoid.com/blog/cpp-string/"  title="C++ string 用法详解">C++ string 用法详解</a> - 765 </li><li><a href="http://www.byvoid.com/blog/break-firefox/"  title="破解Firefox密码管理器加密的信息">破解Firefox密码管理器加密的信息</a> - 527 </li><li><a href="http://www.byvoid.com/blog/lpf24-solution/"  title="线性规划与网络流24题 解题报告">线性规划与网络流24题 解题报告</a> - 484 </li><li><a href="http://www.byvoid.com/blog/wc2008-photo-1/"  title="NOI2008冬令营照片-1">NOI2008冬令营照片-1</a> - 482 </li><li><a href="http://www.byvoid.com/blog/noi-2008-party/"  title="NOI 2008 假面舞会 party">NOI 2008 假面舞会 party</a> - 479 </li><li><a href="http://www.byvoid.com/blog/noi-2007-day1-solution/"  title="NOI 2007 第一天 解题报告">NOI 2007 第一天 解题报告</a> - 442 </li><li><a href="http://www.byvoid.com/blog/noi-2009/"  title="NOI2009之旅">NOI2009之旅</a> - 418 </li><li><a href="http://www.byvoid.com/blog/c-string/"  title="C语言字符串函数大全">C语言字符串函数大全</a> - 402 </li><li><a href="http://www.byvoid.com/blog/treap-kth/"  title="Treap 查找第K小的数">Treap 查找第K小的数</a> - 398 </li><li><a href="http://www.byvoid.com/blog/ubuntu-710-mysql-apache-php-proftpd-seup/"  title="Ubuntu 7.10 + Mysql + Apache + PHP + ProFTPD 安装指导">Ubuntu 7.10 + Mysql + Apache + PHP + ProFTPD 安装指导</a> - 391 </li><li><a href="http://www.byvoid.com/blog/noi2008-shaoxing/"  title="NOI2008 绍兴之旅 经过 感想 及其他">NOI2008 绍兴之旅 经过 感想 及其他</a> - 380 </li><li><a href="http://www.byvoid.com/blog/haoi-2008-prob/"  title="HAOI 2008 题目第一时间发布！">HAOI 2008 题目第一时间发布！</a> - 379 </li><li><a href="http://www.byvoid.com/blog/vim-syntex/"  title="Vim 语法高亮与自动缩进">Vim 语法高亮与自动缩进</a> - 378 </li><li><a href="http://www.byvoid.com/blog/invalid-driver/"  title="解决无效驱动器的问题">解决无效驱动器的问题</a> - 369 </li><li><a href="http://www.byvoid.com/blog/lcs-suffix-array/"  title="最长公共子串问题的后缀数组解法">最长公共子串问题的后缀数组解法</a> - 362 </li><li><a href="http://www.byvoid.com/blog/noi-1999-solution/"  title="NOI 1999 解题报告">NOI 1999 解题报告</a> - 359 </li><li><a href="http://www.byvoid.com/blog/browser-kernel/"  title="几种浏览器的内核">几种浏览器的内核</a> - 355 </li><li><a href="http://www.byvoid.com/blog/noi-ssc-exp/"  title="NOI特别夏令营的总结和一些经验分享">NOI特别夏令营的总结和一些经验分享</a> - 352 </li><li><a href="http://www.byvoid.com/blog/vim-learing/"  title="学用VIM Linux下最通用的文本编辑器">学用VIM Linux下最通用的文本编辑器</a> - 350 </li><li><a href="http://www.byvoid.com/blog/noi-2008-design/"  title="NOI 2008 设计路线 design">NOI 2008 设计路线 design</a> - 346 </li><li><a href="http://www.byvoid.com/blog/ooj-setup/"  title="OOJ配置记">OOJ配置记</a> - 341 </li><li><a href="http://www.byvoid.com/blog/usaco-325-magic-squares/"  title="USACO 3.2.5 Magic Squares 魔板 msquare">USACO 3.2.5 Magic Squares 魔板 msquare</a> - 338 </li><li><a href="http://www.byvoid.com/blog/cmykrgb123-online-grading-system-screenshot/"  title="CmYkRgB123 Online Grading System 信息学在线评测系统截图">CmYkRgB123 Online Grading System 信息学在线评测系统截图</a> - 338 </li><li><a href="http://www.byvoid.com/blog/wc2008-photo-2/"  title="NOI2008冬令营照片-2">NOI2008冬令营照片-2</a> - 323 </li><li><a href="http://www.byvoid.com/blog/ctsc-apio-2009/"  title="CTSC&amp;APIO2009 收获与感想">CTSC&amp;APIO2009 收获与感想</a> - 323 </li><li><a href="http://www.byvoid.com/blog/cogs-log1/"  title="在线测评系统开发日志1">在线测评系统开发日志1</a> - 317 </li><li><a href="http://www.byvoid.com/blog/pre-noip/"  title="考前准备秘诀">考前准备秘诀</a> - 315 </li><li><a href="http://www.byvoid.com/blog/senior-high-school-grade2/"  title="正式进入高二 明天开始上课">正式进入高二 明天开始上课</a> - 315 </li><li><a href="http://www.byvoid.com/blog/cogs-plan/"  title="在线评测系统发布计划">在线评测系统发布计划</a> - 313 </li><li><a href="http://www.byvoid.com/blog/usaco-154-checker/"  title="USACO 1.5.4 Checker Challenge （N皇后问题） 位运算解法">USACO 1.5.4 Checker Challenge （N皇后问题） 位运算解法</a> - 302 </li><li><a href="http://www.byvoid.com/blog/cogs-log2/"  title="在线评测系统开发日志2">在线评测系统开发日志2</a> - 300 </li><li><a href="http://www.byvoid.com/blog/usaco-232-cow-pedigrees/"  title="USACO 2.3.2 Cow Pedigrees 奶牛家谱">USACO 2.3.2 Cow Pedigrees 奶牛家谱</a> - 297 </li><li><a href="http://www.byvoid.com/blog/cmykrgb123-online-judge-system-testing/"  title="CmYkRgB123 Online Judge System 比赛测试">CmYkRgB123 Online Judge System 比赛测试</a> - 294 </li><li><a href="http://www.byvoid.com/blog/treap/"  title="Treap">Treap</a> - 292 </li><li><a href="http://www.byvoid.com/blog/hasyzx-cut/"  title="对省实验大裁员的思考">对省实验大裁员的思考</a> - 283 </li><li><a href="http://www.byvoid.com/blog/usaco-431-buy-low-buy-lower/"  title="USACO 4.3.1 Buy Low, Buy Lower 逢低吸纳 buylow">USACO 4.3.1 Buy Low, Buy Lower 逢低吸纳 buylow</a> - 283 </li><li><a href="http://www.byvoid.com/blog/usaco-551-picture/"  title="USACO 5.5.1 Picture 矩形周长 picture">USACO 5.5.1 Picture 矩形周长 picture</a> - 272 </li><li><a href="http://www.byvoid.com/blog/2-sp-mst/"  title="次短路径与次小生成树问题的简单解法">次短路径与次小生成树问题的简单解法</a> - 270 </li><li><a href="http://www.byvoid.com/blog/usaco-522-electric-fences/"  title="USACO 5.2.2 Electric Fences 电网 fence3">USACO 5.2.2 Electric Fences 电网 fence3</a> - 264 </li><li><a href="http://www.byvoid.com/blog/noi2008-province-1/"  title="省队培训日志1">省队培训日志1</a> - 264 </li><li><a href="http://www.byvoid.com/blog/noip2007-return/"  title="NOIP归来">NOIP归来</a> - 255 </li><li><a href="http://www.byvoid.com/blog/usaco-344-raucous-rockers/"  title="USACO 3.4.4 Raucous Rockers 破锣摇滚乐队">USACO 3.4.4 Raucous Rockers 破锣摇滚乐队</a> - 254 </li><li><a href="http://www.byvoid.com/blog/qbxt-q1-solution/"  title="清北学堂比赛 Q1 解题报告">清北学堂比赛 Q1 解题报告</a> - 254 </li><li><a href="http://www.byvoid.com/blog/noi2009-iacoming/"  title="NOI2009 我来了">NOI2009 我来了</a> - 253 </li><li><a href="http://www.byvoid.com/blog/noip2008-message-costflow/"  title="NOIP2008 传纸条 费用流建模">NOIP2008 传纸条 费用流建模</a> - 252 </li><li><a href="http://www.byvoid.com/blog/haoi2008-return/"  title="省选归来">省选归来</a> - 246 </li><li><a href="http://www.byvoid.com/blog/usaco-531-milk-measuring/"  title="USACO 5.3.1 Milk Measuring 量取牛奶 milk4">USACO 5.3.1 Milk Measuring 量取牛奶 milk4</a> - 246 </li><li><a href="http://www.byvoid.com/blog/haoi2008-tmr/"  title="明天就是省选">明天就是省选</a> - 246 </li><li><a href="http://www.byvoid.com/blog/isc-clac/"  title="反演计算器">反演计算器</a> - 245 </li><li><a href="http://www.byvoid.com/blog/noi2008-province-3/"  title="省队培训日志3">省队培训日志3</a> - 243 </li><li><a href="http://www.byvoid.com/blog/noi-2001-solution/"  title="NOI 2001 解题报告">NOI 2001 解题报告</a> - 242 </li><li><a href="http://www.byvoid.com/blog/usaco-316-stamps/"  title="USACO 3.1.6 Stamps 邮票">USACO 3.1.6 Stamps 邮票</a> - 235 </li><li><a href="http://www.byvoid.com/blog/zju-2112/"  title="Dynamic Rankings 动态排名系统 (zju 2112)">Dynamic Rankings 动态排名系统 (zju 2112)</a> - 235 </li><li><a href="http://www.byvoid.com/blog/noi2008-province-6/"  title="省队培训日志6">省队培训日志6</a> - 234 </li><li><a href="http://www.byvoid.com/blog/usaco-541-canada-tour/"  title="USACO 5.4.1 Canada Tour 周游加拿大 tour">USACO 5.4.1 Canada Tour 周游加拿大 tour</a> - 228 </li><li><a href="http://www.byvoid.com/blog/php-path/"  title="PHP 计算相对路径">PHP 计算相对路径</a> - 226 </li><li><a href="http://www.byvoid.com/blog/usaco-314-shaping-regions/"  title="USACO 3.1.4 Shaping Regions 形成的区域">USACO 3.1.4 Shaping Regions 形成的区域</a> - 225 </li><li><a href="http://www.byvoid.com/blog/noip2008-twostack/"  title="NOIP2008 双栈排序 twostack 题解">NOIP2008 双栈排序 twostack 题解</a> - 225 </li><li><a href="http://www.byvoid.com/blog/usaco-545-telecowmunication/"  title="USACO 5.4.5 TeleCowmunication 奶牛的电信 telecow">USACO 5.4.5 TeleCowmunication 奶牛的电信 telecow</a> - 224 </li><li><a href="http://www.byvoid.com/blog/usaco-feb08-silver-meteor-shower/"  title="USACO FEB08 Silver Meteor Shower 流星雨">USACO FEB08 Silver Meteor Shower 流星雨</a> - 224 </li><li><a href="http://www.byvoid.com/blog/noip2008-return/"  title="NOIP2008归来">NOIP2008归来</a> - 224 </li><li><a href="http://www.byvoid.com/blog/usaco-424-cowcycles/"  title="USACO 4.2.4 Cowcycles 奶牛自行车 cowcycle">USACO 4.2.4 Cowcycles 奶牛自行车 cowcycle</a> - 217 </li><li><a href="http://www.byvoid.com/blog/usaco-mar08-gold-cow-jogging/"  title="USACO MAR08 Gold Cow Jogging 牛跑步">USACO MAR08 Gold Cow Jogging 牛跑步</a> - 216 </li><li><a href="http://www.byvoid.com/blog/usaco-552-hidden-passwords/"  title="USACO 5.5.2 Hidden Passwords 隐藏口令  hidden">USACO 5.5.2 Hidden Passwords 隐藏口令  hidden</a> - 210 </li><li><a href="http://www.byvoid.com/blog/noi-1997-solution/"  title="NOI 1997 解题报告">NOI 1997 解题报告</a> - 210 </li><li><a href="http://www.byvoid.com/blog/noi2008-province-2/"  title="省队培训日志2">省队培训日志2</a> - 209 </li><li><a href="http://www.byvoid.com/blog/usaco-jan08-silver-telephone-lines/"  title="USACO JAN08 Silver Telephone Lines 架设电话线">USACO JAN08 Silver Telephone Lines 架设电话线</a> - 208 </li><li><a href="http://www.byvoid.com/blog/high-precision-class/"  title="高精度计算对象">高精度计算对象</a> - 206 </li><li><a href="http://www.byvoid.com/blog/noi2008-province-5/"  title="省队培训日志5">省队培训日志5</a> - 204 </li><li><a href="http://www.byvoid.com/blog/usaco-231-longest-prefix/"  title="USACO 2.3.1 Longest Prefix 最长前缀">USACO 2.3.1 Longest Prefix 最长前缀</a> - 202 </li><li><a href="http://www.byvoid.com/blog/usaco-mar08-gold-pearl-pairing/"  title="USACO MAR08 Gold Pearl Pairing 珍珠分对">USACO MAR08 Gold Pearl Pairing 珍珠分对</a> - 201 </li><li><a href="http://www.byvoid.com/blog/usaco-315-contact/"  title="USACO 3.1.5 Contact 联系">USACO 3.1.5 Contact 联系</a> - 200 </li><li><a href="http://www.byvoid.com/blog/broken/"  title="电脑坏了，真爽">电脑坏了，真爽</a> - 198 </li><li><a href="http://www.byvoid.com/blog/crand/"  title="小话随机数">小话随机数</a> - 196 </li><li><a href="http://www.byvoid.com/blog/noi2008-province-4/"  title="省队培训日志4">省队培训日志4</a> - 195 </li><li><a href="http://www.byvoid.com/blog/usaco-223-runaround-numbers/"  title="USACO 2.2.3 Runaround Numbers 循环数">USACO 2.2.3 Runaround Numbers 循环数</a> - 195 </li><li><a href="http://www.byvoid.com/blog/usaco-feb07-silver-silver-lilypad-pond/"  title="USACO FEB07 Silver Silver Lilypad Pond  银色莲花池">USACO FEB07 Silver Silver Lilypad Pond  银色莲花池</a> - 193 </li><li><a href="http://www.byvoid.com/blog/no-mail/"  title="拒绝书信">拒绝书信</a> - 190 </li><li><a href="http://www.byvoid.com/blog/noi2008-province-7/"  title="省队培训日志7">省队培训日志7</a> - 189 </li><li><a href="http://www.byvoid.com/blog/pal4-experience/"  title="有感仙四">有感仙四</a> - 188 </li><li><a href="http://www.byvoid.com/blog/thinking-in-mind/"  title="冥念中的思考">冥念中的思考</a> - 187 </li><li><a href="http://www.byvoid.com/blog/usaco-544-betsys-tour/"  title="USACO 5.4.4 Betsy&rsquo;s Tour 漫游小镇 betsy">USACO 5.4.4 Betsy&rsquo;s Tour 漫游小镇 betsy</a> - 186 </li><li><a href="http://www.byvoid.com/blog/usaco-323-spinning-wheels/"  title="USACO 3.2.3 Spinning Wheels 纺车的轮子">USACO 3.2.3 Spinning Wheels 纺车的轮子</a> - 186 </li><li><a href="http://www.byvoid.com/blog/usaco-332shopping-offers/"  title="USACO 3.3.2Shopping Offers 商店购物">USACO 3.3.2Shopping Offers 商店购物</a> - 186 </li><li><a href="http://www.byvoid.com/blog/usaco-jan08-silver-cow-contest/"  title="USACO JAN08 Silver Cow Contest 奶牛的比赛">USACO JAN08 Silver Cow Contest 奶牛的比赛</a> - 186 </li><li><a href="http://www.byvoid.com/blog/folder-rename/"  title="遍历文件夹改名">遍历文件夹改名</a> - 185 </li><li><a href="http://www.byvoid.com/blog/usaco-mar07-silver-cow-traffic/"  title="USACO MAR07 Silver Cow Traffic 奶牛交通">USACO MAR07 Silver Cow Traffic 奶牛交通</a> - 185 </li><li><a href="http://www.byvoid.com/blog/haoi2008-coming/"  title="省选，即将来临">省选，即将来临</a> - 184 </li><li><a href="http://www.byvoid.com/blog/c-int64/"  title="C/C++的64位整型">C/C++的64位整型</a> - 183 </li><li><a href="http://www.byvoid.com/blog/cogs-queue/"  title="COGS 评测排队问题">COGS 评测排队问题</a> - 182 </li><li><a href="http://www.byvoid.com/blog/usaco-224-party-lamps/"  title="USACO 2.2.4 Party Lamps 派对灯">USACO 2.2.4 Party Lamps 派对灯</a> - 181 </li></ul>
+</li>
+		<li>
+			<h2>Meta</h2>
+			<ul>
+				<li><a href="http://www.byvoid.com/blog/wp-login.php?action=register">注册</a></li>				<li><a href="http://www.byvoid.com/blog/wp-login.php">登录</a></li>
+				<li><a href="http://www.nattywp.com/">Wordpress Themes</a></li>
+  <li>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+  </li>
+  <li>
+<a href="http://validator.w3.org/feed/check.cgi?url=http%3A//feeds2.feedburner.com/byvoid"><img src="http://validator.w3.org/feed/images/valid-rss.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
+</li>
+			</ul>
+		</li>
+
+
+	</ul>
+
+</div>
+
+</div>
+
+<div id="content"><a name="content"></a>
+
+<div class="post" id="post-297">
+<div class="title">
+
+<h2><a href="http://www.byvoid.com/blog/usaco-mar08-gold-cow-jogging/" rel="bookmark" title="Permanent Link to USACO MAR08 Gold Cow Jogging 牛跑步">USACO MAR08 Gold Cow Jogging 牛跑步</a></h2>
+<div class="date"><span class="author">Posted by CmYkRgB123</span> <span class="clock"> On 2008 - 九月 - 29日  09 : 49 : 47</span>
+<span class="com">  <a href="http://www.byvoid.com/blog/usaco-mar08-gold-cow-jogging/#respond" title="USACO MAR08 Gold Cow Jogging 牛跑步 上的评论">ADD COMMENTS</a> 216 views </span>
+</div>
+</div>
+
+<div class="cover">
+<div class="centry">
+					<p>这是一个K短路径问题，解决方法有Yen算法等等。但是这并不是一个一般的K短路径问题，这是一个有向无环图。所以可以考虑动态规划(记忆化搜索)的思想解决。</p>
+<p>记顶点i到目标点N的k短路径的长度为Dis[i,k]。可以知道每个顶点Dis[i,*]，都是由大于i的顶点j，Dis[j,*]推得的。由于源点和目标都是确定的，我们可以从目标节点倒推回源点。</p>
+<p>建立原图的逆向图，即从1开始到N。记从顶点1到i的当前路径的长度为S，访问顶点i邻接的顶点j，令新的到j的路径长度F为S+ (i,j)。把F加入到Dis[j]中，并只保留前K小的。然后访问顶点j。如果F大于所有Dis[j]，则不能用该路径松弛顶点j，不访问j。当全部访问完以后，按照要求输出Dis[N]即可。</p>
+<p>对于维护Dis[i]，可以使用堆、甚至平衡树等高级数据结构。但是考虑到K并不是很大，维护一个数组即可。当插入新的元素V时，如果已有的数目不足K，直接插入；如果已经为K，在这K个元素中找到最大值Max，如果V<Max，用V替换Max；如果V>=Max，不必插入。</p>
+<p>时间复杂度为O(M*K)<br />
+<span id="more-297"></span></p>
+
+<div class="wp_codebox_msgheader"><span class="right"><sup><a href="http://www.ericbess.com/ericblog/2008/03/03/wp-codebox/#examples" target="_blank" title="WP-CodeBox HowTo?"><span style="color: #99cc00">?</span></a></sup><a href="javascript:;" onclick="copycode('p297code1');">[Copy to clipboard]</a></span><span class="left"><a href="javascript:;" onclick="javascript:showCodeTxt('p297code1'); return false;">View Code</a> CPP</span><div class="codebox_clear"></div></div><div class="wp_codebox"><table width="100%" ><tr id="p2971"><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+</pre></td><td class="code" id="p297code1"><pre class="cpp" style="font-family:monospace;"><span style="color: #ff0000; font-style: italic;">/*
+ID: cmykrgb1
+PROG: cowjog
+LANG: C++
+*/</span>
+<span style="color: #339900;">#include &lt;iostream&gt;</span>
+<span style="color: #339900;">#define MAX 1001</span>
+<span style="color: #339900;">#define MAXK 101</span>
+<span style="color: #339900;">#define INF 0x7fffffff</span>
+&nbsp;
+<span style="color: #0000ff;">using</span> <span style="color: #0000ff;">namespace</span> std<span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">class</span> list
+<span style="color: #008000;">&#123;</span>
+<span style="color: #0000ff;">public</span><span style="color: #008080;">:</span>
+	list <span style="color: #000040;">*</span>next<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> p,v<span style="color: #008080;">;</span>
+	list<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> tp,<span style="color: #0000ff;">int</span> tv<span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		p<span style="color: #000080;">=</span>tp<span style="color: #008080;">;</span>
+		v<span style="color: #000080;">=</span>tv<span style="color: #008080;">;</span>
+		next<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">class</span> tadjl
+<span style="color: #008000;">&#123;</span>
+<span style="color: #0000ff;">public</span><span style="color: #008080;">:</span>
+	list <span style="color: #000040;">*</span>first,<span style="color: #000040;">*</span>last<span style="color: #008080;">;</span>
+	tadjl<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		first<span style="color: #000080;">=</span>last<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #0000ff;">void</span> ins<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> p,<span style="color: #0000ff;">int</span> v<span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>first<span style="color: #008000;">&#41;</span>
+			last<span style="color: #000080;">=</span>last<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #000080;">=</span><span style="color: #0000dd;">new</span> list<span style="color: #008000;">&#40;</span>p,v<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">else</span>
+			first<span style="color: #000080;">=</span>last<span style="color: #000080;">=</span><span style="color: #0000dd;">new</span> list<span style="color: #008000;">&#40;</span>p,v<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">class</span> monotony
+<span style="color: #008000;">&#123;</span>
+<span style="color: #0000ff;">public</span><span style="color: #008080;">:</span>
+	<span style="color: #0000ff;">int</span> Size,cnt<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">int</span> C<span style="color: #008000;">&#91;</span>MAXK<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+	monotony<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> K<span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		Size<span style="color: #000080;">=</span>K<span style="color: #008080;">;</span>
+		cnt<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #0000ff;">bool</span> ins<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> v<span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		<span style="color: #0000ff;">int</span> i,j,max<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>cnt<span style="color: #000080;">&lt;</span>Size<span style="color: #008000;">&#41;</span>
+		<span style="color: #008000;">&#123;</span>
+			C<span style="color: #008000;">&#91;</span>cnt<span style="color: #000040;">++</span><span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>v<span style="color: #008080;">;</span>
+		<span style="color: #008000;">&#125;</span>
+		<span style="color: #0000ff;">else</span>
+		<span style="color: #008000;">&#123;</span>
+			<span style="color: #0000ff;">for</span> <span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>cnt<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span>
+			<span style="color: #008000;">&#123;</span>
+				<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>C<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">&gt;</span>max<span style="color: #008000;">&#41;</span>
+				<span style="color: #008000;">&#123;</span>
+					max<span style="color: #000080;">=</span>C<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+					j<span style="color: #000080;">=</span>i<span style="color: #008080;">;</span>
+				<span style="color: #008000;">&#125;</span>
+			<span style="color: #008000;">&#125;</span>
+			<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>v<span style="color: #000080;">&gt;=</span>max<span style="color: #008000;">&#41;</span>
+				<span style="color: #0000ff;">return</span> <span style="color: #0000ff;">false</span><span style="color: #008080;">;</span>
+			C<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>v<span style="color: #008080;">;</span>
+		<span style="color: #008000;">&#125;</span>
+		<span style="color: #0000ff;">return</span> <span style="color: #0000ff;">true</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">int</span> N,M,K<span style="color: #008080;">;</span>
+tadjl adjl<span style="color: #008000;">&#91;</span>MAX<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+monotony <span style="color: #000040;">*</span>Dis<span style="color: #008000;">&#91;</span>MAX<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">void</span> init<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+	<span style="color: #0000ff;">int</span> i,a,b,v<span style="color: #008080;">;</span>
+	<span style="color: #0000dd;">freopen</span><span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;cowjog.in&quot;</span>,<span style="color: #FF0000;">&quot;r&quot;</span>,<span style="color: #0000ff;">stdin</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000dd;">freopen</span><span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;cowjog.out&quot;</span>,<span style="color: #FF0000;">&quot;w&quot;</span>,<span style="color: #0000ff;">stdout</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000dd;">cin</span> <span style="color: #000080;">&gt;&gt;</span> N <span style="color: #000080;">&gt;&gt;</span> M <span style="color: #000080;">&gt;&gt;</span> K<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">for</span> <span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;=</span>M<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		<span style="color: #0000dd;">cin</span> <span style="color: #000080;">&gt;&gt;</span> a <span style="color: #000080;">&gt;&gt;</span> b <span style="color: #000080;">&gt;&gt;</span> v<span style="color: #008080;">;</span>
+		adjl<span style="color: #008000;">&#91;</span>b<span style="color: #008000;">&#93;</span>.<span style="color: #007788;">ins</span><span style="color: #008000;">&#40;</span>a,v<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #0000ff;">for</span> <span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;=</span>N<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		Dis<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span><span style="color: #0000dd;">new</span> monotony<span style="color: #008000;">&#40;</span>K<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+	<span style="color: #0000ff;">for</span> <span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>K<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		Dis<span style="color: #008000;">&#91;</span>N<span style="color: #008000;">&#93;</span><span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>C<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000080;">=</span>INF<span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">void</span> dfs<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i,<span style="color: #0000ff;">int</span> S<span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+	<span style="color: #0000ff;">int</span> j,v,F<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">bool</span> succ<span style="color: #008080;">;</span>
+	list <span style="color: #000040;">*</span>k<span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">for</span> <span style="color: #008000;">&#40;</span>k<span style="color: #000080;">=</span>adjl<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span>.<span style="color: #007788;">first</span><span style="color: #008080;">;</span>k<span style="color: #008080;">;</span>k<span style="color: #000080;">=</span>k<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>next<span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		j<span style="color: #000080;">=</span>k<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>p<span style="color: #008080;">;</span>
+		v<span style="color: #000080;">=</span>k<span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>v<span style="color: #008080;">;</span>
+		F<span style="color: #000080;">=</span>v<span style="color: #000040;">+</span>S<span style="color: #008080;">;</span>
+		succ<span style="color: #000080;">=</span>Dis<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span><span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>ins<span style="color: #008000;">&#40;</span>F<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>succ <span style="color: #000040;">&amp;&amp;</span> j<span style="color: #000040;">!</span><span style="color: #000080;">=</span>N<span style="color: #008000;">&#41;</span>
+		<span style="color: #008000;">&#123;</span>
+			dfs<span style="color: #008000;">&#40;</span>j,F<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+		<span style="color: #008000;">&#125;</span>
+	<span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">inline</span> <span style="color: #0000ff;">int</span> cmp<span style="color: #008000;">&#40;</span><span style="color: #0000ff;">const</span> <span style="color: #0000ff;">void</span> <span style="color: #000040;">*</span>a,<span style="color: #0000ff;">const</span> <span style="color: #0000ff;">void</span> <span style="color: #000040;">*</span>b<span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+	<span style="color: #0000ff;">return</span> <span style="color: #000040;">*</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> <span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>a<span style="color: #000040;">-*</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> <span style="color: #000040;">*</span><span style="color: #008000;">&#41;</span>b<span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">void</span> print<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+	<span style="color: #0000ff;">int</span> i<span style="color: #008080;">;</span>
+	<span style="color: #0000dd;">qsort</span><span style="color: #008000;">&#40;</span>Dis<span style="color: #008000;">&#91;</span>N<span style="color: #008000;">&#93;</span><span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>C,K,<span style="color: #0000dd;">sizeof</span><span style="color: #008000;">&#40;</span>Dis<span style="color: #008000;">&#91;</span>N<span style="color: #008000;">&#93;</span><span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>C<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span>,cmp<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">for</span> <span style="color: #008000;">&#40;</span>i<span style="color: #000080;">=</span><span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>i<span style="color: #000080;">&lt;</span>K<span style="color: #008080;">;</span>i<span style="color: #000040;">++</span><span style="color: #008000;">&#41;</span>
+	<span style="color: #008000;">&#123;</span>
+		<span style="color: #0000ff;">if</span> <span style="color: #008000;">&#40;</span>Dis<span style="color: #008000;">&#91;</span>N<span style="color: #008000;">&#93;</span><span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>C<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #000040;">!</span><span style="color: #000080;">=</span>INF<span style="color: #008000;">&#41;</span>
+			<span style="color: #0000dd;">cout</span> <span style="color: #000080;">&lt;&lt;</span> Dis<span style="color: #008000;">&#91;</span>N<span style="color: #008000;">&#93;</span><span style="color: #000040;">-</span><span style="color: #000080;">&gt;</span>C<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+		<span style="color: #0000ff;">else</span>
+			<span style="color: #0000dd;">cout</span> <span style="color: #000080;">&lt;&lt;</span> <span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008080;">;</span>
+		<span style="color: #0000dd;">cout</span> <span style="color: #000080;">&lt;&lt;</span> endl<span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+<span style="color: #008000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">int</span> main<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span>
+<span style="color: #008000;">&#123;</span>
+	init<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	dfs<span style="color: #008000;">&#40;</span><span style="color: #0000dd;">1</span>,<span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	print<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+	<span style="color: #0000ff;">return</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></td></tr></table></div>
+
+<p>官方题解</p>
+<p>参考翻译</p>
+<p>翻译By BYVoid</p>
+<p>我们正在考虑的一个无环图，我们希望找到的K ≤ 100最短路径。由于图是环自然有序的顶点，动态规划是一个很好的第一种办法。</p>
+<p>假设我们知道顶点i到谷仓顶点N的K短路径，我们可以用来计算从顶点i &#8211; 1到N的K短路径。我们认为所有从顶点的i &#8211; 1 的出边。假设顶点的i &#8211; 1有d个出边，这d个出边的末端顶点都大于的i &#8211; 1，我们可以从每个这些顶点计算K短路径。</p>
+<p>考虑将要计算的顶点的i &#8211; 1至所有这些d * K条路径，顶点i &#8211; 1到N的K短路径顶将来自与这些d * K条路径。我们可以通过合并这些d列表中项目，有效地维护一个列表，存储从i-1到N的K短路径。在每一个顶点需要d * K的时间。计算所有的顶点为O(MK)时间。既然M = 10000和K = 100，这将是约1000000个操作。</p>
+<p>原文</p>
+<p>We are given an acyclic graph and we wish to find the K ≤ 100 shortest paths. Since the graph is acyclic with a natural ordering to the vertices, Dynamic Programming is a good first approach.</p>
+<p>Suppose that we knew the K shortest paths starting at each vertex i for i ≥ l and going downhill to the barn at vertex N. Then, to compute the K shortest such paths beginning at vertex i-1, we consider all outgoing edges from vertex i-1. Suppose that vertex i-1 has d outgoing edges. The ends of these d edges are all larger than i-1 and we have computed the K shortest paths from each of these. We can consider prepending vertex i-1 to all of these d*K paths. The best K paths starting at vertex i-1 will come from these d*K paths. We can efficiently compute a sorted list of the K best paths starting at vertex i-1 by merging these d lists of K items. This requires d*K time at each vertex. Summing over all vertices yields O(MK) time. With M=10,000 and K=100, this will be around 1,000,000 operations, which works.<br />
+官方程序</p>
+
+<div class="wp_codebox_msgheader"><span class="right"><sup><a href="http://www.ericbess.com/ericblog/2008/03/03/wp-codebox/#examples" target="_blank" title="WP-CodeBox HowTo?"><span style="color: #99cc00">?</span></a></sup><a href="javascript:;" onclick="copycode('p297code2');">[Copy to clipboard]</a></span><span class="left"><a href="javascript:;" onclick="javascript:showCodeTxt('p297code2'); return false;">View Code</a> CPP</span><div class="codebox_clear"></div></div><div class="wp_codebox"><table width="100%" ><tr id="p2972"><td class="line_numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+</pre></td><td class="code" id="p297code2"><pre class="cpp" style="font-family:monospace;"><span style="color: #339900;">#include &lt;stdio.h&gt;</span>
+&nbsp;
+<span style="color: #0000ff;">const</span> <span style="color: #0000ff;">int</span> BIG <span style="color: #000080;">=</span> <span style="color: #0000dd;">1000000000</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">const</span> <span style="color: #0000ff;">int</span> MAXN <span style="color: #000080;">=</span> <span style="color: #0000dd;">2000</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">const</span> <span style="color: #0000ff;">int</span> MAXE <span style="color: #000080;">=</span> <span style="color: #0000dd;">20000</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">const</span> <span style="color: #0000ff;">int</span> MAXK <span style="color: #000080;">=</span> <span style="color: #0000dd;">200</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">int</span> n,e,k<span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> ea<span style="color: #008000;">&#91;</span>MAXE<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> eb<span style="color: #008000;">&#91;</span>MAXE<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> elen<span style="color: #008000;">&#91;</span>MAXE<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> d<span style="color: #008000;">&#91;</span>MAXN<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> <span style="color: #000040;">*</span>out<span style="color: #008000;">&#91;</span>MAXN<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> <span style="color: #000040;">*</span>len<span style="color: #008000;">&#91;</span>MAXN<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+<span style="color: #0000ff;">int</span> path<span style="color: #008000;">&#91;</span>MAXN<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>MAXK<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">int</span> ei<span style="color: #008000;">&#91;</span>MAXN<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+&nbsp;
+<span style="color: #0000ff;">int</span> main<span style="color: #008000;">&#40;</span><span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+&nbsp;
+  <span style="color: #0000ff;">FILE</span> <span style="color: #000040;">*</span>fin<span style="color: #008080;">;</span>
+&nbsp;
+  fin <span style="color: #000080;">=</span> <span style="color: #0000dd;">fopen</span><span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;cowjog.in&quot;</span>, <span style="color: #FF0000;">&quot;r&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000dd;">fscanf</span><span style="color: #008000;">&#40;</span>fin, <span style="color: #FF0000;">&quot;%d %d %d&quot;</span>, <span style="color: #000040;">&amp;</span>n, <span style="color: #000040;">&amp;</span>e, <span style="color: #000040;">&amp;</span>k<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> n<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    d<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> e<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    <span style="color: #0000ff;">int</span> a,b,l<span style="color: #008080;">;</span>
+    <span style="color: #0000dd;">fscanf</span><span style="color: #008000;">&#40;</span>fin, <span style="color: #FF0000;">&quot;%d %d %d&quot;</span>, <span style="color: #000040;">&amp;</span>b, <span style="color: #000040;">&amp;</span>a, <span style="color: #000040;">&amp;</span>l<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #000040;">--</span>a<span style="color: #008080;">;</span> <span style="color: #000040;">--</span>b<span style="color: #008080;">;</span>
+    <span style="color: #000040;">++</span>d<span style="color: #008000;">&#91;</span>a<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+  <span style="color: #0000dd;">fclose</span><span style="color: #008000;">&#40;</span>fin<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+  out<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> <span style="color: #000040;">&amp;</span>eb<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+  len<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> <span style="color: #000040;">&amp;</span>elen<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">1</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> n<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    out<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> out<span style="color: #008000;">&#91;</span>i<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span> <span style="color: #000040;">+</span> d<span style="color: #008000;">&#91;</span>i<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+    len<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> len<span style="color: #008000;">&#91;</span>i<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span> <span style="color: #000040;">+</span> d<span style="color: #008000;">&#91;</span>i<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+&nbsp;
+  fin <span style="color: #000080;">=</span> <span style="color: #0000dd;">fopen</span><span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;cowjog.in&quot;</span>, <span style="color: #FF0000;">&quot;r&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000dd;">fscanf</span><span style="color: #008000;">&#40;</span>fin, <span style="color: #FF0000;">&quot;%d %d %d&quot;</span>, <span style="color: #000040;">&amp;</span>n, <span style="color: #000040;">&amp;</span>e, <span style="color: #000040;">&amp;</span>k<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> n<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    d<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> e<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    <span style="color: #0000ff;">int</span> a,b,l<span style="color: #008080;">;</span>
+    <span style="color: #0000dd;">fscanf</span><span style="color: #008000;">&#40;</span>fin, <span style="color: #FF0000;">&quot;%d %d %d&quot;</span>, <span style="color: #000040;">&amp;</span>b, <span style="color: #000040;">&amp;</span>a, <span style="color: #000040;">&amp;</span>l<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+    <span style="color: #000040;">--</span>a<span style="color: #008080;">;</span> <span style="color: #000040;">--</span>b<span style="color: #008080;">;</span>
+    out<span style="color: #008000;">&#91;</span>a<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>d<span style="color: #008000;">&#91;</span>a<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> b<span style="color: #008080;">;</span>
+    len<span style="color: #008000;">&#91;</span>a<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>d<span style="color: #008000;">&#91;</span>a<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> l<span style="color: #008080;">;</span>
+    <span style="color: #000040;">++</span>d<span style="color: #008000;">&#91;</span>a<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+  <span style="color: #0000dd;">fclose</span><span style="color: #008000;">&#40;</span>fin<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+&nbsp;
+  path<span style="color: #008000;">&#91;</span>n<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">1</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> k<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    path<span style="color: #008000;">&#91;</span>n<span style="color: #000040;">-</span><span style="color: #0000dd;">1</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> BIG<span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+&nbsp;
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> n<span style="color: #000040;">-</span><span style="color: #0000dd;">2</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&gt;=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> <span style="color: #000040;">--</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> j <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> j <span style="color: #000080;">&lt;</span> d<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span> <span style="color: #000040;">++</span>j<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+      ei<span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+    <span style="color: #008000;">&#125;</span>
+    <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> j <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> j <span style="color: #000080;">&lt;</span> k<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>j<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+      <span style="color: #0000ff;">int</span> best_m <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span>
+      <span style="color: #0000ff;">int</span> best_d <span style="color: #000080;">=</span> BIG<span style="color: #008080;">;</span>
+      <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> m <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> m <span style="color: #000080;">&lt;</span> d<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span> <span style="color: #000040;">++</span>m<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+	<span style="color: #0000ff;">if</span><span style="color: #008000;">&#40;</span>len<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>m<span style="color: #008000;">&#93;</span> <span style="color: #000040;">+</span> path<span style="color: #008000;">&#91;</span>out<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>m<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>ei<span style="color: #008000;">&#91;</span>m<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#93;</span> <span style="color: #000080;">&lt;</span> best_d<span style="color: #008000;">&#41;</span> <span style="color: #008000;">&#123;</span>
+	  best_m <span style="color: #000080;">=</span> m<span style="color: #008080;">;</span>
+	  best_d <span style="color: #000080;">=</span> len<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>m<span style="color: #008000;">&#93;</span> <span style="color: #000040;">+</span> path<span style="color: #008000;">&#91;</span>out<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>m<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>ei<span style="color: #008000;">&#91;</span>m<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+	<span style="color: #008000;">&#125;</span>
+      <span style="color: #008000;">&#125;</span>
+      path<span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>j<span style="color: #008000;">&#93;</span> <span style="color: #000080;">=</span> best_d<span style="color: #008080;">;</span>
+      <span style="color: #000040;">++</span>ei<span style="color: #008000;">&#91;</span>best_m<span style="color: #008000;">&#93;</span><span style="color: #008080;">;</span>
+    <span style="color: #008000;">&#125;</span>
+  <span style="color: #008000;">&#125;</span>
+&nbsp;
+  <span style="color: #0000ff;">FILE</span> <span style="color: #000040;">*</span>fout <span style="color: #000080;">=</span> <span style="color: #0000dd;">fopen</span><span style="color: #008000;">&#40;</span><span style="color: #FF0000;">&quot;cowjog.out&quot;</span>, <span style="color: #FF0000;">&quot;w&quot;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #0000ff;">for</span><span style="color: #008000;">&#40;</span><span style="color: #0000ff;">int</span> i <span style="color: #000080;">=</span> <span style="color: #0000dd;">0</span><span style="color: #008080;">;</span> i <span style="color: #000080;">&lt;</span> k<span style="color: #008080;">;</span> <span style="color: #000040;">++</span>i<span style="color: #008000;">&#41;</span><span style="color: #008000;">&#123;</span>
+    <span style="color: #0000dd;">fprintf</span><span style="color: #008000;">&#40;</span>fout, <span style="color: #FF0000;">&quot;%dn&quot;</span>, <span style="color: #008000;">&#40;</span>path<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span> <span style="color: #000080;">==</span> BIG<span style="color: #008000;">&#41;</span> <span style="color: #008080;">?</span> <span style="color: #000040;">-</span><span style="color: #0000dd;">1</span> <span style="color: #008080;">:</span> path<span style="color: #008000;">&#91;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#93;</span><span style="color: #008000;">&#91;</span>i<span style="color: #008000;">&#93;</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+  <span style="color: #008000;">&#125;</span>
+  <span style="color: #0000dd;">fclose</span><span style="color: #008000;">&#40;</span>fout<span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+&nbsp;
+&nbsp;
+  <span style="color: #0000ff;">return</span><span style="color: #008000;">&#40;</span><span style="color: #0000dd;">0</span><span style="color: #008000;">&#41;</span><span style="color: #008080;">;</span>
+<span style="color: #008000;">&#125;</span></pre></td></tr></table></div>
+
+<h3>你可能想看</h3><ul class="related_post"><li><a href="http://www.byvoid.com/blog/usaco-feb07-silver-silver-lilypad-pond/" title="USACO FEB07 Silver Silver Lilypad Pond  银色莲花池">USACO FEB07 Silver Silver Lilypad Pond  银色莲花池</a></li><li><a href="http://www.byvoid.com/blog/usaco-mar07-silver-cow-traffic/" title="USACO MAR07 Silver Cow Traffic 奶牛交通">USACO MAR07 Silver Cow Traffic 奶牛交通</a></li><li><a href="http://www.byvoid.com/blog/usaco-oct07-silver-obstacle-course/" title="USACO OCT07 Silver Obstacle Course 障碍训练场">USACO OCT07 Silver Obstacle Course 障碍训练场</a></li><li><a href="http://www.byvoid.com/blog/usaco-nov07-silver-milking-time/" title="USACO NOV07 Silver Milking Time 挤奶时间">USACO NOV07 Silver Milking Time 挤奶时间</a></li><li><a href="http://www.byvoid.com/blog/usaco-feb08-silver-eating-together/" title="USACO FEB08 Silver Eating Together 麻烦的聚餐">USACO FEB08 Silver Eating Together 麻烦的聚餐</a></li><li><a href="http://www.byvoid.com/blog/usaco-feb08-silver-meteor-shower/" title="USACO FEB08 Silver Meteor Shower 流星雨">USACO FEB08 Silver Meteor Shower 流星雨</a></li></ul>				
+</div>
+
+</div>
+
+<div class="postinfo">
+	<div class="category"><a href="http://www.byvoid.com/blog/cate/olympiad-informatics/" title="查看 Olympiad Informatics 的全部文章" rel="category tag">Olympiad Informatics</a>,  <a href="http://www.byvoid.com/blog/cate/slns/usaco-slns/" title="查看 USACO 的全部文章" rel="category tag">USACO</a> 
+	标签：<a href="http://www.byvoid.com/blog/tag/k%e7%9f%ad%e8%b7%af%e5%be%84/" rel="tag">K短路径</a>, <a href="http://www.byvoid.com/blog/tag/usaco/" rel="tag">USACO</a>, <a href="http://www.byvoid.com/blog/tag/%e5%8a%a8%e6%80%81%e8%a7%84%e5%88%92/" rel="tag">动态规划</a>, <a href="http://www.byvoid.com/blog/tag/%e8%ae%b0%e5%bf%86%e5%8c%96%e6%90%9c%e7%b4%a2/" rel="tag">记忆化搜索</a></div>
+</div>
+
+</div>
+
+<!-- You can start editing here. -->
+
+<div class="comments" id="comments">
+
+
+			<!-- If comments are open, but there are no comments. -->
+
+	 
+
+
+<h2 id="respond">Add A Comment</h2>
+
+
+<form action="http://www.byvoid.com/blog/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" /> <label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" /> <label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" /> <label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Post" />
+<input type="hidden" name="comment_post_ID" value="297" />
+</p>
+<p><input type="hidden" id="comment_reply_ID" name="comment_reply_ID" value="0" /><input type="hidden" id="comment_reply_dp" name="comment_reply_dp" value="0" /></p><div id="cancel_reply" style="display:none;"><a href="javascript:void(0)" onclick="movecfm(null,0,1,null);" style="color:red;">点击取消回复</a></div><script type="text/javascript">
+/* <![CDATA[ */
+var commentformid = "commentform";
+var USERINFO = false;
+var atreply = "none";
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.byvoid.com/blog/wp-content/plugins/wordpress-thread-comment/wp-thread-comment.js.php?jsver=common"></script>
+
+</form>
+
+
+
+</div>	
+</div>
+
+
+
+  <div class="clear"></div>
+		</div>		
+<div id="footer">
+	<div class="left">
+	Sunstream designed by <a href="http://www.thoughts.com" >Thoughts</a>  
+	</div>	
+	<div class="right">
+Powered by <a href="http://wordpress.org/" >wordpress</a>  
+
+<noscript><a href="http://www.51.la/?2876281" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/2876281.asp" style="border:none" /></a></noscript>
+
+<script type="text/javascript" src="http://js.tongji.linezing.com/1241242/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/1241242/tongji.gif"/></a></noscript>
+	</div>	
+</div>
+	</div>
+
+</body>
+</html>

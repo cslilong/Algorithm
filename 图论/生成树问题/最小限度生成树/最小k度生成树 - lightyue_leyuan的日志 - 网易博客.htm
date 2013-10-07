@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  	<script>
+  		if(top!=window){top.location=location.href;}
+  	
+    	var ginit_time = new Date().getTime();
+ 		var gend_time = 0;
+    </script>
+	     <title>最小k度生成树 - lightyue_leyuan的日志 - 网易博客</title>
+	<meta name="Author" content="lightyue_leyuan,lightyue_leyuan">
+	<meta name="Keywords" content="最小k度生成树,日志,lightyue_leyuan的博客,lightyue_leyuan,lightyue_leyuan,网易博客,网易,blog">
+	<meta name="Description" content="&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;解题报告：Picnic Planning&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;题目来源：poj 1639&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;解法或类型：图论 &lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;作者：胡华嵩&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;&amp;nbsp;&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;　 Picnic Planning&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;Time Limit:5S&amp;nbsp; Memory Limit:1000K&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;Total Submit:237 Accepted:37&lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;Description &lt;/P&gt;
+&lt;P style=&quot;TEXT-INDENT: 2em&quot;&gt;The Contortion Brothers are a famous set of circus clowns, known worldwide for their incredible ability to cram an unlimited number of themselves into even the smallest vehicle. During the off-season,&lt;/P&gt;,lightyue_leyuan的日志,,lightyue_leyuan的网易博客">
+    <meta http-equiv="Content-Type" content="text/html;charset=gbk"/>
+<link rel="shortcut icon" href="http://b1.bst.126.net/0902000/style/common/favicon.ico" />
+<script type="text/javascript">try{document.execCommand('BackgroundImageCache',false,true);}catch(e){}</script>
+<link type="text/css" rel="stylesheet" href="/style/css/base/src/00-htc.css"/>
+
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core1.css" />
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core2.css" />
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core3.css" />
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/base/core4.css" />
+	
+
+  <script type="text/javascript" src="http://b1.bst.126.net/0902000/style/css/fixed/fixedThemeInit.js"></script>  
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/fixed/4244/o.css" id="_$$_link_layout"/>
+<link type="text/css" rel="stylesheet" href="http://b1.bst.126.net/0902000/style/css/fixed/4244/s.css"  id="_$$_link_theme"/> 
+
+ 
+<script type="text/JavaScript">
+<!--//--><![CDATA[//><!--
+var UD = {
+     status       : 'prev',
+     themeId      :  4244,
+     hostId       :  75136077,
+     visitorId    :  0,
+     visitorIP	  :  '118.251.192.14',
+     visitorAvatar:	 '',
+     hostPath     : '/lightyue_leyuan',
+     hostName     : 'lightyue_leyuan', 
+     pageName     : 'prevBlogPerma',
+     visitorRank  : '-100',
+     visitorName  : '', 
+     hostNickname : 'lightyue_leyuan',
+     visitorNickname : '',
+     commentRank  : -100,
+     externHash   : '',
+     hasAdminCircles : 'false',
+     hostImgUrl   : 'http://ava.bimg.126.net/photo/hTkT36QM6tF2dyNb_zymDA==/225179981368633745.jpg',
+     themeFileId  : '-1252258353087',
+     serverName   : 'blog.163.com',
+     dataDigest	  : 'null',
+     lastModifyTime : '',
+     visitorUserType: [12,25,104],
+     uuid			: '1c3f0540-3910-49c4-affc-9b6ab6b88442',
+     speedTest		: 0,
+     migStat		: 0,
+     isAudit		: true
+};   
+
+if(UD.pageName == "prevHome" || UD.pageName == "editHome"){
+	var date = new Date();
+	date.setMinutes(0,0,0);
+	UD.weatherGenTime = date.getTime();
+}
+
+//--><!]]>
+</script>
+
+
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/core1.js"></script>
+<script type="text/javascript" src="http://b1.bst.126.net/0902000/js/gen/core_ext.js"></script>
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/core2.js"></script>
+<script type="text/javascript" src="http://b1.bst.126.net/0902000/js/gen/core3.js"></script>
+
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/interface.js"></script>
+
+<script type="text/javascript" src="http://b1.bst.126.net/0902000/js/gen/interface_ext.js"></script>
+
+
+<script type="text/javascript" src="http://b2.bst.126.net/0902000/js/gen/blog.js"></script>
+  </head> 
+  <body lang="zh" id="blog-163-com">   
+    <div id="tptlbr" style="display:none">&nbsp;</div>
+    <div class="bggb" id="blog-163-com-body">
+      <div class="innerlayer" id="_$$_inner_layer"><div class="g_p_none"><span class="a_a">&nbsp;</span></div>
+
+<script language="JavaScript">
+<!--//--><![CDATA[//><!--
+ 	if (NEBlog==undefined) 
+		var NEBlog={};
+		
+	
+	NEBlog.gPermalink_BlogCiters = [];
+//--><!]]>
+</script>
+
+
+<div class="g_p_none">
+  
+  <!-- 单篇日志预览-内容 -->
+  <div class="g_c_container g_p_hide " id="_$$_blog_perma" >
+  <div id="layoutType" class="mdl_new ">
+    <div class="mdl_new_main">
+       <div class="mdl_new_mainc">
+         <div>
+<!-- 单篇日志预览-菜单 -->
+         	<div style="display:block;padding-top:6px; border-bottom-width: 1px; border-bottom-style: dashed;" class="g_h_25 brd01">
+			    	<a class="g_p_block g_w_45 g_p_right g_t_right n_ n33c g_t_14 c05" id="newerBlogLink" style="display:none;"><p class="g_p_right g_w_95 g_t_hide g_c_hand g_t_12" id="newerBlogTitle">&nbsp;</p></a>
+			   		<a class="g_p_block g_w_45 g_p_left g_t_left n_ n34 g_t_14 c05" id="olderBlogLink" style="display:none;"><p class="g_w_95 g_t_hide g_c_hand g_p_left g_t_12" id="olderBlogTitle">&nbsp;</p></a>
+			    <div class="g_p_clear g_t_space">&nbsp;</div>
+			</div>	
+	        <div class="mdl_new_diray">
+		        <p class="g_p_center g_t_wrap g_t_left g_t_20 g_c_pdin c07" id="blogtitle_fks_084075083094084071082086081095083083080064082086081068" style="margin:20px auto 10px;"><span style="font-family: '微软雅黑','黑体',Arial,Helvetica,Sans-Serif;">最小k度生成树</span></p>
+			    <div class="g_p_center g_t_right g_c_pdin g_h_20 c08" style="margin-bottom: 15px;">
+			        <div class="g_p_left">
+			        	<a id="aBelongClsfks_084075083094084071082086081095083083080064082086081068" class="c05" href="#" onclick="NEBlog.gPermaLinkPage.updownMenu.openSameClass('fks_095070085084080074086085074068081087082069084081081', '默认分类');">默认分类</a>
+			        	&nbsp;&nbsp;<span class="g_t_12 c08">2008-07-14 23:20</span>
+			        	<span class="c08">&nbsp;&nbsp;阅读<nobr id="accessCount_fks_084075083094084071082086081095083083080064082086081068">17</nobr>&nbsp;&nbsp;&nbsp;评论<nobr id="comCount_fks_084075083094084071082086081095083083080064082086081068">0</nobr></span>
+			        	<span class="c08">&nbsp;</span>
+			        </div>
+			        <div>字号：
+			          <a id="bigfont" href="#" class="g_c_ul c05" onclick="NEBlog.gPermaLinkPage.updownMenu.changeFont('blogtext_fks_084075083094084071082086081095083083080064082086081068', 1);return false;" style="font-size:12px;">大</a><span class="g_t_bold c07" id="bigfont_off" style="display:none;">大</span>&nbsp;
+			          <a id="middlefont" href="#" class="g_c_ul c05" onclick="NEBlog.gPermaLinkPage.updownMenu.changeFont('blogtext_fks_084075083094084071082086081095083083080064082086081068', 2);return false;" style="font-size:12px;">中</a><span class="g_t_bold c07" id="middlefont_off" style="display:none;">中</span>&nbsp;
+			          <a id="smallfont" class="g_c_ul c05" href="#" onclick="NEBlog.gPermaLinkPage.updownMenu.changeFont('blogtext_fks_084075083094084071082086081095083083080064082086081068', 3);return false;" style="display:none;font-size:12px;">小</a><span class="g_t_bold c07" id="smallfont_off" style="display:inline;">小</span>
+			        </div>
+		   		</div>
+		   	    
+				<div class="g_blog_list">
+					<div class="g_t_center g_c_pdin g_p_center c07 content" id="blogtext_fks_084075083094084071082086081095083083080064082086081068">
+					  <div class="ns_content">
+					   <P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">解题报告：Picnic Planning</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">题目来源：poj 1639</P>
+<P style="TEXT-INDENT: 2em">解法或类型：图论 </P>
+<P style="TEXT-INDENT: 2em">作者：胡华嵩</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">　 Picnic Planning</P>
+<P style="TEXT-INDENT: 2em">Time Limit:5S&nbsp; Memory Limit:1000K</P>
+<P style="TEXT-INDENT: 2em">Total Submit:237 Accepted:37</P>
+<P style="TEXT-INDENT: 2em">Description </P>
+<P style="TEXT-INDENT: 2em">The Contortion Brothers are a famous set of circus clowns, known worldwide for their incredible ability to cram an unlimited number of themselves into even the smallest vehicle. During the off-season, the brothers like to get together for an Annual Contortionists Meeting at a local park. However, the brothers are not only tight with regard to cramped quarters, but with money as well, so they try to find the way to get everyone to the party which minimizes the number of miles put on everyone's cars (thus saving gas, wear and tear, etc.). To this end they are willing to cram themselves into as few cars as necessary to minimize the total number of miles put on all their cars together. This often results in many brothers driving to one brother's house, leaving all but one car there and piling into the remaining one. There is a constraint at the park, however: the parking lot at the picnic site can only hold a limited number of cars, so that must be factored into the overall miserly calculation. Also, due to an entrance fee to the park, once any brother's car arrives at the park it is there to stay; he will not drop off his passengers and then leave to pick up other brothers. Now for your average circus clan, solving this problem is a challenge, so it is left to you to write a program to solve their milage minimization problem.</P>
+<P style="TEXT-INDENT: 2em">Input </P>
+<P style="TEXT-INDENT: 2em">Input will consist of one problem instance. The first line will contain a single integer n indicating the number of highway connections between brothers or between brothers and the park. The next n lines will contain one connection per line, of the form name1 name2 dist, where name1 and name2 are either the names of two brothers or the word Park and a brother's name (in either order), and dist is the integer distance between them. These roads will all be 2-way roads, and dist will always be positive.The maximum number of brothers will be 20 and the maximumlength of any name will be 10 characters.Following these n lines will be one final line containing an integer s which specifies the number of cars which can fit in the parking lot of the picnic site. You may assume that there is a path from every brother's house to the park and that a solution exists for each problem instance.</P>
+<P style="TEXT-INDENT: 2em">Output </P>
+<P style="TEXT-INDENT: 2em">Output should consist of one line of the form </P>
+<P style="TEXT-INDENT: 2em">Total miles driven: xxx </P>
+<P style="TEXT-INDENT: 2em">where xxx is the total number of miles driven by all the brothers' cars.</P>
+<P style="TEXT-INDENT: 2em">Sample Input </P>
+<P style="TEXT-INDENT: 2em">10</P>
+<P style="TEXT-INDENT: 2em">Alphonzo Bernardo 32</P>
+<P style="TEXT-INDENT: 2em">Alphonzo Park 57</P>
+<P style="TEXT-INDENT: 2em">Alphonzo Eduardo 43</P>
+<P style="TEXT-INDENT: 2em">Bernardo Park 19</P>
+<P style="TEXT-INDENT: 2em">Bernardo Clemenzi 82</P>
+<P style="TEXT-INDENT: 2em">Clemenzi Park 65</P>
+<P style="TEXT-INDENT: 2em">Clemenzi Herb 90</P>
+<P style="TEXT-INDENT: 2em">Clemenzi Eduardo 109</P>
+<P style="TEXT-INDENT: 2em">Park Herb 24</P>
+<P style="TEXT-INDENT: 2em">Herb Eduardo 79</P>
+<P style="TEXT-INDENT: 2em">3</P>
+<P style="TEXT-INDENT: 2em">Sample Output </P>
+<P style="TEXT-INDENT: 2em">Total miles driven: 183</P>
+<P style="TEXT-INDENT: 2em">Source </P>
+<P style="TEXT-INDENT: 2em">East Central North America 2000</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">解题思路：最小度限制生成树</P>
+<P style="TEXT-INDENT: 2em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 先求出v1，…,vn的最小生成树T，再加上与v0相关联的边。</P>
+<P style="TEXT-INDENT: 2em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 求v0度数不超过K的最小生成树，不妨令Hi为v0的度数为i的最小生成树。则问题所求就是min{Hi,1&lt;=i&lt;=K},显然H1=T+{(0,x)},(0,x)时所有与v0关联的边中权值最小的。</P>
+<P style="TEXT-INDENT: 2em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在Hi-1上加入一条边（0，x）,得到一个环，然后再删掉环中一条不与0关联的边，设为（xa,xb）,这样就能得到一颗v0的度数为i的生成树，这样得到的生成树的权值和为cost(Hi-1)+cost(0,x)-cost(xa,xb),为了使权值最小，我们可以枚举x的值，删除时选取一条权值最大的。这样得到一颗v0的度数为i的最小生成树。</P>
+<P style="TEXT-INDENT: 2em">算法流程：</P>
+<P style="TEXT-INDENT: 2em">（1）&nbsp;&nbsp;&nbsp; 找{v1,…,vn}所有的连通块，求出每个连通块的最小生成树Ti.</P>
+<P style="TEXT-INDENT: 2em">（2）&nbsp;&nbsp;&nbsp; 在每个块中，选择v0相邻的最小边，得到Ht.&nbsp; Min&lt;-Ht,V&lt;-cost(Ht).</P>
+<P style="TEXT-INDENT: 2em">（3）&nbsp;&nbsp;&nbsp; 循环i&lt;-i+1 to k do</P>
+<P style="TEXT-INDENT: 2em">在Hi-1上选择“差额最小添删操作”，添加并删除一条边得到Hi,令v&lt;-v+cost(添边)-cost(删边),若v&lt;min,则令Min&lt;-v;如果找不到“差额最小添删操作”则Break.</P>
+<P style="TEXT-INDENT: 2em">（4）&nbsp;&nbsp;&nbsp; 输出Min.</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">&nbsp;&nbsp;&nbsp; 设不关联的顶点有一条权值无穷大（设为一个很大的值）的边，然后求出最小生成树，而不是森林，然后直接从（3）做起，前几次循环都将去掉一条无穷大的边。</P>
+<P style="TEXT-INDENT: 2em">&nbsp;&nbsp;&nbsp; 查找“差额最小添删操作”只需用dfs找出来就行了。</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">数据结构：</P>
+<P style="TEXT-INDENT: 2em">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 没什么特殊的数据结构</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">时空分析：</P>
+<P style="TEXT-INDENT: 2em">（1）&nbsp;&nbsp;&nbsp; O(n*n)</P>
+<P style="TEXT-INDENT: 2em">（2）&nbsp;&nbsp;&nbsp; 没用</P>
+<P style="TEXT-INDENT: 2em">（3）&nbsp;&nbsp;&nbsp; O(k*n*n)</P>
+<P style="TEXT-INDENT: 2em">总共O(k*n*n).</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">源程序： </P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #include &lt;iostream.h&gt;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #include &lt;algorithm&gt;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; const int INF=1000000000;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct Edge{</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int start,stop;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int weight;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #define N 30</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int nn,s,num;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int graph[N][N];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char name[30][15];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Edge mst[N];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bool find,use[30];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int get(char* s)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(int i=0;i&lt;num;i++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(strcmp(name[i],s)==0) return i;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcpy(name[num],s);</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; num++;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return num-1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int prim(){</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int result=0;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int i,j,min,vx,vy;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int weight,minweight;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(i=1;i&lt;nn-1;i++){</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mst[i].start=1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mst[i].stop=i+1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mst[i].weight=graph[1][i+1];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(i=1;i&lt;nn-1;i++){</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minweight=INF+1;min=-1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(j=i;j&lt;nn-1;j++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(mst[j].weight&lt;minweight)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minweight=mst[j].weight,min=j;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(min==-1)break;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::swap(mst[min],mst[i]);</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result+=minweight;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vx=mst[i].stop;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(j=i+1;j&lt;nn-1;j++){</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vy=mst[j].stop;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight=graph[vx][vy];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(weight&lt;mst[j].weight)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mst[j].weight=weight,mst[j].start=vx;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; void cycle(int x,int begin,int &amp;max,int last,int &amp;c)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(x==begin) </P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; find=true;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(i=0;i&lt;nn-1;i++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(mst[i].start!=x&amp;&amp;mst[i].stop!=x) continue;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(mst[i].start==x&amp;&amp;mst[i].stop!=last)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycle(mst[i].stop,begin,max,x,c);</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(find)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(max&lt;mst[i].weight&amp;&amp;mst[i].stop!=0)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max=mst[i].weight,c=i;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else if(mst[i].stop==x&amp;&amp;mst[i].start!=last)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycle(mst[i].start,begin,max,x,c);</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(find)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(max&lt;mst[i].weight&amp;&amp;mst[i].start!=0)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max=mst[i].weight,c=i;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return ;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int main()</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int n,i,x,y,j,min,temp,max,c,temp0;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char name1[15],name2[15];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cin&gt;&gt;n;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; num=1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcpy(name[0],"Park");</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(i=0;i&lt;25;i++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(j=0;j&lt;25;j++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; graph[i][j]=INF;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(i=0;i&lt;n;i++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cin&gt;&gt;name1&gt;&gt;name2;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x=get(name1);</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; y=get(name2);</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cin&gt;&gt;graph[x][y];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; graph[y][x]=graph[x][y];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nn=num;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cin&gt;&gt;s;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int r=prim();</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min=INF+1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(i=1;i&lt;nn;i++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use[i]=false;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(graph[0][i]&lt;min)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min=graph[0][i];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp=i;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use[temp]=true;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; r+=min;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mst[0].start=0;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mst[0].stop=temp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mst[0].weight=min;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(i=1;i&lt;s;i++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min=INF+1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp=-1;temp0=-1;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(j=1;j&lt;nn;j++)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(use[j]) continue;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; find=false;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max=0;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycle(j,0,max,0,c);</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(graph[0][j]-max&lt;min)</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min=graph[0][j]-max;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp=c;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp0=j;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(min&gt;=0) break;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(temp!=-1){</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mst[temp].start=0;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mst[temp].stop=temp0;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mst[temp].weight=graph[0][temp0];</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; use[j]=true;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; r+=min;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout&lt;&lt;"Total miles driven: "&lt;&lt;r&lt;&lt;endl;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 0;</P>
+<P style="TEXT-INDENT: 2em">·&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+<P style="TEXT-INDENT: 2em">&nbsp;</P>
+					  </div>
+					</div>
+				</div>
+	         </div>
+             <div class="g_tab_btn00 bdb g_t_left" id="cssTabBar_fks_084075083094084071082086081095083083080064082086081068">
+             
+						<div class="bdl" id="ShareDiv_fks_084075083094084071082086081095083083080064082086081068"><a class="c05" href="#" onclick="NEBlog.gPermaLinkPage.updownMenu.upDownCities('fks_084075083094084071082086081095083083080064082086081068','blog/751360772008614112023629.track','blog/static/751360772008614112023629');return false;" >引用(<nobr id="tbCount_fks_084075083094084071082086081095083083080064082086081068">?</nobr>)<span class="n_ n32 g_p_none">&nbsp;</span></a></div>
+						<div class="bdl" id="RecommendDiv_fks_084075083094084071082086081095083083080064082086081068"><a class="c05" href="#" onclick="NEBlog.gPermaLinkPage.recommend();return false;" >推荐(<nobr id="recommendCount_fks_084075083094084071082086081095083083080064082086081068">?</nobr>)<span class="n_ n32 g_p_none">&nbsp;</span></a></div>
+						<div class="c08 bdl bdr">评论(<nobr id="comCountMid_fks_084075083094084071082086081095083083080064082086081068">?</nobr>)</div>
+					<div class="c08 bdl bdr last">阅读(<nobr id="accessCountMid_fks_084075083094084071082086081095083083080064082086081068">?</nobr>)</div>
+
+		    	<input id="openCom_fks_084075083094084071082086081095083083080064082086081068" type="hidden" value="-1"/>
+			    <input id="openShare_fks_084075083094084071082086081095083083080064082086081068" type="hidden" value="-1"/>
+			    <input id="selectedLayout" type="hidden" value="0"/>
+			</div>
+			<div id="share_fks_084075083094084071082086081095083083080064082086081068" class="g_t_left" style="display:none;"></div>
+			<div id="com_fks_084075083094084071082086081095083083080064082086081068">
+<!-- 单篇日志预览-菜单 -->
+         	<div class="ns_links">
+         	
+			   		<p class="c05"><a class="c05" id="olderBlogLinkBottom" style="display:none;">上一篇：<span id="olderBlogTitleBottom">&nbsp;</span></a>
+			    <div class="g_p_clear g_t_space">&nbsp;</div>
+			    	<p class="c05"><a class="c05" id="newerBlogLinkBottom" style="display:none;">下一篇：<span id="newerBlogTitleBottom">&nbsp;</span></a>
+			</div>
+				<div id="blogReader_fks_084075083094084071082086081095083083080064082086081068"></div>
+				<div class="g_p_relative g_h_1"  style="display: block;">
+	                <div class="ns_mtt c08 brd01" id="ComDiv_fks_084075083094084071082086081095083083080064082086081068">评论</div>
+	    			<div id="comShow_fks_084075083094084071082086081095083083080064082086081068"></div>
+	  				<div id="comPub_fks_084075083094084071082086081095083083080064082086081068" class="g_h_1"></div>	
+	  			 </div>
+  			 </div>
+          </div>
+          
+       </div>
+	</div>
+	<div class="mdl_new_side brd01">
+		<div id="aboutMeBasic"></div>
+	    <div id="recentBlogs"></div>
+		<div id="postsense"></div>
+     </div>
+
+   <div class="g_p_clear g_t_space">&nbsp;</div>
+   </div>    
+ </div>
+</div>
+
+<!-- 生成模块脚本 -->
+<script language="JavaScript">
+	function initPage(){
+    	var _$$_blog_perma = new netease.ui.module.Module("日志",null,$("_$$_blog_perma"),null,"",{parent:"_$$_module_container_center"});
+	}
+</script>
+</div>
+<div class="wsy topbar" id="_$$_TopBar">
+	<div class="g_menu_llk sep">
+      <span id="sysmsgs" style="display:none;">
+      	<div class="g_hom_sys">
+			<div class="icn_arrow">&nbsp;</div>
+			<div id="sysmsgsContent" class="g_hom_sys_cnt"></div>
+			<a class="a-close" onclick="closeSysMsg();return false;">关闭</a>
+		</div>
+	  </span>
+      <ul class="fl topbar2">
+	      <li class="noline"><a href="http://www.163.com/?frompersonalbloghome" target="_blank">网易首页</a></li>
+	      <li class="chose"><a id="$_topbarItmes" class="arrow" href="javascript:void(0);" onClick="toggleBlogItems(event);">网易博客</a>
+	        <ol class="ch-list" id="blog_items" style="display:none" onClick="stopBubble(event);">
+	          <li><a href="http://blog.163.com/?frompersonalbloghome" target="_blank">博客首页</a></li>
+	          <li><a href="http://pp.blog.163.com/?frompersonalbloghome" target="_blank">博客拍拍</a></li>
+	          <li><a href="http://blog.163.com/public/theme/?frompersonalbloghome" target="_blank">精美风格</a></li>
+	          <li><a href="http://q.163.com/#home?frompersonalbloghome" target="_blank">博客圈子</a></li>
+	          <li><a href="http://huodong.163.com/?frompersonalbloghome" target="_blank">博客活动</a></li>
+	          	<li><a href="http://my.163.com/?frompersonalbloghome" target="_blank">娱乐中心</a></li>
+	          <li><div class="line brd01"></div></li>
+	          <li><a href="http://blog.163.com/findFriend.do?type=5?frompersonalbloghome" target="_blank">找 朋 友</a></li>
+	          <li><a href="http://blog.163.com/clone/clone.html?frompersonalbloghome" target="_blank">博客复制</a></li>
+	          <li><a href="http://blog.163.com/services/wapblog.html?frompersonalbloghome" target="_blank">手机博客</a></li>
+	          <li><a href="http://blog.163.com/services/emsblog.html?frompersonalbloghome" target="_blank">短信写博</a></li>
+	          <li><div class="line brd01"></div></li>
+	          <li style="background-image: none;"><a href="http://blog.163.com/services/all.html?frompersonalbloghome">更多&gt;&gt;</a></li>
+	        </ol>
+	      </li>
+      </ul>
+      <form id="rmndtplfm" method="get" action="/search"><input class="bd01" type="text" name="q" disabled="true" value="" id="rmndtplin"/><input type="hidden" name="t" value="blog"/>
+      <a class="bd01" id="rmndtplsr" href="http://blog.163.com/search?frompersonalsearch" target="_blank">搜 索</a></form>
+	</div>
+    <div class="g_menu_rlk sep" id="_$$_TopBarRight">
+    
+    </div>
+</div>
+      <div class="bgtt wsy">
+<div class="bg10 wsy" id="_$$_Top_Outer">
+  <div class="bg11 ht wkg" id="_$$_Top_Inner">
+    <div class="flash ht" id="_$$_Top_Flash"></div>
+    <div class="logo" onclick="window.location.href='http://blog.163.com/login.html';return false;">&nbsp;</div>
+    <div class="title" id="_$$_Top_Title">
+    </div>
+  </div>
+</div>
+<div class="bg20 wsy">
+  <div class="bg21 hn c02 wkg advnav">
+    <div class="wnl hn">&nbsp;</div>
+    <div class="wnr hn">&nbsp;</div>
+    <div class="wnc hn" style="position:relative; z-index:100;">
+      <div class="hn g_menu_nv">
+        <div class="hn item ">
+          <a hidefocus="true" href="http://blog.163.com/lightyue_leyuan/" onclick="">首页</a>
+        </div>
+        <div class="hn item seltag">
+          <a hidefocus="true" href="http://blog.163.com/lightyue_leyuan/blog/" onclick="">日志</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://blog.163.com/lightyue_leyuan/album/" onclick="">相册</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://blog.163.com/lightyue_leyuan/music/" onclick="">音乐</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://blog.163.com/lightyue_leyuan/collection/" onclick="">收藏</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://blog.163.com/lightyue_leyuan/friends/" onclick="">博友</a>
+        </div>
+        <div class="hn item ">
+          <a hidefocus="true" href="http://blog.163.com/lightyue_leyuan/profile/" onclick="">关于我</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bgtf wsy"><div class="bgtf_ hz wkg"><div class="wzl hz">&nbsp;</div><div class="wzr hz">&nbsp;</div><div class="wzc hz">&nbsp;</div></div></div>
+<div class="bgmt wsy"><div class="bgmt_ hy wkg"><div class="wyl hy">&nbsp;</div><div class="wyr hy">&nbsp;</div><div class="wyc hy">&nbsp;</div></div></div>
+<div class="bg40 wsy">
+  <div class="bg41 wkg g_p_hide" id="_$$_module_container">
+	  <div class="wml bgml g_p_fill">&nbsp;</div>
+	  <div class="wmr bgmr g_p_fill">&nbsp;</div>
+	  <div class="wml mtl">&nbsp;</div><div class="wml mbl">&nbsp;</div>
+	  <div class="wmr mtr">&nbsp;</div><div class="wmr mbr">&nbsp;</div>
+	  <div class="wmc"><div id="layout_ctrl" class="css_inr_1 innerLayout">
+	    <div class="wql hm" id="_$$_module_container_left" index="0"></div>
+	    <div class="wqc hm" index="1">
+<!-- 封禁的提示 -->
+<div id="_$_prohibit_user_content" style="display:none;border:1px solid #AAAAAA;background-color:#FFFFDC;margin:10px 10px 10px 150px;height:60px;width:610px;">
+		<div style="text-align:left;margin:10px 0px 0px 10px">
+		<img src="http://blog.163.com/style/common/exclamation.gif" style="margin:0px 10px 0px 20px;float:left"/>
+		<span style="color:#575757;line-height:20px;">很抱歉，因为您在网易相册发布了违规信息，账号被屏蔽。被屏蔽期间他人无法访问您的相册。<br>
+			去<a style="color:#0000FF;line-height:20px;text-decoration:underline;" target="_blank" href="http://help.163.com/07/0129/11/360I4UJQ007525K2.html">帮助中心</a>，了解如何重新恢复服务。</span></div>
+</div>		    <div id="_$$_module_container_center"></div>
+	    </div>
+	    <div class="wqr hm" id="_$$_module_container_right" index="2"></div>
+	    <div class="g_p_clear">&nbsp;</div>
+	  </div></div>
+  </div>        
+</div>
+<div class="bgmf wsy"><div class="bgmf_ hx wkg"><div class="wxl hx">&nbsp;</div><div class="wxr hx">&nbsp;</div><div class="wxc hx">&nbsp;</div></div></div>
+<div class="bg50 wsy">
+  <div class="bg51 hf wkg c10">
+    <div class="g_menu_bt fmgtp">
+      <a target="_blank" href="http://corp.163.com/index_gb.html">公司简介</a><span>-</span>
+      <a target="_blank" href="http://gb.corp.163.com/gb/contactus.html">联系方法</a><span>-</span>
+      <a target="_blank" href="http://corp.163.com/gb/job/job.html">招聘信息</a><span>-</span>
+      <a target="_blank" href="http://help.163.com/?b13abk1">客户服务</a><span>-</span>
+      <a target="_blank" href="http://corp.163.com/gb/legal/legal.html">相关法律</a><span>-</span>
+      <a href="http://jz.163.com" >互动营销</a><span>-</span>
+      	  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://blog.163.com/lightyue_leyuan/rss/">
+	      <a target="_blank" href="http://blog.163.com/lightyue_leyuan/rss/" class="p_ p0">&nbsp;</a>
+    </div>
+    <div>网易公司版权所有 &copy;1997-2009</div>
+  </div>
+</div>
+      </div>
+    </div>
+    <div id="_$$_outer_layer"></div>
+    <div class="g_p_none">
+	  <input type="hidden" id="$_oppoPageUrlForLogin" value="/lightyue_leyuan/blog/static/751360772008614112023629/edit/"/>
+    </div>
+  <script language="JavaScript">     
+  	function initUD(){
+       UD.body=$("_$$_inner_layer");
+       UD.layer=$("_$$_outer_layer");
+       UD.window=$("blog-163-com-body");
+       UD.bar=$("theme_selector_pointer");
+     }
+  </script>
+   
+<script language="JavaScript">
+// <![CDATA[
+     var g_urlPrefix="";
+     function g_initCommon(){
+         var _arr = ["rmdtpxt","rmdtplgn"];
+         for (var i=_arr.length-1;i>=0;i--){
+              _o = $(_arr[i]);
+              if(i==0)_o && (_o.onclick=function(){exitAfterLogged();return false;});
+              else if(i==1)_o && (_o.onclick=function(){showLoginDlg('blog.163.com');return false;});
+         }
+         topFromUrsLogin();
+     } 
+	function g_initUtil(){
+		TopSearch.init();
+	}
+// ]]>
+</script>
+
+<style type="text/css">
+<!--/*--><![CDATA[/*><!--*/
+#messageZone {top:0px; right:20px; background:#ffffae; width:100px; position:fixed!important;
+	position:absolute;font-family: Arial,Helvetica,sans-serif; padding:4px;font-size:12px;}
+/*]]>*/-->
+</style>
+
+<script type='text/javascript' src='http://b.bst.126.net/js/utils/InfoAlertPad.js'></script>
+ 
+  
+  <script language="javascript">  
+  function initAll(){
+  	try{  		
+  		initUD();
+  		g_initCommon();
+  		initFlash(1);  		
+		  showPageTopBar({serverName:'blog.163.com',serverHostName:'blog.163.com'});
+		initPage();
+  		window.setTimeout("g_initUtil();",3000);
+  		
+  		//顶部博客子菜单的显示
+  		Event.observe(document.body,'click',hideBlogItems);
+  		
+  		//主题风格需要做的事情
+  		if(typeof _$$_initFixedTheme == 'function'){
+  			_$$_initFixedTheme(4244);
+  		}
+ 	 }catch(e){}
+  }
+  initAll();
+  </script>
+ 
+
+	<script language="JavaScript">
+			function onVisitorInfoLoad(_p){	
+				var _s = $('visitorInfoJs').readyState;
+				if (_p && _s!='loaded'&&_s!='complete') return;
+				
+				gLoadPermaLink(1, 'prev', 'fks_084075083094084071082086081095083083080064082086081068', 20, -100, 
+					'最小k度生成树', 'blog/static/751360772008614112023629', '751360772008614112023629', 'http://q.163.com', 
+					0, 1,	'off', '0'
+);
+					
+				topFromUrsLogin();
+			}		
+		  			  			  	
+	  		var ver = new Date().getTime();
+	  		var setNone163Cookie = getUrlParam("setNone163Cookie");
+	  		var setCookieStr = ""
+	  		if(setNone163Cookie)
+	  		   setCookieStr = "&setNone163Cookie="+setNone163Cookie;
+	  		document.write('<script type="text/javascript" onreadystatechange="onVisitorInfoLoad(true);" onload="onVisitorInfoLoad();" id="visitorInfoJs" src="http://blog.163.com/js/static/visitorInfo.js?host=lightyue_leyuan&mode=prev&channel=blog&blogId=fks_084075083094084071082086081095083083080064082086081068&pubTime=1216048823629&v=' + ver + setCookieStr+'"></'+'script>');
+  	</script>
+		
+  
+  </body>
+</html>

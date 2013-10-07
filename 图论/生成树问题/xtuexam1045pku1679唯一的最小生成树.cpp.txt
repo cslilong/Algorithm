@@ -1,0 +1,118 @@
+#include<iostream>
+using namespace std;
+int cases,n,e;
+int pre[1001];
+int dis[1001];
+bool use[1001];
+int que[1001];
+int least[1001];
+struct Edge
+{
+       int to,cost,next;
+}edge[100000];
+int main()
+{
+    scanf("%d",&cases);
+    while(cases--)
+    {
+        scanf("%d%d",&n,&e);
+        int a,b,c;
+        memset(least,-1,sizeof(least));
+        memset(pre,-1,sizeof(pre));
+        int eid=1;
+        for(int i=1;i<=e;i++)
+        {
+                scanf("%d%d%d",&a,&b,&c);
+                edge[eid].to=b;
+                edge[eid].cost=c;
+                edge[eid].next=pre[a];
+                pre[a]=eid;
+                eid++;
+                edge[eid].to=a;
+                edge[eid].cost=c;
+                edge[eid].next=pre[b];
+                pre[b]=eid;
+                eid++;
+        }
+        fill(&dis[0],&dis[n+1],1000000);
+        memset(use,0,sizeof(use));
+        int m=0;
+        dis[1]=0;
+        int num=0;
+        bool judge=false;
+        int res=0;
+        while(m<n)
+        {
+            int temp=1000000,p;
+            for(int i=1;i<=n;i++)
+            if(!use[i]&&dis[i]<temp)
+            {
+                num=1;
+                temp=dis[i];
+                p=i;
+            }
+            else if(!use[i]&&dis[i]==temp)
+            {
+                 que[num++]=i;
+            }
+            res+=temp;
+            int q=pre[p];
+            bool init=false;
+            while(q!=-1)
+            {
+                if(use[edge[q].to]&&edge[q].cost==temp)
+                {
+                     if(init)
+                     {
+                             judge=true;
+                             break;
+                     }
+                     else
+                     init=true;
+                }
+                q=edge[q].next;
+            }
+            if(judge)
+            break;
+            if(least[p]!=-1&&least[p]!=temp)
+            {
+               judge=true;
+               break;
+            }
+            if(judge)
+            break;
+            least[p]=temp;
+            use[p]=true;
+            q=pre[p];
+            while(q!=-1)
+            {
+                 if(!use[edge[q].to]&&dis[edge[q].to]>edge[q].cost)
+                 dis[edge[q].to]=edge[q].cost;
+                 q=edge[q].next;
+            }
+            if(num!=1)
+            {
+                for(int i=1;i<num;i++)
+                if(dis[que[i]]!=temp)
+                {
+                    judge=true;
+                    break;
+                }
+                else if(least[que[i]]!=-1&&least[que[i]]!=temp)
+                {
+                     judge=true;
+                     break;
+                }
+                else
+                least[que[i]]=temp;
+            }
+            if(judge)
+            break;
+            m++;
+        }
+        if(judge)
+        printf("Not Unique\n");
+        else
+        printf("%d\n",res);
+    }
+} 

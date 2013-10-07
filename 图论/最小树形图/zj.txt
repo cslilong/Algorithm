@@ -1,0 +1,34 @@
+http://acm.tju.edu.cn/toj/showp2248.html
+
+http://acm.pku.edu.cn/JudgeOnline/problem?id=3164
+
+http://uva.onlinejudge.org/
+
+http://acm.hdu.edu.cn/showproblem.php?pid=2121
+
+http://blog.csdn.net/huangwei1024/archive/2007/09/15/1786608.aspx
+
+有固定根的最小树形图求法O(VE)：
+首先消除自环，显然自环不在最小树形图中。然后判定是否存在最小树形图，以根为起点DFS一遍即可。
+之后进行以下步骤。
+设cost为最小树形图总权值。
+0.置cost=0。
+1.求最短弧集合Ao （一条弧就是一条有向边）
+除源点外，为所有其他节点Vi，找到一条以Vi为终点的边，把它加入到集合Ao中。
+（加边的方法：所有点到Vi的边中权值最小的边即为该加入的边，记prev[vi]为该边的起点，mincost[vi]为该边的权值）
+2.检查Ao中的边是否会形成有向圈，有则到步骤3，无则到步骤4。
+（判断方法：利用prev数组，枚举为检查过的点作为搜索的起点，做类似DFS的操作）
+3.将有向环缩成一个点。
+假设环中的点有（Vk1，Vk2，… ，Vki）总共i个，用缩成的点叫Vk替代，则在压缩后的图中，其他所有不在环中点v到Vk的距离定义如下：
+gh[v][Vk]=min { gh[v][Vkj]-mincost[Vkj] } (1<=j<=i)而Vk到v的距离为
+gh[Vk][v]=min { gh[Vkj][v] }              (1<=j<=i)
+同时注意更新prev[v]的值，即if(prev[v]==Vkj) prev[v]=Vk
+另外cost=cost+mincost[Vkj] (1<=j<=i)
+到步骤1.
+4.cost加上Ao的权值和即为最小树形图总权值。
+如要输出最小树形图较烦，没实现过。
+找环O(V)，收缩O(E)，总复杂度O(VE)。
+那幅对我有莫大帮助的流程图如下，
+对于不固定根的最小树形图，wy教主有一巧妙方法。摘录如下：
+新加一个点，和每个点连权相同的边，这个权大于原图所有边权的和，这样这个图固定跟的最小树形图和原图不固定跟的最小树形图就是对应的了。
+

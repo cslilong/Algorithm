@@ -1,0 +1,68 @@
+Dijkstra 与 Bellman Ford
+复制内容到剪贴板C/C++代码:
+#include <stdio.h>
+#include <stdlib.h>
+#define INF 1000000000
+#define MAXV 200
+
+typedef struct Graph{
+    int n;
+    int w[MAXV][MAXV];
+};    
+
+int d[MAXV];
+int pre[MAXV];
+
+void init_single_source(Graph *G,int s) {
+    for (int i=0;i<G->n;i++) {
+        d[i]=INF;
+        pre[i]=-1;
+    }
+    d[s]=0;
+}
+
+void relax(int u,int v,Graph *G) {
+    if (d[v]>d[u]+G->w[u][v]) {
+        d[v]=d[u]+G->w[u][v];
+        pre[v]=u;
+    }
+}
+
+int dijkstra(Graph *G,int s) {
+    init_single_source(G,s);
+    int S[MAXV],i,j,u,min;
+    for (i=0;i<G->n;i++) S[i]=0;
+    for (i=0;i<G->n;i++) {
+        min=INF;
+        u=-1;
+        for (j=0;j<G->n;j++) if (S[j]==0 && d[j]<min) {
+            u=j;
+            min=d[j];
+        }
+        S[u]=-1;
+        for (j=0;j<G->n;j++) if (S[j]==0) relax(u,j,G);
+     }
+}
+
+int bellman_ford(Graph *G,int s) {
+    init_single_source(G,s);
+    int i,j,u,v;
+    for (i=0;i<G->n-1;i++) for (u=0;u<G->n;u++) for (v=0;v<G->n;v++) if (G->w[u][v]!=INF) relax(u,v,G);
+    for (u=0;u<G->n;u++) for (v=0;v<G->n;v++) if (G->w[u][v]!=INF) if (d[v]>d[u]+G->w[u][v]) return 0;
+    return 1;
+}
+               
+int main() {
+    int n,i,j,flag;
+    Graph *G=(Graph *)malloc(sizeof(Graph));
+    while (scanf("%d",&n)==1) {
+        G->n=n;
+        for (i=0;i<n;i++) for(j=0;j<n;j++) scanf("%d",&G->w[i][j]);
+//        dijkstra(G,0);
+        flag=bellman_ford(G,0);  
+        for (i=0;i<n;i++) printf("%d ",d[i]);
+        printf("\n");
+        printf("%d\n",flag);
+    }
+    return 0;
+}

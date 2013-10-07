@@ -1,0 +1,88 @@
+/*
+无向图的欧拉回路（有向图基本上一样）
+回溯找欧拉回路
+对于规模比较大的图，可以采用并差集判断连通性
+题目：USACO Training Page 3.3.1 Riding The Fences
+	  pku 2513 http://acm.pku.edu.cn/JudgeOnline/problem?id=2513 Trie+并差集判断欧拉路径的存在性
+*/
+#include <stdio.h>
+#include <string.h>
+
+const  int MAXN = 500+5;
+//N个点，M条边，1为最小节点 
+int  N, M;
+int  g[MAXN][MAXN], du[MAXN];
+//保存最后的路径，逆序输出字典序最小 
+int  path[MAXN], plen;
+//初始化图和degree 
+void  Init()
+{
+	memset(du, 0, sizeof(du));
+	memset(g, 0, sizeof(g));
+}
+//判断欧拉路径是否存在 
+bool  EulerTour()
+{
+	int  i, j;
+	//度数都为偶数，欧拉回路；有两个点为奇数 欧拉路径 
+	for(i = 1, j = 0; i <= N && j <= 2; i++)
+		if(du[i]%2 == 1) j++;
+	if(j != 0 && j != 2) return 0;
+	//判断连通性, BFS
+	int  rear = 1, que[MAXN];
+	bool  used[MAXN];
+	memset(used, 0, sizeof(used));
+	que[0] = 1; used[1] = true; 
+	for(i = 0; i < rear; i++)
+		for(j = 1; j <= N; j++) 
+			if(!used[j] && g[que[i]][j])
+			{
+				used[j] = 1;
+				que[rear++] = j;
+			}
+	return  rear == N;
+}
+
+void  Tour(int  t)
+{
+	int  i;
+	for(i = 1; i <= N; i++)
+		if(g[t][i] > 0)
+		{
+			g[t][i]--; g[i][t]--;
+			Tour(i);
+		}
+	path[plen++] = t;
+}
+//t为欧拉路径的起点 
+void  Show_Euler(int  t) 
+{
+	int  i;
+	plen = 0;
+	Tour(t);
+	for(i = plen-1; i >= 0; i--)
+		printf("%d\n", path[i]);		
+}
+int  main()
+{
+	int  i, j, k;
+	while(scanf("%d %d", &N, &M) != EOF)
+	{
+		Init();		
+		for(i = 0; i < M; i++)
+		{
+			scanf("%d %d", &j, &k);
+			g[j][k]++; g[k][j]++;
+			du[j]++; du[k]++;
+		} 
+		if(!EulerTour())puts("No Euler Path Exit");
+		else
+		{
+			for(i = 1; i <= N; i++)
+				if(du[i]%2 == 1) break;
+			if(i >= N+1)  Show_Euler(1);
+			else  Show_Euler(i);
+		}
+	}
+	return 0;
+}

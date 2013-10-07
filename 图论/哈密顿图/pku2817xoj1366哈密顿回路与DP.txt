@@ -1,0 +1,93 @@
+#include <cstdio>
+#include <cmath>
+#include <cstring>
+
+char word[11][15];
+int mm[11][11];
+int len[11];
+int n;
+int dp[2000][11];
+
+void Cal( int a, int b ) //word[a]和word[b]有多少公共字母，存在mm[a][b]里,test OK
+{
+     int i,j,result,max = 0;
+     for (  i = 0; i < len[a]; ++i )
+     {
+         int result = 0;
+         for ( j = 0; j < len[b]; ++j )
+         {
+             if ( i+j<len[a] && word[a][i+j] == word[b][j] ) ++result;
+         }        
+        if(max<result) max=result;
+     }
+     for ( i = 1; i < len[b]; ++i )
+     {
+         result = 0; 
+         for (  j = 0; j < len[a]; ++j )
+         {
+             if ( i+j<len[b] && word[b][i+j] == word[a][j] ) ++result;
+         }        
+        if(max<result) max=result;
+     }
+     mm[a][b] = mm[b][a] = max;
+}
+
+int Fun( int state, int last )
+{
+    int max = 0;
+    int state_t = state;
+    state_t &= (~(1<<(last-1)));
+    if ( state_t == 0 ) return 0;
+    if ( dp[state][last] ) return dp[state][last];
+    
+    for ( int i = 0 ; i < n; ++i )
+    {
+        int result = 0;
+        int tmp = state_t&(~(1<<i));
+        if ( tmp != state_t ) result = Fun( state_t, i+1 )+mm[i+1][last];
+        if(max<result) max=result;
+    }
+    
+    dp[state][last] = max;
+    return max;
+}
+
+int main()
+{
+    int i,j;
+    while ( scanf( "%d", &n ), n>0 ) 
+    {
+          int max = 0;
+          int power = (int)pow( 2, n );
+          
+          for ( i = 0; i < power; ++i )
+          {
+              for ( j = 0; j <= n; ++j )
+              {
+                  dp[i][j] = 0;
+              }
+          }
+          
+          for ( i = 1; i <= n; ++i )
+          {
+              scanf( "%s", word[i] );
+              len[i] = strlen( word[i] );
+          }
+          
+          for (  i = 1; i <= n; ++i )
+          {
+              for ( j = i+1; j <= n; ++j )
+              {
+                  Cal( i, j ); //Cal函数算word两两之间的最大公共字母数存到mm里 
+              }
+          }
+          
+          for ( i = 1; i <= n; ++i ) 
+          {
+              int tt = Fun( power-1, i );//Fun函数用来求dp[][]的值，也就是全部单词都放满，最后一行是i的情况下总的最大公共字母数 
+              if(max<tt) max=tt;
+          }
+          printf( "%d\n", max );
+    }
+    return 0;
+}

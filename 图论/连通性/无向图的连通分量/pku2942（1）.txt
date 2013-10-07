@@ -1,0 +1,125 @@
+#include <iostream>
+#include <stack>
+#include <algorithm>
+using namespace std;
+
+#define MAXN 1001
+#define min(a,b) (a<b?a:b)
+
+typedef pair<int,int> PAIR;
+
+int p[MAXN],ecnt,n,m,dfn[MAXN],lowlink[MAXN],sign,st,color[MAXN];
+bool hate[MAXN][MAXN],mark[MAXN],ans[MAXN];
+stack<PAIR> sta;
+
+struct Edge{
+    int v,next;
+}edg[MAXN*MAXN];
+
+
+void init(){
+    ecnt=0;
+    memset(p,-1,sizeof(p));
+    memset(dfn,-1,sizeof(dfn));
+    memset(hate,false,sizeof(hate));
+    sign=0;
+    while(!sta.empty())
+        sta.pop();
+    memset(ans,false,sizeof(ans));
+}
+
+bool check_odd(int u,int col){//检查该子块是否为二分图
+    int i,v;
+    color[u]=col;
+    for(i=p[u];i!=-1;i=edg[i].next){
+        v=edg[i].v;
+        if(mark[v]){
+            if(color[v]==0){
+                if(check_odd(v,-col))
+                    return true;
+            }
+            else if(col==color[v])
+                return true;
+        }
+    }
+    return false;
+}
+
+
+void dfs(int pre,int u){
+    int i,j,v,x,y;
+    PAIR P;
+    dfn[u]=lowlink[u]=++sign;
+    for(i=p[u];i!=-1;i=edg[i].next){
+        v=edg[i].v;
+        if(v!=pre && dfn[u]>dfn[v]){//边u-v未访问过
+            sta.push(make_pair(u,v));
+        }
+        if(dfn[v]==-1){//顶点v未访问过
+            dfs(u,v);
+            lowlink[u]=min(lowlink[u],lowlink[v]);
+            if(dfn[u]<=lowlink[v]){//u是割点，找到一个重连通分量
+                memset(mark,false,sizeof(mark));
+                st=u;
+                    
+                do{
+                    P=sta.top();
+                    x=P.first;
+                    y=P.second;
+                    sta.pop();
+                    mark[x]=mark[y]=true;
+                }while(!( (x==u && y==v) || (x==v && y==u) ));
+
+                memset(color,0,sizeof(color));
+                if(check_odd(st,1)){
+                    for(j=1;j<=n;j++)
+                        ans[j]|=mark[j];
+                }
+            }
+        }
+        else if(v!=pre){
+            lowlink[u]=min(lowlink[u],dfn[v]);
+        }
+    }
+}
+
+int solve(){
+    int i,anscnt=0;
+    for(i=1;i<=n;i++){
+        if(dfn[i]==-1){
+            dfs(-1,i);
+        }
+    }
+    for(i=1;i<=n;i++)
+        if(ans[i])
+            anscnt++;
+    return n-anscnt;
+}
+
+
+int main(){
+    int i,u,v;
+    while(scanf("%d%d",&n,&m) && n && m){
+        init();
+        for(i=0;i<m;i++){
+            scanf("%d%d",&u,&v);
+            hate[u][v]=hate[v][u]=true;
+        }
+        for(u=1;u<=n;u++){
+            for(v=u+1;v<=n;v++){
+                if(!hate[u][v]){
+                     edg[ecnt].v=v;
+                     edg[ecnt].next=p[u];
+                     p[u]=ecnt++;
+                     edg[ecnt].v=u;
+                     edg[ecnt].next=p[v];
+                    p[v]=ecnt++;
+                }
+            }
+        }
+
+
+        printf("%d\n",solve());
+    }
+    return 0;
+}

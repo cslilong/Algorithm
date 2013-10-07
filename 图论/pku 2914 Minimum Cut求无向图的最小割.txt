@@ -1,0 +1,57 @@
+pku 2914 Minimum Cut求无向图的最小割
+算法：Stoer-Wagner算法 O（N^3）时间复杂度
+
+很久没更新blog 了
+
+
+#include <stdio.h>
+#include <string.h>
+#define MAXN 510
+int g[MAXN][MAXN],dis[MAXN],n,m;
+bool del[MAXN],visit[MAXN];
+int solve(){
+int src=0,i,j,k,kase=n-1,ans=(1<<30),pre;
+memset(del,0,sizeof(del));
+while(kase--){
+   memset(visit,0,sizeof(visit));
+   for( i=0 ; i<n ; i++)
+    if(!del[i])
+     dis[i]=g[src][i];
+   visit[src]=1;k=src;
+   for( i=0 ; i<=kase ; i++ ){
+    pre=k;
+    k=0;
+    for(j=0;j<n;j++)
+     if(!visit[j] &&!del[j] &&(!k || dis[j]>dis[k]))
+      k=j;
+    if(!k) return 0;
+    visit[k]=1;
+    for( j=0 ; j<n ; j++)
+     if(!visit[j] &&!del[j] )
+      dis[j] += g[k][j];
+   }
+   if(ans>dis[k])ans=dis[k];
+   del[k]=1;
+   for(i=0;i<n;i++)
+    if(!del[i] && i!=pre){
+     g[i][pre]+=g[i][k];
+     g[pre][i]=g[i][pre];
+    }
+}
+return ans;
+}
+int main(){
+int i,j,k;
+while(scanf("%d%d",&n,&m)!=EOF){
+   memset(g,0,sizeof(g));
+   while( m-- ){
+    scanf("%d%d%d",&i,&j,&k);
+    if(i==j)continue;
+    g[i][j]+=k;
+    g[j][i]+=k;
+   }
+   printf("%d\n" ,solve());
+}
+return 0;
+}
+ 

@@ -1,0 +1,112 @@
+PKU 图论分类-Author McFn
+打星号的表示个人认为比较经典，或是算法，构图比较好的题目
+
+1062* 昂贵的聘礼 枚举等级限制+dijkstra
+1087* A Plug for UNIX 2分匹配
+1094 Sorting It All Out floyd 或 拓扑
+1112* Team Them Up! 2分图染色+DP
+1125 Stockbroker Grapevine FLOYD
+1135 Domino Effect 最短路
+1149* PIGS 网络流
+1161* Walls floyd
+1201 Intervals 差分约束
+1236* Network of Schools 强联通
+1251 Jungle Roads MST
+1273 Drainage Ditches 最大流
+1274 The Perfect Stall 2分匹配
+1275* Cashier Employment 差分约束
+1325 Machine Schedule 2分匹配(最小点覆盖)
+1364 King 差分约束
+1422 Air Raid 2分匹配
+1459 Power Network 网络流
+1466 Girls and Boys 2分图(最大独立团)
+1469 COURSES 2分匹配
+1502 MPI Maelstrom floyd
+1511* Invitation Cards 最短路
+1637* Sightseeing tour 混合图欧拉回路-网络流
+1716 Integer Intervals 差分约束
+1724* ROADS 最短路-拆点
+1780* Code 欧拉回路
+1789 Truck History 最小生成树
+1797 Heavy Transportation 最小生成树
+1847 Tram 最短路
+1904* King's Quest 强联通
+1949 Chores 最短路
+2060 Taxi Cab Scheme 2分匹配
+2075 Tangled in Cables 最小生成树
+2112 Optimal Milking 网络流
+2125 Destroying The Graph 最小割
+2135 Farm Tour 费用流
+2139 Six Degrees of Cowvin Bacon floyd
+2226 Muddy Fields 2分匹配
+2230 Watchcow 欧拉回路
+2239 Selecting Courses 2分匹配
+2267* From Dusk till Dawn or: Vladimir the Vampire 最短路
+2289 Jamie's Contact Groups 网络流
+2337 Catenyms 欧拉通路
+2349 Arctic Network 最小生成树
+2369 Genealogical tree 拓扑序
+2387 Til the Cows Come Home 最短路
+2391* Ombrophobic Bovines 最大流
+2394 Checking an Alibi 最短路
+2396* Budget 网络流
+2421* Constructing Roads 最小生成树
+2446 Chessboard 2分匹配
+2455 Secret Milking Machine 网络流
+2457 Part Acquisition 最短路
+2472 106 miles to Chicago 最短路
+2485 Highways 最小生成树
+2516 Minimum Cost 费用流
+2536 Gopher II 2分匹配
+2553* The Bottom of a Graph 强联通
+2570 Fiber Network floyd
+2584 T-Shirt Gumbo 网络流
+2594* Treasure Exploration 2分匹配
+2723 Get Luffy Out 2-sat
+2724 Purifying Machine 2分匹配
+2728 Desert King 最优比例生成树
+2749* Building roads 2-sat
+2762 Going from u to v or from v to u? 强联通
+2949* Word Rings 差分约束
+2983 Is the Information Reliable? 差分约束
+2987 Firing 最小割(求解正确性??)
+3020 Antenna Placement 2分匹配
+3041 Asteroids 2分匹配
+3072* Robot 最短路
+3160 Father Christmas flymouse 强联通
+3164 Command Network 最小树形图
+3169 Layout 差分约束
+3177 Redundant Paths 双联通分量
+3189 Steady Cow Assignment 网络流
+3204 Ikki's Story I - Road Reconstruction 最大流
+3207 Ikki's Story IV - Panda's Trick 2分图
+3216 Repairing Company 2分匹配
+3228 Gold Transportation 网络流
+3255 Roadblocks 最短路
+3259 Wormholes 最短路
+3268 Silver Cow Party 最短路
+3275 Ranking the Cows floyd
+3281 Dining 最大流
+3308 Paratroopers 最小割
+3310 Caterpillar
+3311 Hie with the Pie floyd
+3328 Cliff Climbing 最短路
+3343 Against Mammoths 2分匹配
+3352 Road Construction 桥
+3439 Server Relocation 最短路
+3463 Sightseeing 最短路
+3469 Dual Core CPU 最小割
+3487 The Stable Marriage Problem 稳定婚姻
+3522 Slim Span 最小生成树
+3594 Escort of Dr. Who How 最短路
+3615 Cow Hurdles 最短路
+3623 Wedding 2-sat
+3653 Here We Go(relians) Again 最短路
+3659* Cell Phone Network 最小支配集
+3660 Cow Contest 拓扑
+3662* Telephone Lines 最短路
+3678 Katu Puzzle 2-sat
+3683* Priest John's Busiest Day 2-sat求解
+3687 Labeling Balls 差分约束 或 拓扑
+3692 Kindergarten 2分匹配
+3694 Network 无向图缩点

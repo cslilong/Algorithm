@@ -1,0 +1,144 @@
+pku 1679 The Unique MST
+Posted by CmYkRgB123 On 2009 - 四月 - 14日 14 : 48 : 36 7 COMMENTS 72 views 
+判断一个图的最小生成树是否唯一，可以求其次小生成树。如果它的次小生成树权值之和等于最小生成树权值之和，则最小生成树不唯一，否则最小生成树唯一。
+
+求次小生成树我的方法是O(N^2 + M)的。首先求出最小生成树，记录权值之和为MinST。然后枚举添加边(u,v)，加上以后一定形成一个环，找到环上非(u,v)边的权值最大的边，把它删掉，计算当前生成树的权值之和，取所有枚举加边后生成树权值之和的最小值，就是次小生成树。
+
+实际上具体更简单的方法为从每个顶点i，遍历整个最小生成树，定义F[j]为从i到j的路径上最大边的权值，用O(N)的方法求出每个F[j]。然后枚举顶点i的邻域，遍历每条不再最小生成树中的边(i,j)，加上这条边，并删除环上最大边(非(i,j))，新的生成树权值之和为MinST + w(i,j) – F[j]，记录其最小值即可，时间复杂度为O(N^2 + M)。求最小生成树可以用最简单的Prim，时间复杂度为O(N^2)，用更好的算法是没有意义的。
+
+这种方法比起那种求出最小生成树后，枚举删除最小生成树上每条边，然后再求最小生成树的方法应该要快些，因为那种方法的时间复杂度为O(N * ( N * logN + M) )(Prim + Heap)。
+http://www.byvoid.com/blog/pku-1679/
+
+/* 
+ * Problem: pku1679 The Unique MST
+ * Author: Guo Jiabao
+ * Time: 2009.4.14 8:28
+ * State: Solved
+ * Memo: 次小生成树 Prim
+*/
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+const int MAXN=101,MAXM=MAXN*MAXN*4,INF=0x7FFFFFFF;
+using namespace std;
+struct edge
+{
+	edge *next,*op;
+	int t,c;
+	bool mst;
+}ES[MAXM],*V[MAXN],*clst[MAXN],*NA[MAXN];
+int N,M,EC,MinST,NMST,Ans;
+int F[MAXN],MST[MAXN];
+inline void addedge(edge **V,int a,int b,int c)
+{
+	ES[++EC].next=V[a];
+	V[a]=ES+EC; V[a]->t=b; V[a]->c=c;
+	ES[++EC].next=V[b];
+	V[b]=ES+EC; V[b]->t=a; V[b]->c=c;
+	V[a]->op=V[b]; V[b]->op=V[a];
+	V[a]->mst=V[b]->mst=false;
+}
+void init()
+{
+	int i,a,b,c;
+	scanf("%d%d",&N,&M);
+	EC=-1;Ans=INF;MinST=0;
+	memset(clst,0,sizeof(clst));
+	memset(V,0,sizeof(V));
+	memset(NA,0,sizeof(NA));
+	for (i=1;i<=M;i++)
+	{
+		scanf("%d%d%d",&a,&b,&c);
+		addedge(V,a,b,c);
+	}
+}
+void prim()
+{
+	int i,j;
+	for (i=1;i<=N;i++)
+		MST[i]=INF;
+	for (i=1;;)
+	{
+		MST[i]=-INF;
+		for (edge *e=V[i];e;e=e->next)
+		{
+			if (e->c < MST[j=e->t])
+			{
+				MST[j]=e->c;
+				clst[j]=e->op;
+			}
+		}
+		int Mini=INF;i=0;
+		for (j=1;j<=N;j++)
+			if (MST[j]!=-INF && MST[j] < Mini)
+			{
+				Mini=MST[j];
+				i=j;
+			}
+		if (i==0)
+			break;
+	}
+	for (i=2;i<=N;i++)
+	{
+		MinST+=clst[i]->c;
+		j=clst[i]->t;
+		clst[i]->mst=true;
+		clst[i]->op->mst=true;
+		addedge(NA,i,j,clst[i]->c);
+	}
+}
+void dfs(int i)
+{
+	for (edge *e=NA[i];e;e=e->next)
+	{
+		int j=e->t;
+		if (F[j]==-INF)
+		{
+			F[j]=F[i];
+			if (e->c > F[j])
+				F[j]= e->c;
+			dfs(j);
+		}
+	}
+}
+void smst()
+{
+	int i,j;
+	for (i=1;i<=N;i++)
+	{
+		for (j=1;j<=N;j++)
+			F[j]=-INF;
+		F[i]++;
+		dfs(i);
+		for (edge *e=V[i];e;e=e->next)
+		{
+			j=e->t;
+			if (!e->mst)
+			{
+				NMST=MinST + e->c - F[j];
+				if (NMST < Ans)
+					Ans = NMST;
+			}
+		}
+	}
+}
+int main()
+{
+	int T,i;
+	freopen("umst.in","r",stdin);
+	freopen("umst.out","w",stdout);
+	scanf("%d",&T);
+	for (i=1;i<=T;i++)
+	{
+		init();
+		prim();
+		smst();
+		if (Ans > MinST)
+			printf("%dn",MinST);
+		else
+			printf("Not Unique!n");
+	}
+	return 0;
+}

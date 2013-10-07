@@ -1,0 +1,137 @@
+pku 3255 Roadblocks
+这道题不同于一般的次短路径问题，因为允许边重走。看似更为复杂了，其实是更简单了一些。
+方法为先用Heap+Dijkstra求出1和N的单源最短路径，把无向边看成两个有向边，然后枚举每单向条边(u,v)，
+计算Dist=dis(1,u) + dis(N,v)，看看此时Dist的值是否大于dis(1,N)，
+如果是的话用它更新次短路径，保留一个最小的值。
+
+
+/* 
+ * Problem: pku3255 Roadblocks
+ * Author: Guo Jiabao
+ * Time: 2009.4.14 10:32
+ * State: Solved
+ * Memo: 次短路径 Dijkstra + Heap (特殊)
+*/
+#include <iostream>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+const int MAXN=5001,MAXM=200001,INF=0x7FFFFFF;
+using namespace std;
+struct Minheap
+{
+	struct HeapElement
+	{
+		int key,value;
+	}H[MAXN];
+	int size,Position[MAXN];
+	void init(){H[size=0].value=-INF;}
+	void shift(int key,int value,int pos)
+	{
+		int i,f;
+		HeapElement p={key,value};
+		for (i=pos;p.value < H[f=i>>1].value;i=f)
+		{
+			H[i]=H[f];
+			Position[H[i].key]=i;
+		}
+		H[i]=p;
+		Position[H[i].key]=i;
+	}
+	void ins(int key,int value){shift(key,value,++size);}
+	void decrease(int key,int value){shift(key,value,Position[key]);}
+	void delmin()
+	{
+		int i,c;
+		HeapElement p=H[size--];
+		for (i=1;(c=i<<1)<=size;i=c)
+		{
+			if (c+1 <=size && H[c+1].value < H[c].value)
+				c++;
+			if (H[c].value < p.value)
+			{
+				H[i]=H[c];
+				Position[H[i].key]=i;
+			}
+			else
+				break;
+		}
+		H[i]=p;
+		Position[H[i].key]=i;
+	}
+}H;
+struct edge
+{
+	edge *next;
+	int t,c;
+}ES[MAXM],*V[MAXN];
+int N,M,EC=-1,Shortest,Ans;
+int sp[2][MAXN];
+inline void addedge(int a,int b,int c)
+{
+	ES[++EC].next=V[a];
+	V[a]=ES+EC; V[a]->t=b; V[a]->c=c;
+	ES[++EC].next=V[b];
+	V[b]=ES+EC; V[b]->t=a; V[b]->c=c;
+}
+void init()
+{
+	int i,a,b,c;
+	freopen("block.in","r",stdin);
+	freopen("block.out","w",stdout);
+	scanf("%d%d",&N,&M);
+	for (i=1;i<=M;i++)
+	{
+		scanf("%d%d%d",&a,&b,&c);
+		addedge(a,b,c);
+	}
+}
+void dijkstra(int S,int *sp)
+{
+	int i,j;
+	H.init();
+	for (i=1;i<=N;i++)
+		H.ins(i,sp[i]=INF);
+	H.decrease(S,sp[S]=0);
+	for (i=S;;)
+	{
+		H.delmin();
+		for (edge *e=V[i];e;e=e->next)
+		{
+			j=e->t;
+			if (sp[i] + e->c <sp[j])
+				H.decrease(j,sp[j]=sp[i] + e->c);
+		}
+		if (H.size)
+			i=H.H[1].key;
+		else
+			break;
+	}
+}
+void solve()
+{
+	int i,c;
+	dijkstra(1,sp[0]);
+	dijkstra(N,sp[1]);
+	Shortest=sp[0][N];
+	Ans=INF;
+	for (i=0;i<=EC;i+=2)
+	{
+		edge *e1=ES+i,*e2=ES+i+1;
+		int a=e1->t,b=e2->t;
+		c=sp[0][a] + sp[1][b] + e1->c;
+		if (c < Ans && c>Shortest)
+			Ans=c;
+		c=sp[1][a] + sp[0][b] + e1->c;
+		if (c < Ans && c>Shortest)
+			Ans=c;
+	}
+}
+int main()
+{
+	init();
+	solve();
+	printf("%dn",Ans);
+	return 0;
+}

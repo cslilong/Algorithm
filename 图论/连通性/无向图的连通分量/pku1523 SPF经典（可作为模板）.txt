@@ -1,0 +1,119 @@
+/*pku1523 SPF
+xoj1376
+(1)求割点。割点距离各连通分支有一边距离（父子边），故使用<=
+(2)求割边。割边两端点分别在两个连通分支之中，故使用<
+(3)求去除割点u后形成的连通分支数。若dfn[u]<lowlink[v]，则uv为一割边，对应一个连通分支；若dfn[u]==lowlink[v]，则表示割点u和v所在的连通分支之间只有父子边uv相连，除掉后亦可得到一连通分支。
+*/
+#include <iostream>
+using namespace std;
+
+#define MAXN 1001
+#define Min(a,b)(a<b?a:b)
+
+int p[MAXN],ecnt,dfn[MAXN],lowlink[MAXN],sign,subSCC[MAXN],root,odeg[MAXN],T;
+bool exist[MAXN],cut[MAXN];
+
+struct Edge{
+    int v,next;
+}edg[10*MAXN];
+
+void init(){
+    sign=0;
+    ecnt=0;
+    memset(cut,false,sizeof(cut));
+    memset(odeg,0,sizeof(odeg));
+    //memset(subSCC,0,sizeof(subSCC));
+    memset(exist,false,sizeof(exist));
+    memset(p,-1,sizeof(p));
+    memset(dfn,-1,sizeof(dfn));
+    for(int i=1;i<MAXN;i++)
+        subSCC[i]=1;////根所在的连通分支在dfs中没有被统计
+}
+
+void dfs(int pre,int u){
+    int i,v;
+    dfn[u]=lowlink[u]=++sign;
+    for(i=p[u];i!=-1;i=edg[i].next){
+        v=edg[i].v;
+        odeg[u]++;
+        if(dfn[v]!=-1){
+            if(v!=pre)//(2)
+                lowlink[u]=Min(lowlink[u],dfn[v]);
+        }
+        else{
+            dfs(u,v);
+            lowlink[u]=Min(lowlink[u],lowlink[v]);
+            //(1)
+            if(u!=root && dfn[u]<=lowlink[v])
+                cut[u]=true;//cut[u]为true表示u为割点。这里改用计数器的话会重复计数
+            else if(u==root && odeg[root]>1)//DFS树的根r是割点的充要条件是：至少有2条以r为尾(从r出发)的父子边
+                cut[u]=true;
+            //(2)
+            //if(bfn[u]<lowlink[v])
+            //    Brige[u,v] is true;//边uv是桥
+            //(3)
+            if(u!=root && dfn[u]<=lowlink[v])
+                subSCC[u]++;
+            else if(u==root)
+                subSCC[u]=odeg[u];
+            
+        }
+    }
+}
+                
+
+
+
+void solve(){
+    int i;
+    bool ok=false;
+    root=1;
+    while(!exist[root])
+        root++;
+    for(i=1;i<MAXN;i++)
+        if(exist[i] && dfn[i]==-1)
+            dfs(-1,i);
+
+    printf("Network #%d\n",T++);
+    for(i=1;i<MAXN;i++){
+        if(cut[i]){
+            ok=true;
+            printf("  SPF node %d leaves %d subnets\n",i,subSCC[i]);
+        }
+    }
+    if(!ok){
+        printf("  No SPF nodes\n");
+    }
+    printf("\n");
+}
+
+int main(){
+    T=1;
+    int u,v;
+    while(scanf("%d",&u) && u){
+        init();
+        scanf("%d",&v);
+        edg[ecnt].v=v;
+        edg[ecnt].next=p[u];
+        p[u]=ecnt++;
+        edg[ecnt].v=u;
+        edg[ecnt].next=p[v];
+        p[v]=ecnt++;
+        exist[u]=exist[v]=true;
+        while(scanf("%d",&u) && u){
+            scanf("%d",&v);
+            edg[ecnt].v=v;
+            edg[ecnt].next=p[u];
+            p[u]=ecnt++;
+            edg[ecnt].v=u;
+            edg[ecnt].next=p[v];
+            p[v]=ecnt++;
+            exist[u]=exist[v]=true;
+        }
+        solve();
+    }
+    return 0;
+}
+
+
+

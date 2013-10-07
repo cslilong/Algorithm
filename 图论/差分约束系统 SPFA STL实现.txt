@@ -1,0 +1,45 @@
+差分约束系统 SPFA STL实现
+复制内容到剪贴板C/C++代码:
+#include <iostream>
+#include <queue>
+#include <vector>
+#define MAXV 30010
+#define MAXE 150010
+using namespace std;
+struct edge {
+    int next,len;
+};
+int d[MAXE],n,m,i,j,t1,t2,t3,hash[MAXV];
+queue <int> q;
+vector <edge> v[MAXV];
+int main() {
+    scanf("%d%d",&n,&m);
+    for (i=1;i<=m;i++) {
+        scanf("%d%d%d",&t1,&t2,&t3);//t2-t1<=t3   建图: t1->t2 长度为t3
+        edge t;
+        t.next=t2;
+        t.len=t3;
+        v[t1].push_back(t);
+    }
+    memset(d,0x7f,sizeof(d));
+    memset(hash,0,sizeof(hash));
+    hash[1]=1;
+    d[1]=0;
+    q.push(1);
+    while (!q.empty()) {
+        int t=q.front();
+        for (i=0;i<v[t].size();i++) {
+            if (d[t]+v[t][i].len<d[v[t][i].next]) {
+                d[v[t][i].next]=d[t]+v[t][i].len;
+                if (!hash[v[t][i].next]) {
+                    hash[v[t][i].next]=1;
+                    q.push(v[t][i].next);
+                }
+            }
+        }
+        q.pop();
+        hash[t]=0;
+    }
+    if (d[n]!=0x7f7f7f7f) printf("%d\n",d[n]); else printf("0\n");
+    return 0;
+}
